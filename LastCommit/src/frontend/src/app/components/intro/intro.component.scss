@@ -1,39 +1,57 @@
-/* Remove margens e paddings globais e força altura mínima */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* remove qualquer scroll */
-}
-
-/* Container ocupando toda a tela */
 .intro-container {
-  position: fixed; /* fixa na tela inteira */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* garante que nada dentro cause scroll */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
-/* Imagem cobrindo toda a tela */
 .bg-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* cobre toda a tela mantendo proporção */
-  display: block;
+  object-fit: cover;
   z-index: -1;
 }
 
-/* Terminal sobre a imagem */
+h1 {
+  color: white;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 3rem;
+  text-align: center;
+  z-index: 1;
+}
+
 .terminal-screen {
   position: relative;
   z-index: 1;
-  /* ajuste a posição e tamanho do terminal como quiser */
+  width: 80%;
+  max-width: 600px;
+  max-height: 300px;      
+  text-align: left;
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 10px;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  overflow-y: auto;       
+  overflow-wrap: break-word; 
+  box-sizing: border-box;
+  margin-bottom: 20px;
 }
+
+
+.terminal-content pre {
+  margin: 0;
+  white-space: pre-wrap;  
+  word-break: break-word;
+}
+
