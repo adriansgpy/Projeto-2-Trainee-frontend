@@ -1,64 +1,165 @@
-@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+/* login.component.scss */
 
-.login-container {
+/* Tela e fundo */
+.terminal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle at center, #000 0%, #111 100%);
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  color: #0f0;
+}
+
+/* Tela do terminal */
+.terminal-screen {
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #0f0;
+  box-shadow: 0 0 20px #0f0 inset, 0 0 30px #0f0;
+  border-radius: 8px;
+  width: 400px;
+  padding: 1rem;
+  animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Header do terminal */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.terminal-header .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.terminal-header .red { background: #f33; }
+.terminal-header .yellow { background: #ff0; }
+.terminal-header .green { background: #3f3; }
+
+.terminal-title {
+  margin-left: auto;
+  font-weight: bold;
+  text-shadow: 0 0 10px #0f0;
+}
+
+/* Inputs estilo terminal */
+.input-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.prompt {
+  margin-right: 0.5rem;
+}
+
+.input-line input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #0f0;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  padding: 0.2rem 0;
+}
+
+.input-line input:focus {
+  outline: none;
+}
+
+.cursor {
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
+.login-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: #0f0;
+  color: #000;
+  border: 1px solid #0f0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn:hover {
+  background: #0c0;
+  box-shadow: 0 0 10px #0f0, 0 0 20px #0f0 inset;
+}
+
+
+/* Base do terminal (como antes) */
+.terminal-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #0d0d0d 0%, #1a1a1a 100%);
-  font-family: 'Creepster', cursive;
-
-  .fog {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    opacity: 0.2;
-    animation: moveFog 60s linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes moveFog {
-    0% { background-position: 0 0; }
-    100% { background-position: 1000px 0; }
-  }
-
-  .login-card {
-    position: relative;
-    background: rgba(10, 10, 10, 0.95);
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #ff0000 inset, 0 0 40px #ff0000;
-    text-align: center;
-    width: 340px;
-    z-index: 1;
-    border: 2px solid #ff0000;
-
-    h2 { color: #ff0000; text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; }
-    p { color: #fff; margin-bottom: 25px; }
-
-    .form-group {
-      margin-bottom: 20px; text-align: left;
-      label { color: #ff0000; display: block; margin-bottom: 5px; }
-      input {
-        width: 100%; padding: 10px; border: 1px solid #ff0000;
-        border-radius: 6px; background: #1a1a1a; color: #fff;
-        &:focus { outline: none; border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
-      }
-    }
-
-    button {
-      width: 100%; padding: 12px; background-color: #ff0000;
-      color: #1a1a1a; font-size: 16px; font-weight: bold; border: none; border-radius: 6px;
-      cursor: pointer; box-shadow: 0 0 10px #ff0000;
-      transition: 0.3s;
-      &:hover { background-color: #8b0000; box-shadow: 0 0 20px #ff0000; }
-      &:disabled { background-color: #550000; cursor: not-allowed; }
-    }
-
-    .register-link {
-      margin-top: 20px; font-size: 14px;
-      a { color: #ff0000; font-weight: bold; text-decoration: none; &:hover { text-decoration: underline; } }
-    }
-  }
+  height: 100vh;
+  background: radial-gradient(circle at center, #000 0%, #111 100%);
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  color: #0f0;
 }
+
+.terminal-screen { /* ... estilo do terminal como antes ... */ }
+
+/* Mensagens fantasmagóricas */
+.ghost-messages {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* permite clicar nos inputs normalmente */
+}
+
+.ghost-msg {
+  position: absolute;
+  color: rgba(0, 255, 0, 0.4);
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 5px #0f0;
+  animation: blink-glitch 3s infinite, move-random 5s infinite linear;
+}
+
+/* Piscar / glitch */
+@keyframes blink-glitch {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Movimento aleatório */
+@keyframes move-random {
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  25%  { transform: translate(50px, -30px) rotate(-2deg); }
+  50%  { transform: translate(-40px, 20px) rotate(1deg); }
+  75%  { transform: translate(30px, 50px) rotate(-1deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+/* Duplicar mensagens com delays diferentes para efeito aleatório */
+.ghost-msg:nth-child(1) { animation-delay: 0s, 0s; }
+.ghost-msg:nth-child(2) { animation-delay: 1s, 1s; }
+.ghost-msg:nth-child(3) { animation-delay: 2s, 2s; }
+.ghost-msg:nth-child(4) { animation-delay: 3s, 3s; }

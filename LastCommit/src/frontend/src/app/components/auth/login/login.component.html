@@ -1,25 +1,33 @@
-<div class="login-container">
-  <div class="login-card">
-    <h2>Entre na Escuridão</h2>
-    <p>Somente os corajosos podem prosseguir...</p>
+<div class="terminal-wrapper">
+  <div class="terminal-screen">
+    <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="terminal-title">LOGIN</span>
+    </div>
 
-    <form (ngSubmit)="login()" #loginForm="">
-      <div class="form-group">
-        <label for="username">Usuário</label>
-        <input type="text" id="username" name="username"  />
+    <div class="terminal-body">
+      <div class="input-line">
+        <span class="prompt">user&#64;rpg-game:~$</span>
+        <input type="text" placeholder="username" id="username"/>
+        <span class="cursor">|</span>
       </div>
 
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" />
+      <div class="input-line">
+        <span class="prompt">user&#64;rpg-game:~$</span>
+        <input type="password" placeholder="password" id="password"/>
+        <span class="cursor">|</span>
       </div>
 
-      <button type="submit">Entrar</button>
-    </form>
-
-    <p class="register-link">
-      Novo na noite? <a routerLink="/signup">Cadastre-se</a>
-    </p>
+      <button class="login-btn">LOGIN</button>
+    </div>
   </div>
-  <div class="fog"></div>
+
+  <div class="ghost-messages">
+    <p class="ghost-msg">The code watches you...</p>
+    <p class="ghost-msg">…your errors are alive</p>
+    <p class="ghost-msg">Do you hear the whispers?</p>
+    <p class="ghost-msg">They know your secrets</p>
+  </div>
 </div>
