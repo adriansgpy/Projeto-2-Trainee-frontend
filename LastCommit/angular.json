@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "LastCommit": {
+    "FinalCommit": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -11,15 +11,15 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "scr/frontend/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/last-commit",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
+            "outputPath": "dist/final-commit",
+            "index": "src/frontend/src/index.html",
+            "browser": "src/frontend/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -30,9 +30,6 @@
                 "glob": "**/*",
                 "input": "public"
               }
-            ],
-            "styles": [
-              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -64,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "LastCommit:build:production"
+              "buildTarget": "FinalCommit:build:production"
             },
             "development": {
-              "buildTarget": "LastCommit:build:development"
+              "buildTarget": "FinalCommit:build:development"
             }
           },
           "defaultConfiguration": "development"
