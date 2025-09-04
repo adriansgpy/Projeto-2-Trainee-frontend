@@ -9,25 +9,32 @@
 
     <div class="terminal-body">
       <div class="input-line">
-        <span class="prompt">user&#64;rpg-game:~$</span>
-        <input type="text" placeholder="username" id="username"/>
+        <span class="prompt" ngNonBindable>user&#64;rpg-game:~$</span>
+
+        <input type="text" placeholder="username" />
         <span class="cursor">|</span>
       </div>
 
       <div class="input-line">
-        <span class="prompt">user&#64;rpg-game:~$</span>
-        <input type="password" placeholder="password" id="password"/>
+       <span class="prompt" ngNonBindable>user&#64;rpg-game:~$</span>
+
+        <input type="password" placeholder="password"/>
         <span class="cursor">|</span>
       </div>
 
       <button class="login-btn">LOGIN</button>
+      <button class="signup-btn create-btn" (click)="createAccount()">Criar Conta</button>
     </div>
   </div>
 
+ 
   <div class="ghost-messages">
     <p class="ghost-msg">The code watches you...</p>
     <p class="ghost-msg">…your errors are alive</p>
     <p class="ghost-msg">Do you hear the whispers?</p>
     <p class="ghost-msg">They know your secrets</p>
   </div>
+
+  
+  <div class="tv-glitch"></div>
 </div>
