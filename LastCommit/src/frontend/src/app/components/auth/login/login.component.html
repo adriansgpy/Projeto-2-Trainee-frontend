@@ -1,0 +1,25 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Entre na Escuridão</h2>
+    <p>Somente os corajosos podem prosseguir...</p>
+
+    <form (ngSubmit)="login()" #loginForm="">
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input type="text" id="username" name="username"  />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" />
+      </div>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <p class="register-link">
+      Novo na noite? <a routerLink="/signup">Cadastre-se</a>
+    </p>
+  </div>
+  <div class="fog"></div>
+</div>
