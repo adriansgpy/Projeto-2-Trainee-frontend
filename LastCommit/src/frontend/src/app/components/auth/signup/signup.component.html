@@ -1,1 +1,64 @@
-<h1>signup</h1>
+<div class="terminal-wrapper" [ngClass]="{ 'glitch-mode': isGlitching, 'friendly-mode': !isGlitching }">
+  
+  
+    
+
+ <div class="terminal-screen">
+        
+    <img 
+        *ngIf="isGlitching" 
+        src="assets/images/ghost-hand.png" 
+        class="glitch-image" 
+    />
+
+    <div class="terminal-content">
+        <div class="register-header">
+      <span class="dot green"></span>
+      <span class="dot dark"></span>
+      <span class="dot light"></span>
+      <span class="register-title">{{ isGlitching ? 'Seu fim chegou' : 'Cadastro' }}</span>
+    </div>
+
+    <p class="warning-text">
+      {{ isGlitching ? 'Não olhe para trás...' : 'Bem-vindo, crie sua conta abaixo:' }}
+    </p>
+
+    <div class="input-line">
+      <span class="prompt">new-username:</span>
+      <input type="text" [(ngModel)]="username" />
+      <span class="cursor">|</span>
+    </div>
+
+    <div class="input-line">
+      <span class="prompt">new-password:</span>
+      <input type="password" [(ngModel)]="password" />
+      <span class="cursor">|</span>
+    </div>
+
+    <div class="input-line">
+      <span class="prompt">confirm-password:</span>
+      <input type="password" [(ngModel)]="confirmPassword" />
+      <span class="cursor">|</span>
+    </div>
+
+    <button class="register-btn" (click)="register()">
+      {{ isGlitching ? 'Corromper-se' : 'Registrar' }}
+    </button>
+
+    <button class="back-btn" (click)="back()">
+      {{ isGlitching ? 'DESISTA' : 'Sair' }}
+    </button>
+
+    </div>
+  </div>
+
+  <!-- Só aparece no modo amaldiçoado -->
+  <div class="virus-messages" *ngIf="isGlitching">
+    <span class="virus-msg">> VIRUS.exe iniciado</span>
+    <span class="virus-msg">> Corrompendo arquivos...</span>
+    <span class="virus-msg">> Sistema comprometido</span>
+    <span class="virus-msg">> NÃO HÁ VOLTA</span>
+  </div>
+
+  <div class="tv-glitch-red" *ngIf="isGlitching"></div>
+</div>

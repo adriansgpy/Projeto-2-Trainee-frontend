@@ -1,3 +1,340 @@
-h1{
-  color: black;
+/* --- Base Wrapper --- */
+.terminal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+/* ======================= */
+/* ===== Friendly Mode ==== */
+/* ======================= */
+.friendly-mode {
+  background: radial-gradient(circle at center, #000 0%, #111 100%);
+  color: #0f0;
+
+  .terminal-screen {
+    background: rgba(0, 20, 0, 0.9);
+    border: 2px solid #0f0;
+    border-radius: 8px;
+    width: 420px;
+    padding: 1rem;
+    box-shadow: 0 0 10px #0f0 inset, 0 0 20px #060;
+  }
+
+  .register-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .dot.green { background: #0f0; }
+    .dot.dark { background: #060; }
+    .dot.light { background: #0c0; }
+  }
+
+  .register-title {
+    margin-left: auto;
+    font-weight: bold;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+  }
+
+  .warning-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6f6;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 8px #0f0;
+  }
+
+  .input-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .prompt { margin-right: 0.5rem; }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #0f0;
+      color: #6f6;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+
+      &:focus { outline: none; }
+    }
+
+    .cursor {
+      margin-left: 2px;
+      animation: blink 1s steps(1) infinite;
+      color: #0f0;
+    }
+  }
+
+  .register-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: #0f0;
+    color: #000;
+    border: 1px solid #0c0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #060;
+      color: #fff;
+      box-shadow: 0 0 10px #0f0;
+    }
+  }
+
+  .back-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: #0f0;
+    color: #000;
+    border: 1px solid #0c0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 20px;
+    &:hover {
+      background: #060;
+      color: #fff;
+      box-shadow: 0 0 10px #0f0;
+    }
+  }
+
+}
+
+/* ======================= */
+/* ==== Glitch Mode ====== */
+/* ======================= */
+.glitch-mode {
+  background: radial-gradient(circle at center, #000 0%, #200 100%);
+  color: #f33;
+
+  .terminal-screen {
+    background: rgba(20, 0, 0, 0.9);
+    border: 2px solid #f33;
+    border-radius: 8px;
+    width: 420px;
+    padding: 1rem;
+    box-shadow: 0 0 20px #f00 inset, 0 0 40px #900;
+    animation: flicker 2s infinite;
+
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background: 
+        repeating-linear-gradient(
+          rgba(255,255,255,0.05) 0px,
+          rgba(255,255,255,0.05) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+      animation: noise 0.2s infinite;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        rgba(255,0,0,0.05) 0px,
+        rgba(255,0,0,0.05) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      animation: horizontal-glitch 0.1s infinite;
+    }
+
+    .terminal-content {
+      position: relative;
+      z-index: 1;
+      animation: rgb-shift 3s infinite;
+    }
+
+  }
+
+  .register-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .dot.red { background: #f33; }
+    .dot.dark { background: #600; }
+    .dot.blood { background: #900; }
+  }
+
+  .register-title {
+    margin-left: auto;
+    font-weight: bold;
+    color: #f33;
+    text-shadow: 0 0 15px #f00;
+  }
+
+  .warning-text {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #f66;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px #f00;
+  }
+
+  .input-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .prompt { margin-right: 0.5rem; }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #f33;
+      color: #f66;
+      font-size: 1rem;
+      padding: 0.2rem 0;
+
+      &:focus { outline: none; }
+    }
+
+    .cursor {
+      margin-left: 2px;
+      animation: blink 1s steps(1) infinite;
+      color: #f33;
+    }
+  }
+
+  .register-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: #f33;
+    color: #000;
+    border: 1px solid #f00;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #900;
+      color: #fff;
+      box-shadow: 0 0 15px #f00, 0 0 30px #600 inset;
+    }
+  }
+
+  .back-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: #f33;
+    color: #000;
+    border: 1px solid #f00;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s; 
+
+    margin-top: 40px;
+
+    &:hover {
+      background: #900;
+      color: #fff;
+      box-shadow: 0 0 15px #f00, 0 0 30px #600 inset;
+    }
+  }
+
+  /* Mensagens amaldiçoadas */
+  .virus-messages {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+
+    .virus-msg {
+      position: absolute;
+      font-size: 1rem;
+      color: rgba(255, 0, 0, 0.4);
+      text-shadow: 0 0 5px #f00;
+      animation: blink-slow 6s infinite, move-random 5s infinite linear;
+    }
+  }
+
+  /* Glitch vermelho */
+  .tv-glitch-red {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+      rgba(255,0,0,0.05) 0px,
+      rgba(255,0,0,0.05) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 999;
+    mix-blend-mode: screen;
+  }
+}
+
+/* ======================= */
+/* ==== Animações ======== */
+/* ======================= */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+@keyframes blink-slow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+@keyframes move-random {
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  25%  { transform: translate(50px, -30px) rotate(-2deg); }
+  50%  { transform: translate(-40px, 20px) rotate(1deg); }
+  75%  { transform: translate(30px, 50px) rotate(-1deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+@keyframes noise {
+  0% { transform: translate(0, 0); opacity: 0.1; }
+  25% { transform: translate(-2px, 2px); opacity: 0.15; }
+  50% { transform: translate(1px, -1px); opacity: 0.05; }
+  75% { transform: translate(-1px, 1px); opacity: 0.2; }
+  100% { transform: translate(0, 0); opacity: 0.1; }
+}
+
+/* Linhas horizontais piscando */
+@keyframes horizontal-glitch {
+  0%, 100% { transform: translateY(0); opacity: 0.05; }
+  50% { transform: translateY(3px); opacity: 0.2; }
+}
+
+/* ----------------------- */
+/* RGB split leve para efeito de distorção */
+@keyframes rgb-shift {
+  0% { filter: drop-shadow(2px 0 red) drop-shadow(-2px 0 cyan); }
+  25% { filter: drop-shadow(-1px 0 red) drop-shadow(1px 0 cyan); }
+  50% { filter: drop-shadow(1px 0 red) drop-shadow(-1px 0 cyan); }
+  75% { filter: drop-shadow(-2px 0 red) drop-shadow(2px 0 cyan); }
+  100% { filter: drop-shadow(2px 0 red) drop-shadow(-2px 0 cyan); }
 }

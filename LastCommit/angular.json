@@ -11,7 +11,7 @@
         }
       },
       "root": "",
-      "sourceRoot": "scr/frontend/src",
+      "sourceRoot": "src/frontend/src",
       "prefix": "app",
       "architect": {
         "build": {
@@ -26,10 +26,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/frontend/src/assets",
+              "src/frontend/src/favicon.ico"
             ],
             "scripts": []
           },
