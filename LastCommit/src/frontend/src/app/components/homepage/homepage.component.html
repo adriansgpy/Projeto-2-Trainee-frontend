@@ -1,0 +1,25 @@
+<!-- Fundo e overlay -->
+<img src="assets/bmrf4.png" alt="Fundo Black Mesa" class="fundo">
+<div class="overlay"></div>
+
+<!-- Header fixo -->
+<header class="menu-header">
+  <nav>
+    <ul>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/inicio">INÍCIO</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/campanhas">CAMPANHAS</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/personagens">PERSONAGENS</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Conteúdo central que muda conforme a rota -->
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
