@@ -15,16 +15,16 @@ export class IntroComponent implements AfterViewInit {
 
   private storyBlocks: string[][] = [
     [
-      "Bem-vindo à ToyCorp!",
-      "Você foi contratado como programador de máquinas de montagem."
+      "Bem-vindo(a) ao laboratório Black Mesa.",
+      "Você foi contratado como cientista e programador."
     ],
     [
-      "Seu trabalho será garantir que os robôs criem brinquedos com precisão e eficiência...",
-      "Prepare-se para entrar na fábrica e iniciar sua jornada!"
+      "Seu trabalho será garantir que os projetos sejam desenvolvidos de forma segura e eficiente com o time.",
+      "Nenhuma informação deve sair de dentro dessa instalação, lembre-se disso. Qualquer suspeita de vazamento de dados secretos ocasionará sua morte."
     ],
     [
-      "Cuidado, não faça nada errado lá dentro. ",
-      "Venha, entre no nosso sistema!"
+      "Tenha um ótimo dia.",
+      "Lembre-se de colocar seu uniforme."
     ]
   ];
 

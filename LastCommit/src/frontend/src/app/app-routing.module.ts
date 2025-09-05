@@ -1,26 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () =>
-      import('./components/intro/intro.component').then(m => m.IntroComponent)
-  },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./components/auth/login/login.component').then(m => m.LoginComponent)
-  },
-  {
-    path: 'signup',
-    loadComponent: () =>
-      import('./components/auth/signup/signup.component').then(m => m.SignupComponent)
-  }
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' } // Redireciona para a tela de login por padrão
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

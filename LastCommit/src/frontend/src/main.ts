@@ -1,12 +1,16 @@
+// main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { provideRouter } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { routes } from './app/app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
-// Inicializa a aplicação com o AppComponent standalone
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes) // fornece as rotas para <router-outlet>
+    importProvidersFrom(
+      RouterModule.forRoot(routes),
+      HttpClientModule
+    )
   ]
-})
-.catch(err => console.error(err));
+}).catch(err => console.error(err));

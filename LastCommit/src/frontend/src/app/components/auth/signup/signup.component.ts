@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -8,25 +8,19 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, RouterModule,FormsModule]
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   username = '';
   password = '';
   confirmPassword = '';
-  isGlitching = false; // começa amigável
+  isGlitching = false; 
 
   constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.startGlitchLoop();
+  gotologin(){
+    this.router.navigate(['/login'])
   }
-  
-
-  back(){
-    this.router.navigate(['/login']); 
-  }
-
+ 
   register() {
     if (this.password !== this.confirmPassword) {
       alert('As senhas não coincidem!');
@@ -36,19 +30,5 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  startGlitchLoop() {
-    const glitchCycle = () => {
-      // espera entre 5 e 10 segundos para iniciar glitch
-      const delay = 3000 + Math.random() * 3000;
-      setTimeout(() => {
-        this.isGlitching = true; // ativa amaldiçoado
-        // glitch dura entre 1 e 3 segundos
-        setTimeout(() => {
-          this.isGlitching = false; // volta ao normal
-          glitchCycle(); // reinicia ciclo
-        }, 500 + Math.random() * 1000);
-      }, delay);
-    };
-    glitchCycle();
-  }
+  
 }
