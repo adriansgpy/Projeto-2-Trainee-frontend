@@ -72,19 +72,24 @@ export class IntroComponent implements AfterViewInit {
     }
   }
 
-  nextBlock() {
-    if (this.currentTimeout) clearTimeout(this.currentTimeout);
+ nextBlock() {
+  if (this.currentTimeout) clearTimeout(this.currentTimeout);
 
-    const pre = document.getElementById('introText');
-    if (pre) {
-      const lines = this.storyBlocks[this.currentBlockIndex];
-      pre.textContent = lines.join('\n');
-    }
-    this.isTyping = false;
-
-    if (this.currentBlockIndex < this.storyBlocks.length - 1) {
-      this.currentBlockIndex++;
-      this.showBlock(this.currentBlockIndex);
-    }
+  const pre = document.getElementById('introText');
+  if (pre) {
+    const lines = this.storyBlocks[this.currentBlockIndex];
+    pre.textContent = lines.join('\n'); 
   }
+  this.isTyping = false;
+
+  if (this.currentBlockIndex < this.storyBlocks.length - 1) {
+   
+    this.currentBlockIndex++;
+    this.showBlock(this.currentBlockIndex);
+  } else {
+  
+    this.router.navigate(['/login']);
+  }
+}
+
 }

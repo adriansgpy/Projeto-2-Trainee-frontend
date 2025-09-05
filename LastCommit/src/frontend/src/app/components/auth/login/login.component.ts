@@ -45,9 +45,6 @@ export class LoginComponent implements AfterViewInit{
   requestAnimationFrame(animate);
 }
 
-
-
-
   // Glitch da tela
   startGlitch() {
     const glitch = document.querySelector('.tv-glitch') as HTMLElement;
