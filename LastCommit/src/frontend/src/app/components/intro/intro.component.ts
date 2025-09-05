@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-intro',
@@ -10,32 +11,80 @@ import { CommonModule } from '@angular/common';
 })
 export class IntroComponent implements AfterViewInit {
 
-  private textLines: string[] = [
-    "Bem-vindo à ToyCorp!",
-    "Você foi contratado como programador de máquinas de montagem.",
-    "Seu trabalho será garantir que os robôs criem brinquedos com precisão e eficiência...",
-    "Prepare-se para entrar na fábrica e iniciar sua jornada!"
+  constructor(private router: Router) {}
+
+  private storyBlocks: string[][] = [
+    [
+      "Bem-vindo à ToyCorp!",
+      "Você foi contratado como programador de máquinas de montagem."
+    ],
+    [
+      "Seu trabalho será garantir que os robôs criem brinquedos com precisão e eficiência...",
+      "Prepare-se para entrar na fábrica e iniciar sua jornada!"
+    ],
+    [
+      "Cuidado, não faça nada errado lá dentro. ",
+      "Venha, entre no nosso sistema!"
+    ]
   ];
 
-  private typingSpeed: number = 50; 
+  currentBlockIndex: number = 0;
+  isTyping: boolean = false;
 
+  private typingSpeed: number = 50; 
+  private currentTimeout: any; 
   ngAfterViewInit(): void {
-    this.typeText(this.textLines, 'introText', 0, 0);
+    this.showBlock(this.currentBlockIndex);
   }
 
-  private typeText(lines: string[], elementId: string, lineIndex: number, charIndex: number) {
-    const pre = document.getElementById(elementId);
+  showBlock(blockIndex: number) {
+    const pre = document.getElementById('introText');
     if (!pre) return;
 
+    pre.textContent = '';
+    this.isTyping = true;
+
+    const lines = this.storyBlocks[blockIndex];
+    this.typeLines(lines, pre, 0, 0);
+  }
+
+  private typeLines(lines: string[], pre: HTMLElement, lineIndex: number, charIndex: number) {
     if (lineIndex < lines.length) {
       const line = lines[lineIndex];
+
       if (charIndex < line.length) {
         pre.textContent += line.charAt(charIndex);
-        setTimeout(() => this.typeText(lines, elementId, lineIndex, charIndex + 1), this.typingSpeed);
+        this.currentTimeout = setTimeout(() => this.typeLines(lines, pre, lineIndex, charIndex + 1), this.typingSpeed);
       } else {
         pre.textContent += '\n';
-        setTimeout(() => this.typeText(lines, elementId, lineIndex + 1, 0), this.typingSpeed);
+        this.currentTimeout = setTimeout(() => this.typeLines(lines, pre, lineIndex + 1, 0), this.typingSpeed);
       }
+
+    } else {
+      this.isTyping = false; 
+
+      if (this.currentBlockIndex === this.storyBlocks.length - 1) {
+        setTimeout(() => {
+          this.router.navigate(['/login']); 
+        }, 1000); 
+      }
+
+    }
+  }
+
+  nextBlock() {
+    if (this.currentTimeout) clearTimeout(this.currentTimeout);
+
+    const pre = document.getElementById('introText');
+    if (pre) {
+      const lines = this.storyBlocks[this.currentBlockIndex];
+      pre.textContent = lines.join('\n');
+    }
+    this.isTyping = false;
+
+    if (this.currentBlockIndex < this.storyBlocks.length - 1) {
+      this.currentBlockIndex++;
+      this.showBlock(this.currentBlockIndex);
     }
   }
 }
