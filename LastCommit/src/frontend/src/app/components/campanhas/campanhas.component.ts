@@ -14,7 +14,10 @@ export class CampanhasComponent{
   
 
 
-
+  selecionarPersonagem(campanha: string) {
+      console.log(`Personagem selecionado para a campanha: ${campanha}`);
+      // Ex: this.router.navigate(['/personagens']);
+    }
 
 
 

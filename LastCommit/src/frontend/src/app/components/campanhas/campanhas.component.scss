@@ -1,0 +1,79 @@
+/* Variáveis para consistência com outros componentes */
+$cor-laranja: #ff6600;
+$cor-texto-claro: #e0e0e0;
+$cor-fundo-card: rgba(41, 40, 40, 0.87);
+$fonte-principal: 'Inter', sans-serif;
+$fonte-black-mesa-logo: 'Orbitron', monospace;
+
+.campanhas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px;
+}
+
+.titulo-pagina {
+  font-family: $fonte-black-mesa-logo;
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 0 0 10px rgba($cor-laranja, 0.5);
+  margin-bottom: 50px;
+}
+
+.campanhas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.campanha-card {
+  background: rgba(41, 40, 40, 0.87);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $cor-laranja;
+    box-shadow: 0 0 15px rgba($cor-laranja, 0.6);
+  }
+}
+
+.card-titulo {
+  font-family: $fonte-black-mesa-logo;
+  font-size: 1.8rem;
+  color: white;
+  margin: 0 0 10px;
+}
+
+.card-descricao {
+  font-family: $fonte-principal;
+  font-size: 1rem;
+  color: $cor-texto-claro;
+  margin-bottom: 20px;
+}
+
+.btn-selecionar {
+  padding: 12px 25px;
+  border: 2px solid $cor-laranja;
+  background: transparent;
+  color: $cor-laranja;
+  font-family: $fonte-principal;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $cor-laranja;
+    color: white;
+    box-shadow: 0 0 10px rgba($cor-laranja, 0.6);
+  }
+}

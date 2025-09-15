@@ -1,23 +1,26 @@
-<!-- Fundo e overlay -->
-<img src="assets/bmrf4.png" alt="Fundo Black Mesa" class="fundo">
+<div class="fundo-container">
+  <img [src]="'assets/' + currentBackgroundImage" alt="Fundo Black Mesa" class="fundo-transicao">
+</div>
+
 <div class="overlay"></div>
+<div class="glitch-overlay"></div>
 
 <header class="menu-header">
   <nav>
     <ul>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/inicio">INÍCIO</a>
+        <a routerLink="inicio">INÍCIO</a>
       </li>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/campanhas">CAMPANHAS</a>
+        <a routerLink="campanhas">CAMPANHAS</a>
       </li>
       <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/personagens">PERSONAGENS</a>
+        <a routerLink="personagens">PERSONAGENS</a>
       </li>
     </ul>
   </nav>
 </header>
 
-<main class="main-content">
+<main class="main-content-form">
   <router-outlet></router-outlet>
 </main>

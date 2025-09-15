@@ -1,4 +1,4 @@
-<img src="assets/bmrf.png" alt="Fundo Black Mesa" class="fundo">
+<img src="assets/bm.png" alt="Fundo Black Mesa" class="fundo">
 <div class="overlay"></div>
 
 
@@ -19,26 +19,43 @@
   <div class="forms-container">
     
     <div class="cracha">
+  <div class="logo-section">
+    <h1>SECRET PROJECTS</h1>
+  </div>
 
-      <div class="logo-section">
-        <h1>SECRET PROJECTS</h1>
-      </div>
+  <h1>ENTRAR</h1>
 
-      <h1>ENTRAR</h1>
-      <form>
-        <div class="form-group">
-          <label for="login">LOGIN</label>
-          <input type="text" id="login" placeholder="Digite um login" />
-        </div>
-        <div class="form-group">
-          <label for="senha">SENHA</label>
-          <input type="password" id="senha" placeholder="Digite sua senha" />
-        </div>
-        <div class="botoes">
-          <button type="button" (click)="testarApi()">ENTRAR</button>
-        </div>
-      </form>
+  <form (ngSubmit)="fazerLogin()">
+    <div class="form-group">
+      <label for="login">LOGIN</label>
+      <input
+        type="text"
+        id="login"
+        [(ngModel)]="usuario"
+        name="usuario"
+        placeholder="Digite um login"
+        required
+      />
     </div>
+    <div class="form-group">
+      <label for="senha">SENHA</label>
+      <input
+        type="password"
+        id="senha"
+        [(ngModel)]="senha"
+        name="senha"
+        placeholder="Digite sua senha"
+        required
+      />
+    </div>
+    <div class="botoes">
+      <button type="submit">ENTRAR</button>
+    </div>
+  </form>
+
+  <p *ngIf="erro" class="erro">{{ erro }}</p>
+</div>
+
   </div>
 </main>
 

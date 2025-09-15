@@ -1,0 +1,120 @@
+/* Estilos para a seção principal da página de início */
+
+$cor-laranja: #ff6600;
+$cor-laranja-clara: #ffad5c;
+$cor-texto-claro: #e0e0e0;
+$cor-borda-fina: #444;
+$cor-fundo-overlay: rgba(0, 0, 0, 0.4);
+$cor-fundo-card: rgba(41, 40, 40, 0.87);
+
+$fonte-principal: 'Inter', sans-serif;
+$fonte-black-mesa-logo: 'Orbitron', monospace;
+$fonte-menu: 'Inter', sans-serif;
+
+/* ==================================== */
+/* ======== PÁGINA DE INÍCIO ========== */
+/* ==================================== */
+/* ==================================== */
+/* ======== PÁGINA DE INÍCIO ========== */
+/* ==================================== */
+.inicio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 150px;
+  left: 50px;
+  z-index: 10;
+  color: $cor-texto-claro;
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    top: 120px;
+    left: 20px;
+    padding: 20px;
+  }
+}
+
+/* Animação para o brilho do texto "transmissão ao vivo" */
+@keyframes blink-glow {
+  0%, 100% {
+    text-shadow: 0 0 5px $cor-laranja, 0 0 10px $cor-laranja;
+  }
+  50% {
+    text-shadow: none;
+  }
+}
+
+.saudacao-bloco {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.titulo-principal {
+  font-family: $fonte-black-mesa-logo;
+  font-size: 3.5rem;
+  color: white;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 0 10px rgba($cor-laranja, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.subtitulo {
+  font-family: $fonte-principal;
+  font-size: 1.2rem;
+  color: $cor-laranja;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
+
+.linha-decorativa {
+  width: 150px;
+  height: 2px;
+  background-color: $cor-laranja;
+  margin: 10px 0 20px 0;
+  box-shadow: 0 0 10px rgba($cor-laranja, 0.7);
+}
+
+.informacao-usuario-container {
+  margin-bottom: 3rem;
+  .informacao-usuario {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: $cor-texto-claro;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    animation: blink-glow 2s infinite;
+  }
+  .data-e-hora {
+    font-size: 0.9rem;
+    font-family: monospace;
+    color: $cor-laranja;
+    margin: 0;
+  }
+}
+
+.btn-campanha {
+  padding: 15px 30px;
+  border: 2px solid $cor-laranja;
+  background: $cor-laranja;
+  color: $cor-laranja;
+  color:rgb(247, 247, 247);
+  font-family: $fonte-principal;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $cor-laranja;
+    color: white;
+    box-shadow: 0 0 15px rgba($cor-laranja, 0.6);
+  }
+}

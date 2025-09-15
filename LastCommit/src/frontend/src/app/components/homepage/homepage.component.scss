@@ -1,26 +1,35 @@
-
+/* ==================================== */
+/* =========== VARIÁVEIS ============== */
+/* ==================================== */
 $cor-laranja: #ff6600;
 $cor-laranja-clara: #ffad5c;
 $cor-texto-claro: #e0e0e0;
-$cor-borda-fina: #444;
 $cor-fundo-overlay: rgba(0, 0, 0, 0.4);
-$cor-fundo-card: rgba(41, 40, 40, 0.87);
 
 $fonte-principal: 'Inter', sans-serif;
 $fonte-black-mesa-logo: 'Orbitron', monospace;
 $fonte-menu: 'Inter', sans-serif;
 
-
+/* ==================================== */
+/* =========== ANIMAÇÕES ============== */
+/* ==================================== */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes glitch-bg {
+  0% { transform: translate(0); opacity: 0; }
+  20% { opacity: 0.1; transform: translate(-2px, -2px); }
+  40% { opacity: 0.05; transform: translate(2px, 2px); }
+  60% { opacity: 0.15; transform: translate(-1px, 1px); }
+  80% { opacity: 0.08; transform: translate(1px, -1px); }
+  100% { transform: translate(0); opacity: 0; }
 }
 
+/* ==================================== */
+/* ======== ESTILOS GLOBAIS =========== */
+/* ==================================== */
 html, body {
   margin: 0;
   padding: 0;
@@ -28,107 +37,128 @@ html, body {
   width: 100%;
   font-family: $fonte-principal;
   color: $cor-texto-claro;
-  overflow-x: hidden; 
-  overflow-y: scroll; 
+  overflow-x: hidden;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-.fundo {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
+.app-wrapper {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: $cor-fundo-overlay;
-  z-index: -1;
-}
-
-
-
-.menu-header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  box-sizing: border-box;
+/* Container para a transição de imagens */
+.fundo-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  height: 100%;
+  z-index: -3; /* Fica no fundo */
+  overflow: hidden;
+}
+
+/* Classe para a imagem com transição */
+.fundo-transicao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out; /* Transição de 1 segundo na opacidade */
+  opacity: 1; /* A imagem visível começa com 100% de opacidade */
+}
+
+/* Overlay escuro para melhorar a leitura */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: $cor-fundo-overlay;
+  z-index: -2;
+}
+
+/* Novo overlay para o efeito de glitch */
+.glitch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: -1;
+  animation: glitch-bg 0.5s infinite alternate;
+}
+
+/* ==================================== */
+/* ======== HEADER / MENU ============= */
+/* ==================================== */
+.menu-header {
+  width: 100%;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
   background: transparent;
-  overflow: hidden; 
+  overflow: hidden;
+  animation: fadeIn 1s ease-out 0.2s forwards;
+  opacity: 0;
+  display: flex;
+  justify-content: flex-start;
 
   nav {
-    display: flex;
-    position: relative;
     width: auto;
     background: transparent;
-    padding: 10px 30px 10px 20px;
-    z-index: 1;
-
- 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba($cor-laranja, 0.7);
-      transform: skewX(-20deg);
-      transform-origin: left bottom;
-      z-index: -1;
-    }
-
-  
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: -20px;
-      bottom: 0;
-      width: 40px;
-      background: rgba(0, 0, 0, 0.7);
-      transform: skewX(-20deg);
-      transform-origin: right bottom;
-      z-index: 0;
-    }
 
     ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 30px;
+      gap: 50px;
 
       li {
         font-family: $fonte-menu;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
+        position: relative;
 
         a {
           text-decoration: none;
           color: white;
-          transition: all 0.3s ease;
+          transition: color 0.3s ease;
+          position: relative;
+
           &:hover {
             color: $cor-laranja-clara;
-            transform: translateY(-2px);
-            text-shadow: 0 0 8px $cor-laranja-clara, 0 0 12px $cor-laranja-clara;
           }
+
           &.active {
-            color: $cor-laranja-clara;
-            border-bottom: 2px solid white;
-            padding-bottom: 5px;
+            color: $cor-laranja;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+          }
+
+          &:hover::after,
+          &.active::after {
+            width: 100%;
           }
         }
       }
@@ -136,167 +166,14 @@ html, body {
   }
 }
 
-
-.menu-header nav ul li a {
-  position: relative;
-  z-index: 10;      
-  cursor: pointer;  
-}
-
+/* ==================================== */
+/* ====== CONTEÚDO PRINCIPAL ========== */
+/* ==================================== */
 .main-content-form {
-  margin-top: 20px;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.cracha {
-  background: $cor-fundo-card;
-  padding: 3.5rem 4.5rem;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0);
-  animation: slideInUp 1s ease-out 0.5s forwards;
-  opacity: 0;
-
-  h1 {
-    font-family: $fonte-black-mesa-logo;
-    font-size: 2rem;
-    color: white;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-    position: relative;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 2px;
-      background: $cor-laranja;
-    }
-  }
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-
-.logo-section {
-  text-align: right;
-  h1 {
-    font-family: $fonte-black-mesa-logo;
-    font-size: 3.5rem;
-    color: white;
-    filter: drop-shadow(0 0 8px rgba(white, 0.6)); 
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin: 0;
-  }
-  p {
-    filter: drop-shadow(0 0 20px rgba($cor-laranja, 0.7));
-
-    font-family: $fonte-principal;
-    font-size: 1.2rem;
-    color: $cor-laranja;
-    margin-top: 5px;
-  }
-}
-.form-group {
-  text-align: left;
-  label {
-    font-size: 0.9rem;
-    color: $cor-laranja;
-    margin-bottom: 0.5rem;
-    display: block;
-    font-family: $fonte-principal;
-  }
-  input {
-    width: 100%;
-    padding: 12px 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: $cor-texto-claro;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    font-family: $fonte-principal;
-    
-    &:focus {
-      outline: none;
-      border-color: $cor-laranja;
-      box-shadow: 0 0 10px rgba(255,102,0,0.6);
-    }
-  }
-}
-
-.botoes {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    background: #333;
-    color: white;
-    font-family: $fonte-principal;
-    
-    &:hover {
-      background: $cor-laranja;
-      color: white;
-    }
-  }
-  .btn-voltar {
-    background: #333;
-    color: white;
-    &:hover {
-      background: #555;
-    }
-  }
-}
-
-
-.menu-footer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 20px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 2s forwards;
-  
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    
-    span {
-      font-size: 0.9rem;
-      color: white;
-      font-family: $fonte-principal;
-    }
-  }
-  
-  .footer-right {
-    font-size: 0.9rem;
-    color: white;
-    font-family: $fonte-principal;
-  }
+  /* Use padding-top para o conteúdo não ficar por baixo do menu fixo */
+  padding-top: 100px;
 }
