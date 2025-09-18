@@ -3,6 +3,8 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AudioService } from '../../../services/soundtrack.service';
+
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,13 @@ export class LoginComponent {
 
   private apiUrl = 'http://127.0.0.1:8000/auth'; 
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private audioService: AudioService
+
+
+  ) {}
 
   gotosignup() {
     this.router.navigate(['/signup']);
@@ -38,7 +46,7 @@ export class LoginComponent {
         if (res.access_token) {
           localStorage.setItem('token', res.access_token);
         }
-
+        this.audioService.playMusic('assets/soundtrack/menu.mp3', true);
         this.router.navigate(['/homepage']);
       },
       error: (err) => {
