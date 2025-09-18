@@ -3,27 +3,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { CampanhasComponent } from './components/campanhas/campanhas.component';
-import { PersonagensComponent } from './components/personagens/personagens.component';
 
 export const routes: Routes = [
-  // Esta rota redireciona para o login por padrão
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
 
-  // A HOMEPAGE AGORA É A ROTA PAI
   {
     path: 'homepage',
     component: HomepageComponent,
     children: [
-      { path: '', redirectTo: 'inicio', pathMatch: 'full' }, // Rota padrão da homepage
-      { path: 'inicio', component: InicioComponent },
-      { path: 'campanhas', component: CampanhasComponent },
-      { path: 'personagens', component: PersonagensComponent }
+      { path: '', redirectTo: 'inicial', pathMatch: 'full' },
+      { path: 'inicial', loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent) },
+      { path: 'campanhas', loadComponent: () => import('./components/campanhas/campanhas.component').then(m => m.CampanhasComponent) },
+      { path: 'personagens', loadComponent: () => import('./components/personagens/personagens.component').then(m => m.PersonagensComponent) },
+      {
+      path: 'inicial',
+      loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent)
+    }
+
     ]
   }
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

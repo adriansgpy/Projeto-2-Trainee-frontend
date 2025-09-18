@@ -1,9 +1,7 @@
 
-
 $cor-laranja: #ff6600;
 $cor-laranja-clara: #ff9933;
 $cor-texto-claro: #e0e0e0;
-$cor-fundo-card: rgba(30, 30, 30, 0.8);
 $cor-decorativa: rgba(255, 102, 0, 0.7);
 
 $fonte-principal: 'Inter', sans-serif;
@@ -16,7 +14,6 @@ $fonte-titulo: 'Orbitron', monospace;
   min-height: 100vh;
   width: 100%;
   padding-top: 80px; 
-  background: linear-gradient(120deg, #1a1a1a, #111111);
   font-family: $fonte-principal;
   color: $cor-texto-claro;
   overflow: hidden;
@@ -28,9 +25,7 @@ $fonte-titulo: 'Orbitron', monospace;
   align-items: flex-start;
   gap: 1.5rem;
   padding: 2rem 3rem;
-  background-color: $cor-fundo-card;
   border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
   position: relative;
 }
 

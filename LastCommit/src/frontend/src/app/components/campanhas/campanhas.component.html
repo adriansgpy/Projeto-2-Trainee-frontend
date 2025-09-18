@@ -1,34 +1,99 @@
 <div class="campanhas-container">
-    <h1 class="titulo-pagina">Selecione a Campanha</h1>
-    <div class="campanhas-grid">
-        <div class="campanha-card">
-            <h2 class="card-titulo">ZEN</h2>
-            <p class="card-descricao">
-                Embarque na jornada de Xen e descubra os segredos por trás da invasão alienígena.
-            </p>
-            <button class="btn-selecionar" (click)="selecionarPersonagem('Zen')">
-                Selecionar Personagem
-            </button>
-        </div>
+  <h1 class="titulo-tela">Campanhas Disponíveis</h1>
 
-        <div class="campanha-card">
-            <h2 class="card-titulo">Bio Enhancement</h2>
-            <p class="card-descricao">
-                Teste as novas melhorias biológicas em combate e torne-se a arma definitiva.
-            </p>
-            <button class="btn-selecionar" (click)="selecionarPersonagem('Bio Enhancement')">
-                Selecionar Personagem
-            </button>
-        </div>
+  <div class="campanha-secao" *ngIf="getCampanhasPorTipo('cientista').length">
+    <h2 class="subtitulo-tipo">Cientista</h2>
+    <div class="cards-container">
+      <div 
+        *ngFor="let camp of getCampanhasPorTipo('cientista')"
+        class="card"
+        [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
         
-        <div class="campanha-card">
-            <h2 class="card-titulo">Black Mesa</h2>
-            <p class="card-descricao">
-                Reviva a experiência original e explore os perigos do complexo de Black Mesa.
-            </p>
-            <button class="btn-selecionar" (click)="selecionarPersonagem('Black Mesa')">
-                Selecionar Personagem
-            </button>
+        <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
+        
+        <div class="card-info">
+          <h3>{{camp.titulo}}</h3>
+          <p>{{camp.descricao}}</p>
+          <button 
+            class="btn-entrar"
+            [disabled]="!camp.habilitado"
+            (click)="entrarCampanha(camp)">
+            {{ camp.habilitado ? 'Começar Campanha' : 'Bloqueada' }}
+          </button>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="campanha-secao" *ngIf="getCampanhasPorTipo('hecu').length">
+    <h2 class="subtitulo-tipo">H.E.C.U</h2>
+    <div class="cards-container">
+      <div 
+        *ngFor="let camp of getCampanhasPorTipo('hecu')"
+        class="card"
+        [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
+        
+        <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
+        
+        <div class="card-info">
+          <h3>{{camp.titulo}}</h3>
+          <p>{{camp.descricao}}</p>
+          <button 
+            class="btn-entrar"
+            [disabled]="!camp.habilitado"
+            (click)="entrarCampanha(camp)">
+            {{ camp.habilitado ? 'Começar Campanha' : 'Bloqueada' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="campanha-secao" *ngIf="getCampanhasPorTipo('black ops').length">
+    <h2 class="subtitulo-tipo">Black Ops</h2>
+    <div class="cards-container">
+      <div 
+        *ngFor="let camp of getCampanhasPorTipo('black ops')"
+        class="card"
+        [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
+        
+        <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
+        
+        <div class="card-info">
+          <h3>{{camp.titulo}}</h3>
+          <p>{{camp.descricao}}</p>
+          <button 
+            class="btn-entrar"
+            [disabled]="!camp.habilitado"
+            (click)="entrarCampanha(camp)">
+            {{ camp.habilitado ? 'Começar Campanha' : 'Bloqueada' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="campanha-secao" *ngIf="getCampanhasPorTipo('gman').length">
+    <h2 class="subtitulo-tipo">G-MAN</h2>
+    <div class="cards-container">
+      <div 
+        *ngFor="let camp of getCampanhasPorTipo('gman')"
+        class="card"
+        [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
+        
+        <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
+        
+        <div class="card-info">
+          <h3>{{camp.titulo}}</h3>
+          <p>{{camp.descricao}}</p>
+          <button 
+            class="btn-entrar"
+            [disabled]="!camp.habilitado"
+            (click)="entrarCampanha(camp)">
+            {{ camp.habilitado ? 'Começar Campanha' : 'Bloqueada' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Deixamos esse import
+import { RouterModule } from '@angular/router'; 
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({

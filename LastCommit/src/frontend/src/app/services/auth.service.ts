@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
 
-  constructor() { }  // remove o HttpClient
+  constructor() { }  
 
   login(username: string, password: string): Observable<any> {
     if(username === 'teste' && password === '123456'){

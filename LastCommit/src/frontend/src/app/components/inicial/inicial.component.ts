@@ -1,16 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.scss'],
+  selector: 'app-inicial',
+  templateUrl: './inicial.component.html',
+  styleUrls: ['./inicial.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule]
+  imports: [CommonModule, RouterModule]
 })
-export class InicioComponent implements OnInit, OnDestroy {
+export class InicialComponent implements OnInit, OnDestroy {
   currentDateTime: string;
   private dateTimeInterval: any;
 

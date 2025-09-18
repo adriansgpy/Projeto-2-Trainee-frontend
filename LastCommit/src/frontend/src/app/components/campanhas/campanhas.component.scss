@@ -1,79 +1,117 @@
-/* Variáveis para consistência com outros componentes */
-$cor-laranja: #ff6600;
-$cor-texto-claro: #e0e0e0;
-$cor-fundo-card: rgba(41, 40, 40, 0.87);
-$fonte-principal: 'Inter', sans-serif;
-$fonte-black-mesa-logo: 'Orbitron', monospace;
-
 .campanhas-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 80px 20px;
-}
-
-.titulo-pagina {
-  font-family: $fonte-black-mesa-logo;
-  font-size: 2.5rem;
-  color: white;
-  text-shadow: 0 0 10px rgba($cor-laranja, 0.5);
-  margin-bottom: 50px;
-}
-
-.campanhas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  gap: 50px;
+  padding: 80px 50px 50px 50px;
   width: 100%;
-  max-width: 1200px;
 }
 
-.campanha-card {
-  background: rgba(41, 40, 40, 0.87);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 25px;
+.titulo-tela {
+  font-family: 'Orbitron', monospace;
+  font-size: 3rem;
+  color: #ff6600;
   text-align: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 15px #ff6600;
+}
 
-  &:hover {
-    transform: translateY(-5px);
-    border-color: $cor-laranja;
-    box-shadow: 0 0 15px rgba($cor-laranja, 0.6);
+.campanha-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h2.subtitulo-tipo {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    color: #ff9933;
+    text-shadow: 0 0 8px #ff6600;
+    margin-bottom: 15px;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start;
+  }
+
+  .card {
+    width: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(41, 40, 40, 0.95);
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      filter: grayscale(70%);
+    }
+
+    &.enabled:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 35px rgba(255, 102, 0, 0.8);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      .enabled:hover & {
+        transform: scale(1.05);
+      }
+    }
+
+    .card-info {
+      padding: 1rem;
+
+      h3 {
+        color: #ff6600;
+        font-family: 'Orbitron', monospace;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: #e0e0e0;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .btn-entrar {
+        background: #ff6600;
+        color: #fff;
+        padding: 0.5rem 1.2rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover:enabled {
+          background: #ff9933;
+          box-shadow: 0 0 15px #ff6600;
+        }
+
+        &:disabled {
+          background: #555;
+          cursor: not-allowed;
+        }
+      }
+    }
   }
 }
 
-.card-titulo {
-  font-family: $fonte-black-mesa-logo;
-  font-size: 1.8rem;
-  color: white;
-  margin: 0 0 10px;
+@media (max-width: 992px) {
+  .card {
+    width: calc(50% - 2rem);
+  }
 }
 
-.card-descricao {
-  font-family: $fonte-principal;
-  font-size: 1rem;
-  color: $cor-texto-claro;
-  margin-bottom: 20px;
-}
-
-.btn-selecionar {
-  padding: 12px 25px;
-  border: 2px solid $cor-laranja;
-  background: transparent;
-  color: $cor-laranja;
-  font-family: $fonte-principal;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: $cor-laranja;
-    color: white;
-    box-shadow: 0 0 10px rgba($cor-laranja, 0.6);
+@media (max-width: 576px) {
+  .card {
+    width: 100%;
   }
 }

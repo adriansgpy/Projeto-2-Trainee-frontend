@@ -1,0 +1,59 @@
+<div class="characters-page">
+  <div class="characters-container">
+
+    <section class="characters-list-section">
+      <h2 class="section-title">Personagens Criados</h2>
+      <ul class="characters-list">
+        <li *ngFor="let character of characters" class="character-card">
+          <div class="character-info">
+            <img [src]="character.image || 'assets/default-character.png'" 
+                 alt="{{ character.name }}" 
+                 class="character-img">
+            <div class="details">
+              <strong>{{ character.name }}</strong>
+              <span>Função: {{ character.role }}</span>
+              <span *ngIf="character.age">Idade: {{ character.age }}</span>
+              <span *ngIf="character.campaign" class="campaign-indicator">Campanha Atrelada</span>
+              <span *ngIf="!character.campaign" class="campaign-indicator none">Sem Campanha</span>
+            </div>
+          </div>
+          <div class="card-buttons">
+            <button class="view-btn" (click)="viewCharacter(character)">Ver Detalhes</button>
+            <button class="delete-btn" (click)="deleteCharacter(character)">Deletar</button>
+          </div>
+        </li>
+      </ul>
+      <p *ngIf="characters.length === 0" class="empty-msg">
+        Nenhum personagem criado ainda. Comece a criar o seu!
+      </p>
+    </section>
+
+    <section class="create-character-section">
+      <h2 class="section-title">Criar Novo Personagem</h2>
+      <form (ngSubmit)="createCharacter()">
+        <div class="form-group">
+          <label for="newCharName">Nome do Personagem:</label>
+          <input type="text" id="newCharName" [(ngModel)]="newCharacter.name" name="newName" placeholder="Nome Completo" required>
+        </div>
+        
+          <div class="form-group">
+            <label for="newCharRole">Função:</label>
+            <select id="newCharRole" [(ngModel)]="newCharacter.role" name="newRole" required (change)="updateCharacterImage()">
+              <option value="" disabled selected>Selecione uma função</option>
+              <option value="Cientista">Cientista</option>
+              <option value="Soldado">Soldado do Exército(H.E.C.U)</option>
+              <option value="Black Ops">Forças Especiais(Black Ops)</option>
+              <option value="G-MAN">?</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="newCharAge">Idade:</label>
+          <input type="number" id="newCharAge" [(ngModel)]="newCharacter.age" name="newAge" placeholder="Ex: 27" required min="18" max="99">
+        </div>
+        <button type="submit" class="btn btn-create">Criar Personagem</button>
+      </form>
+    </section>
+  </div>
+</div>

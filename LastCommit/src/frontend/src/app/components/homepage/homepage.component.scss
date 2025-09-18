@@ -1,6 +1,5 @@
-/* ==================================== */
-/* =========== VARIÁVEIS ============== */
-/* ==================================== */
+
+
 $cor-laranja: #ff6600;
 $cor-laranja-clara: #ffad5c;
 $cor-texto-claro: #e0e0e0;
@@ -10,9 +9,6 @@ $fonte-principal: 'Inter', sans-serif;
 $fonte-black-mesa-logo: 'Orbitron', monospace;
 $fonte-menu: 'Inter', sans-serif;
 
-/* ==================================== */
-/* =========== ANIMAÇÕES ============== */
-/* ==================================== */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -27,9 +23,6 @@ $fonte-menu: 'Inter', sans-serif;
   100% { transform: translate(0); opacity: 0; }
 }
 
-/* ==================================== */
-/* ======== ESTILOS GLOBAIS =========== */
-/* ==================================== */
 html, body {
   margin: 0;
   padding: 0;
@@ -50,18 +43,16 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Container para a transição de imagens */
 .fundo-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -3; /* Fica no fundo */
+  z-index: -3; 
   overflow: hidden;
 }
 
-/* Classe para a imagem com transição */
 .fundo-transicao {
   position: absolute;
   top: 0;
@@ -69,11 +60,11 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 1s ease-in-out; /* Transição de 1 segundo na opacidade */
-  opacity: 1; /* A imagem visível começa com 100% de opacidade */
+  transition: opacity 1s ease-in-out;
+  opacity: 1; 
 }
 
-/* Overlay escuro para melhorar a leitura */
+
 .overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -81,7 +72,6 @@ html, body {
   z-index: -2;
 }
 
-/* Novo overlay para o efeito de glitch */
 .glitch-overlay {
   position: fixed;
   top: 0;
@@ -95,9 +85,6 @@ html, body {
   animation: glitch-bg 0.5s infinite alternate;
 }
 
-/* ==================================== */
-/* ======== HEADER / MENU ============= */
-/* ==================================== */
 .menu-header {
   width: 100%;
   padding: 40px 60px;
@@ -166,14 +153,11 @@ html, body {
   }
 }
 
-/* ==================================== */
-/* ====== CONTEÚDO PRINCIPAL ========== */
-/* ==================================== */
+
 .main-content-form {
   flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Use padding-top para o conteúdo não ficar por baixo do menu fixo */
+  display: block; 
+  width: 100%;
+  min-height: calc(100vh - 100px); 
   padding-top: 100px;
 }
