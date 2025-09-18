@@ -12,13 +12,13 @@ $cor-decorativa: rgba(255, 102, 0, 0.7);
   flex-direction: column; 
   justify-content: flex-start; 
   align-items: flex-start; 
+  overflow-x: hidden;
   width: 100%;
   min-height: 100vh;
   padding: 50px 10%;
   font-family: $fonte-principal;
   color: $cor-texto-claro;
   position: relative;
-  overflow-x: hidden;
 }
 
 .inicial-container {
@@ -60,7 +60,7 @@ $cor-decorativa: rgba(255, 102, 0, 0.7);
 
   .data-e-hora {
     font-family: monospace;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: $cor-laranja;
   }
 
@@ -136,6 +136,17 @@ $cor-decorativa: rgba(255, 102, 0, 0.7);
   }
 }
 
+.descricao-banner, .sobre-blackmesa-vertical .descricao-vertical p {
+  white-space: normal; // força quebra de linha normal
+}
+
+.inicial-main, .inicial-container, .descricao-banner, .sobre-blackmesa-vertical, .descricao-vertical p {
+  box-sizing: border-box; // garante que padding/margin não estoure largura
+  max-width: 100%;         // evita que ultrapassem a largura da tela
+  overflow-wrap: break-word; // força quebra de palavras longas
+  word-break: break-word;
+}
+
 @media (max-width: 768px) {
   .inicial-main {
     padding: 50px 5%;
@@ -146,7 +157,7 @@ $cor-decorativa: rgba(255, 102, 0, 0.7);
   }
 
   .descricao-banner, .sobre-blackmesa-vertical .descricao-vertical p {
-    font-size: 1rem;
+    font-size: 3rem;
   }
 
   .btn-start {
