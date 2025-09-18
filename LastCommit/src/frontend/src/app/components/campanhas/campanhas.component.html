@@ -1,19 +1,29 @@
 <div class="campanhas-container">
-  <h1 class="titulo-tela">Campanhas Disponíveis</h1>
+  <!-- Banner -->
+  <div class="campanhas-container">
+  <!-- Banner -->
+    <div class="banner">
+  <div class="banner-info">
+    <h1>Black Mesa</h1>
+    <p>A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo.</p>
+    </div>
+  </div>
 
+
+  <!-- Lista de campanhas -->
   <div class="campanha-secao" *ngIf="getCampanhasPorTipo('cientista').length">
     <h2 class="subtitulo-tipo">Cientista</h2>
-    <div class="cards-container">
+    <div class="cards-container full-width">
       <div 
         *ngFor="let camp of getCampanhasPorTipo('cientista')"
-        class="card"
+        class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
-        
+
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
-        
+
         <div class="card-info">
           <h3>{{camp.titulo}}</h3>
-          <p>{{camp.descricao}}</p>
+          <p class="descricao-longa">{{camp.descricao}}</p>
           <button 
             class="btn-entrar"
             [disabled]="!camp.habilitado"
@@ -25,19 +35,20 @@
     </div>
   </div>
 
+  <!-- Repete estrutura para HECU, Black Ops, G-Man -->
   <div class="campanha-secao" *ngIf="getCampanhasPorTipo('hecu').length">
     <h2 class="subtitulo-tipo">H.E.C.U</h2>
-    <div class="cards-container">
+    <div class="cards-container full-width">
       <div 
         *ngFor="let camp of getCampanhasPorTipo('hecu')"
-        class="card"
+        class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
         
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
         
         <div class="card-info">
           <h3>{{camp.titulo}}</h3>
-          <p>{{camp.descricao}}</p>
+          <p class="descricao-longa">{{camp.descricao}}</p>
           <button 
             class="btn-entrar"
             [disabled]="!camp.habilitado"
@@ -49,19 +60,20 @@
     </div>
   </div>
 
+  <!-- Black Ops -->
   <div class="campanha-secao" *ngIf="getCampanhasPorTipo('black ops').length">
     <h2 class="subtitulo-tipo">Black Ops</h2>
-    <div class="cards-container">
+    <div class="cards-container full-width">
       <div 
         *ngFor="let camp of getCampanhasPorTipo('black ops')"
-        class="card"
+        class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
         
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
         
         <div class="card-info">
           <h3>{{camp.titulo}}</h3>
-          <p>{{camp.descricao}}</p>
+          <p class="descricao-longa">{{camp.descricao}}</p>
           <button 
             class="btn-entrar"
             [disabled]="!camp.habilitado"
@@ -73,19 +85,20 @@
     </div>
   </div>
 
+  <!-- G-MAN -->
   <div class="campanha-secao" *ngIf="getCampanhasPorTipo('gman').length">
     <h2 class="subtitulo-tipo">G-MAN</h2>
-    <div class="cards-container">
+    <div class="cards-container full-width">
       <div 
         *ngFor="let camp of getCampanhasPorTipo('gman')"
-        class="card"
+        class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
         
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
         
         <div class="card-info">
           <h3>{{camp.titulo}}</h3>
-          <p>{{camp.descricao}}</p>
+          <p class="descricao-longa">{{camp.descricao}}</p>
           <button 
             class="btn-entrar"
             [disabled]="!camp.habilitado"
