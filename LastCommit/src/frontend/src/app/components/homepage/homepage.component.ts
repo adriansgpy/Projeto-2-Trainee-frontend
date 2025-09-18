@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class HomepageComponent implements OnInit, OnDestroy {
-  private backgroundImages = ['bmrf.png', 'bmrf3.png', 'bmrf4.png'];
+  private backgroundImages = ['hev.png','bmrf.png', 'bmrf3.png', 'bmrf4.png', 'xen_bg.png', 'black_mesa_bg.jpg', 'black_mesa_bg2.jpg'];
   currentBackgroundImage = '';
   private imageInterval: any;
 
@@ -33,6 +33,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.imageInterval = setInterval(() => {
       index = (index + 1) % this.backgroundImages.length;
       this.currentBackgroundImage = this.backgroundImages[index];
-    }, 10000);
+    }, 5000);
   }
 }
