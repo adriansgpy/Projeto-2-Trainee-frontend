@@ -36,11 +36,11 @@ export class CampanhasComponent implements OnInit {
 
   ngOnInit() {
     this.campanhas = [
-      { titulo: 'Black Mesa', descricao: 'A origem de tudo, o maior desastre já visto pelos cientistas.', tipo: 'cientista', imagem: 'assets/black_mesa_outside.png' },
-      { titulo: 'XEN', descricao: 'Descubra a origem das criaturas e tecnologia alienígena.', tipo: 'cientista', imagem: 'assets/xen.png' },
-      { titulo: 'Capture o responsável!', descricao: 'Missão do governo: elimine testemunhas e cientistas.', tipo: 'hecu', imagem: 'assets/hecu.png' },
-      { titulo: 'Elimine tudo e a todos', descricao: 'Destrua a Black Mesa e todas as evidências.', tipo: 'black ops', imagem: 'assets/blackops_img.png' },
-      { titulo: 'G-MAN', descricao: '???', tipo: 'gman', imagem: 'assets/gman.png' },
+      { titulo: 'Black Mesa', descricao: 'Faça parte do experimento mais temido do laboratório, examine o cristal de outro planeta com os dedos cruzados.', tipo: 'cientista', imagem: 'assets/black_mesa_outside.png' },
+      { titulo: 'XEN', descricao: 'O lugar que nenhum ser humano pode saber da existência, um lugar jamais visto por ninguém, a não ser a prórpia Black Mesa.', tipo: 'cientista', imagem: 'assets/xen.png' },
+      { titulo: 'Amigos ou Inimigos?', descricao: 'Mandado pelo governo, as forças H.E.C.U terá que invadir a Black Mesa e apagar a existência desse desastre. Tenha certeza de que nenhum Alien ou Cientista escape com vida. Tudo deve ser mantido em segredo.', tipo: 'hecu', imagem: 'assets/hecu.png' },
+      { titulo: 'Mande tudo pelos ares', descricao: 'Entre na Black Mesa com as forças especiais Black Ops, que são altamente treinada para operações perigosas de alto risco, para acabar com a instalação toda.', tipo: 'black ops', imagem: 'assets/blackops_img.png' },
+      { titulo: 'G-MAN', descricao: '...', tipo: 'gman', imagem: 'assets/gman.png' },
     ];
 
     this.loadPersonagens();

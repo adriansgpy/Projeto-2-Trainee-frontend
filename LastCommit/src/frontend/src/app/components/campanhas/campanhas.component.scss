@@ -1,203 +1,199 @@
 /* Container principal */
 .campanhas-container {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-  padding: 60px 50px 50px 50px;
-  width: 100%;
+display:flex;
+flex-direction:column;
+gap:60px;
+padding:60px 50px 50px 50px;
+width:100%;
 }
 
 /* Título principal da tela */
 .titulo-tela {
-  font-family: 'Orbitron', monospace;
-  font-size: 3rem;
-  color: #ff6600;
-  text-align: left;
-  letter-spacing: 4px;
-  margin-bottom: 20px;
+font-family:'Orbitron',monospace;
+font-size:3rem;
+color:#ff6600;
+text-align:left;
+letter-spacing:4px;
+margin-bottom:20px;
 }
 
 /* Banner */
 .banner {
-  position: relative;
-  width: 100%;
-  height: 400px; // aumenta a altura do banner
-  background-image: url('/assets/banner.png'); // imagem de fundo
-  background-size: cover; // cobre toda a div
-  background-position: center; // centraliza a imagem
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: flex-end; // texto na parte inferior
-  padding: 20px 40px;
-  border-radius: 10px;
-  overflow: hidden;
-
-  // Overlay escuro
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5); // escurece a imagem
-    z-index: 1;
-  }
-
-  .banner-info {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    max-width: 800px;
-    font-family: 'Orbitron', monospace;
-    text-shadow: 0 0 10px rgba(0,0,0,0.7);
-  }
-
-  .banner-info h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .banner-info p {
-    font-size: 1.2rem;
-    line-height: 1.5;
-  }
+position:relative;
+width:100%;
+background-image:url("/assets/banner.png");
+height:400px;
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+display:flex;
+align-items:flex-end;
+padding:20px 40px;
+border-radius:10px;
+overflow:hidden;
 }
 
+.banner::after {
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:1;
+}
+
+.banner-info {
+position:relative;
+z-index:2;
+color:#fff;
+max-width:800px;
+font-family:'Orbitron',monospace;
+text-shadow:0 0 10px rgba(0,0,0,0.7);
+}
+
+.banner-info h1 {
+font-size:4rem;
+margin-bottom:0.5rem;
+}
+
+.banner-info p {
+font-size:1.8rem;
+line-height:1.5;
+}
 
 /* Seções de campanha */
 .campanha-secao {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+display:flex;
+flex-direction:column;
+gap:25px;
 }
 
 .subtitulo-tipo {
-  font-family: 'Orbitron', monospace;
-  font-size: 2rem;
-  color: #ff9933;
-  border-bottom: 2px solid #ff6600;
-  padding-bottom: 5px;
+font-family:'Orbitron',monospace;
+font-size:2rem;
+color:#ff9933;
+border-bottom:2px solid #ff6600;
+padding-bottom:5px;
 }
 
-/* Container de cards */
-.cards-container.full-width {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* Container de cards para layout em duas colunas */
+.cards-container {
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:flex-start;
 }
 
-/* Card principal */
-.card.full-card {
-  display: flex;
-  flex-direction: row;
-  background: linear-gradient(145deg, #1a1a1a, #222);
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100%;
-  padding: 20px;
-  align-items: center;
-  gap: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.card.enabled:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(255, 102, 0, 0.6);
+/* Card individual */
+.card {
+width:calc(50% - 15px);
+border-radius:12px;
+overflow:hidden;
+transition:transform 0.3s ease,box-shadow 0.3s ease,border-color 0.3s ease;
+cursor:pointer;
+display:flex;
+flex-direction:column;
+padding:20px;
 }
 
 /* Cards bloqueados */
 .card.disabled {
-  opacity: 0.6;
-  filter: grayscale(80%);
-  cursor: not-allowed;
-  box-shadow: none;
+opacity:0.6;
+filter:grayscale(80%);
+cursor:not-allowed;
+box-shadow:none;
+}
+
+.card.enabled:hover {
+transform:translateY(-8px);
+box-shadow:0 12px 30px rgba(255,102,0,0.4);
 }
 
 /* Imagem do card */
 .card-img {
-  width: 280px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
+width:100%;
+height:600px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:15px;
+transition:transform 0.3s ease;
 }
 
 .card.enabled:hover .card-img {
-  transform: scale(1.05);
+transform:scale(1.03);
 }
 
 /* Informações do card */
 .card-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+flex:1;
+display:flex;
+flex-direction:column;
 }
 
 .card-info h3 {
-  color: #ff6600;
-  font-family: 'Orbitron', monospace;
-  margin-bottom: 8px;
-  font-size: 1.6rem;
+color:#ff6600;
+font-family:'Orbitron',monospace;
+margin-bottom:8px;
+font-size:3rem;
 }
 
 .descricao-longa {
-  font-size: 1rem;
-  color: #ddd;
-  margin-bottom: 12px;
-  line-height: 1.5;
+font-size:1.9rem;
+color:#ddd;
+margin-bottom:15px;
+line-height:1.6;
 }
 
 /* Botão de entrar */
 .btn-entrar {
-  background: #ff6600;
-  color: #fff;
-  padding: 10px 25px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+background:#ff6600;
+color:#fff;
+padding:12px 25px;
+border:none;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
+text-transform:uppercase;
+transition:all 0.3s ease;
+align-self:flex-start;
 }
 
 .btn-entrar:hover:not(:disabled) {
-  background: #ff9933;
-  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.5);
+background:#ff9933;
+box-shadow:0 4px 15px rgba(255,102,0,0.5);
 }
 
 .btn-entrar:disabled {
-  background: #555;
-  cursor: not-allowed;
+background:#555;
+cursor:not-allowed;
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
-  .card.full-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .card-img {
-    width: 100%;
-    height: 200px;
-    margin-bottom: 15px;
-  }
-
-  .card-info h3 {
-    font-size: 1.4rem;
-  }
+@media (max-width:992px) {
+.card {
+width:calc(100% - 15px);
 }
 
-@media (max-width: 576px) {
-  .campanhas-container {
-    padding: 40px 20px 20px 20px;
-  }
+.cards-container {
+flex-direction:column;
+gap:20px;
+}
+}
 
-  .titulo-tela {
-    font-size: 2.2rem;
-  }
+@media (max-width:768px) {
+.card-info h3 {
+font-size:1.6rem;
+}
+}
+
+@media (max-width:576px) {
+.campanhas-container {
+padding:40px 20px 20px 20px;
+}
+
+.titulo-tela {
+font-size:2.2rem;
+}
 }
