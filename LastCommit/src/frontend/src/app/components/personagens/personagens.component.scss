@@ -1,6 +1,4 @@
-/* =========================
-   VARIÁVEIS BLACK MESA
-========================= */
+
 $cor-laranja: #ff6600;
 $cor-laranja-clara: #ff944d;
 $cor-preto: #0f0f0f;
@@ -8,9 +6,6 @@ $cor-cinza: #1c1c1c;
 $cor-cinza-claro: #2b2b2b;
 $cor-texto: #e0e0e0;
 
-/* =========================
-   PÁGINA PRINCIPAL
-========================= */
 .characters-page {
   color: $cor-texto;
   min-height: 100vh;
@@ -29,9 +24,6 @@ $cor-texto: #e0e0e0;
   max-width: 1200px;
 }
 
-/* =========================
-   SEÇÕES
-========================= */
 .section-title {
   font-size: 1.5rem;
   color: $cor-laranja;
@@ -41,9 +33,6 @@ $cor-texto: #e0e0e0;
   padding-bottom: 0.5rem;
 }
 
-/* =========================
-   LISTA DE PERSONAGENS
-========================= */
 .characters-list {
   list-style: none;
   margin: 0;
@@ -116,9 +105,7 @@ $cor-texto: #e0e0e0;
   }
 }
 
-/* =========================
-   BOTÕES
-========================= */
+
 .card-buttons {
   display: flex;
   flex-direction: column;
@@ -156,9 +143,6 @@ $cor-texto: #e0e0e0;
   }
 }
 
-/* =========================
-   MENSAGEM VAZIA
-========================= */
 .empty-msg {
   text-align: center;
   font-style: italic;
@@ -166,9 +150,6 @@ $cor-texto: #e0e0e0;
   color: #aaa;
 }
 
-/* =========================
-   FORMULÁRIO
-========================= */
 .create-character-section {
   background: $cor-cinza;
   padding: 1.5rem;

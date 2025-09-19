@@ -52,7 +52,7 @@ export class PersonagensComponent implements OnInit {
   updateCharacterImage() {
     if (this.newCharacter.role === 'Cientista') {
       this.newCharacter.image = 'assets/cientist_1.jpg';
-    } else if (this.newCharacter.role === 'Soldado') {
+    } else if (this.newCharacter.role === 'Soldado H.E.C.U') {
       this.newCharacter.image = 'assets/soldier.jpg';
     } else if(this.newCharacter.role == 'Black Ops'){
       this.newCharacter.image = 'assets/black_ops.jpg';

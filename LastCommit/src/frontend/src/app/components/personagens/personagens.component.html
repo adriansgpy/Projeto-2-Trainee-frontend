@@ -11,7 +11,7 @@
                  class="character-img">
             <div class="details">
               <strong>{{ character.name }}</strong>
-              <span>Função: {{ character.role }}</span>
+              <span>{{ character.role }}</span>
               <span *ngIf="character.age">Idade: {{ character.age }}</span>
               <span *ngIf="character.campaign" class="campaign-indicator">Campanha Atrelada</span>
               <span *ngIf="!character.campaign" class="campaign-indicator none">Sem Campanha</span>
@@ -41,12 +41,11 @@
             <select id="newCharRole" [(ngModel)]="newCharacter.role" name="newRole" required (change)="updateCharacterImage()">
               <option value="" disabled selected>Selecione uma função</option>
               <option value="Cientista">Cientista</option>
-              <option value="Soldado">Soldado do Exército(H.E.C.U)</option>
+              <option value="Soldado H.E.C.U">Soldado H.E.C.U</option>
               <option value="Black Ops">Forças Especiais(Black Ops)</option>
               <option value="G-MAN">?</option>
             </select>
         </div>
-
 
         <div class="form-group">
           <label for="newCharAge">Idade:</label>

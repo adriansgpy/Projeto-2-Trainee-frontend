@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
+import { HecuIntroComponent } from './components/intro/hecu-intro/hecu_intro.component';
+import { jogoComponent } from './components/game/jogo.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,13 +19,23 @@ export const routes: Routes = [
       { path: 'inicial', loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent) },
       { path: 'campanhas', loadComponent: () => import('./components/campanhas/campanhas.component').then(m => m.CampanhasComponent) },
       { path: 'personagens', loadComponent: () => import('./components/personagens/personagens.component').then(m => m.PersonagensComponent) },
-      {
-      path: 'inicial',
-      loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent)
-    }
-
     ]
-  }
+  },
+
+  {
+  path: 'intro/hecu',
+  loadComponent: () =>
+    import('./components/intro/hecu-intro/hecu_intro.component').then(m => m.HecuIntroComponent)
+  },
+
+  {
+  path: 'game',
+  loadComponent: () =>
+    import('./components/game/jogo.component').then(m => m.jogoComponent)
+  },
+
+
+
 
 ];
 @NgModule({

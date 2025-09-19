@@ -31,7 +31,7 @@ html, body {
   font-family: $fonte-principal;
   color: $cor-texto-claro;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -98,7 +98,7 @@ html, body {
   justify-content: flex-start;
 
   /* Fundo semi-transparente + efeito blur */
-  background: rgba(0, 0, 0, 0.5); /* ajusta a transparência como quiser */
+  background: rgba(194, 94, 0, 0.534); /* ajusta a transparência como quiser */
   backdrop-filter: blur(15px); /* o "borrado forte" */
   -webkit-backdrop-filter: blur(15px); /* compatibilidade Safari */
   box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* sombra sutil para destacar do conteúdo */

@@ -1,0 +1,81 @@
+.rpg-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #000 url('/assets/hecu_background.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Orbitron', monospace;
+  color: #ffa64d;
+
+  .overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 0;
+  }
+
+  .game-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 90%;
+    height: 85%;
+    gap: 20px;
+  }
+
+  .story-panel {
+    flex: 3;
+    background: rgba(20, 20, 20, 0.85);
+    padding: 20px;
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(255,102,0,0.4);
+
+    .story-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background: #ff6600;
+        color: #fff;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background: #ff9933;
+          box-shadow: 0 0 15px rgba(255,102,0,0.8);
+        }
+      }
+    }
+  }
+
+  .side-panel {
+    flex: 1;
+    background: rgba(30, 30, 30, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255,102,0,0.5);
+
+    h2 {
+      color: #ff6600;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  }
+}

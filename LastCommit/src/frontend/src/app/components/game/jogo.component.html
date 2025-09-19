@@ -1,0 +1,29 @@
+<div class="rpg-container">
+  <div class="overlay"></div>
+  <div class="ambient-lights"></div>
+  <div class="particles"></div>
+
+  <div class="game-content">
+    <div class="story-panel">
+      <div class="story-text" #storyText>
+        <p *ngFor="let line of storyLog">{{ line }}</p>
+      </div>
+
+      <div class="actions">
+        <button *ngFor="let action of actions" (click)="chooseAction(action)">
+          {{ action }}
+        </button>
+      </div>
+    </div>
+
+    <div class="side-panel">
+      <h2>Status</h2>
+      <p>Vida: {{ player.hp }}</p>
+      <p>Energia: {{ player.energy }}</p>
+      <p>Inventário:</p>
+      <ul>
+        <li *ngFor="let item of player.inventory">{{ item }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

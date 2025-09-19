@@ -1,0 +1,228 @@
+/* Estilo Total em Black e Mesa - Cinematográfico */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+$black-mesa-orange: #ff7f00;
+$black-mesa-black: #000000;
+$black-mesa-gray: #333333;
+
+:host {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute; /* Adicionado */
+  top: 0;           /* Adicionado */
+  left: 0;  
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.intro-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $black-mesa-black;
+  color: $black-mesa-orange;
+  font-family: 'Roboto Mono', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+}
+
+.title-force {
+  font-size: 6rem;
+  font-weight: 700;
+  color: $black-mesa-orange;
+  text-shadow: 0 0 15px $black-mesa-orange;
+  animation: fadeIn 2s ease-in, glitch 0.5s infinite alternate;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+}
+
+.background-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  filter: grayscale(100%) brightness(0.5);
+}
+
+.background-image.active {
+  opacity: 0.2;
+  animation: backgroundPulse 10s infinite;
+  filter: grayscale(100%) brightness(0.5) blur(1px);
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.text-content {
+  max-width: 800px;
+  text-align: left;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  font-weight: 400;
+  white-space: pre-wrap;
+  
+  p {
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 0 5px $black-mesa-orange;
+  }
+}
+
+.btn-continue {
+  background: none;
+  border: 1px solid $black-mesa-orange;
+  color: $black-mesa-orange;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+
+  &:hover {
+    background-color: $black-mesa-orange;
+    color: $black-mesa-black;
+  }
+}
+
+.btn-continue.show {
+  opacity: 1;
+}
+
+// Efeito de "glitch" no texto
+p::after {
+  content: '|';
+  display: inline-block;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+/* Animações de luzes e efeito de Black Mesa */
+.light-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.light {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba($black-mesa-orange, 0.5);
+  border-radius: 50%;
+  box-shadow: 0 0 10px 5px rgba($black-mesa-orange, 0.7);
+  animation: light-move 5s infinite alternate;
+}
+
+@keyframes light-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(calc(100vw - 100%), calc(100vh - 100%)); }
+}
+
+/* Efeito de partículas */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  animation: particle-fade 4s infinite;
+}
+
+@keyframes particle-fade {
+  0% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-100vh); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Efeito de glitch no título
+@keyframes glitch {
+  0% { text-shadow: 0 0 15px $black-mesa-orange, 
+                     2px 2px 0px $black-mesa-black,
+                     -2px -2px 0px $black-mesa-black; }
+  25% { text-shadow: 0 0 15px $black-mesa-orange, 
+                      -2px 2px 0px $black-mesa-black,
+                      2px -2px 0px $black-mesa-black; }
+  50% { text-shadow: 0 0 15px $black-mesa-orange, 
+                      1px -1px 0px $black-mesa-black,
+                      -1px 1px 0px $black-mesa-black; }
+  75% { text-shadow: 0 0 15px $black-mesa-orange, 
+                      -1px 1px 0px $black-mesa-black,
+                      1px -1px 0px $black-mesa-black; }
+  100% { text-shadow: 0 0 15px $black-mesa-orange, 
+                       2px 2px 0px $black-mesa-black,
+                       -2px -2px 0px $black-mesa-black; }
+}
+
+// Efeito de pulso no background
+@keyframes backgroundPulse {
+  0% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.05); opacity: 0.25; }
+  100% { transform: scale(1); opacity: 0.2; }
+}
