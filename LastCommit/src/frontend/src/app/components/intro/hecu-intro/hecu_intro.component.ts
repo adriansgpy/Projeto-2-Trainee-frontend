@@ -11,7 +11,17 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class HecuIntroComponent implements OnInit, AfterViewInit, OnDestroy {
-  fullText: string = "Dia 13 de Novembro de 200X, 06:47 AM. Base Avançada da H.E.C.U., deserto do Novo México. A neblina da madrugada cobria a instalação de Black Mesa, mas a movimentação era intensa. Soldados equipavam seus coletes, verificavam armamentos e revisavam mapas digitais da instalação. O desastre interdimensional havia deixado rastros perigosos dentro do laboratório. O governo não queria sobreviventes, testemunhas ou qualquer registro do que havia acontecido. O pelotão H.E.C.U foi enviado para exterminar **tudo e todos** que cruzassem seu caminho — cientistas, alienígenas, civis, ninguém escaparia. O capitão Hughes reuniu a equipe: Nosso objetivo é claro: eliminar todas as ameaças. Não há resgate, não há evacuação. Cada ser vivo dentro de Black Mesa deve ser neutralizado. Entendido? Os soldados respiravam fundo. Cada passo, cada disparo, cada movimento estava cronometrado. Os helicópteros aguardavam nas plataformas, motores rugindo baixo. O frio da manhã misturava tensão e expectativa. De repente, a sirene do laboratório tocou. Era hora. A missão secreta das forças H.E.C.U começava. O destino da instalação dependia de sua eficiência letal. Nada poderia falhar.";
+fullText: string = `DATA: 13 de Novembro de 200X
+HORA: 06:47 AM
+LOCAL: Base Avançada H.E.C.U., Novo México
+
+Soldados, atenção. O governo identificou uma situação crítica dentro da instalação Black Mesa. Um experimento interdimensional falhou, liberando **entidades desconhecidas e perigosas** dentro do laboratório. Cientistas e civis ainda estão presentes no local, mas **não há garantias de sobrevivência**.
+
+Sua missão é **clara e prioritária**: eliminar todas as ameaças, humanas ou alienígenas, e **impedir qualquer registro do incidente**. Nenhum resgate será enviado. Nenhuma evacuação será realizada. O governo deseja **total sigilo**.
+
+As forças H.E.C.U. devem avançar rapidamente, neutralizando qualquer resistência e assegurando que a instalação não represente risco externo. Helicópteros estarão disponíveis para inserção e extração, mas **a prioridade máxima é a neutralização completa de qualquer sobrevivente ou criatura hostil**.
+
+Capitão Hughes, você e sua equipe sabem o que fazer. Cada passo, cada disparo, cada decisão será vital. **Nada pode falhar.**`;
   displayedText: string = '';
   showTitle: boolean = true;
   showContinue: boolean = false;
