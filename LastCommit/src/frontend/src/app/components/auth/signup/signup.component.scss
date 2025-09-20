@@ -1,131 +1,87 @@
-/* Variaveis e Tipografia */
+$cor-primaria: #ffffff; 
+$cor-secundaria: #808080; 
+$cor-texto-claro: #e0e0e0; 
+$cor-fundo-overlay: rgb(46, 46, 46); 
+$cor-fundo-card: rgba(66, 66, 66, 0.459); 
+$fonte-menu:sans-serif;
+$fonte-principal:  sans-serif;
+$fonte-black-mesa-logo:monospace;
 $cor-laranja: #ff6600;
-$cor-laranja-clara: #ff9933;
-$cor-texto-claro: #e0e0e0;
-$cor-borda-fina: #444;
-$cor-fundo-overlay: rgba(0, 0, 0, 0.4);
-$cor-fundo-card: rgba(41, 40, 40, 0.87);
+$cor-laranja-clara: #ffad5c;
 
-$fonte-principal: 'Inter', sans-serif;
-$fonte-black-mesa-logo: 'Orbitron', monospace;
-$fonte-menu: 'Inter', sans-serif;
-
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
   font-family: $fonte-principal;
   color: $cor-texto-claro;
-  overflow-x: hidden; 
-  overflow-y: scroll; 
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  background-color: #000;
 }
 
-.fundo {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-}
-
-.overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: $cor-fundo-overlay;
-  z-index: -1;
-}
-
-
+/* Header */
 .menu-header {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  box-sizing: border-box;
+  padding: 40px 60px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
-  background: transparent;
+  overflow: hidden;
+  animation: fadeIn 1s ease-out 0.2s forwards;
+  display: flex;
+  justify-content: flex-start;
+
 
   nav {
-    display: flex;
-    position: relative;
     width: auto;
     background: transparent;
-    padding: 10px 30px 10px 20px;
-    z-index: 1;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba($cor-laranja, 0.7);
-      transform: skewX(-20deg);
-      transform-origin: left bottom;
-      z-index: -1;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: -20px;
-      bottom: 0;
-      width: 40px;
-      background: rgba(0, 0, 0, 0.7);
-      transform: skewX(-20deg);
-      transform-origin: right bottom;
-      z-index: 0;
-    }
 
     ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 30px;
+      gap: 50px;
 
       li {
         font-family: $fonte-menu;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
+        position: relative;
 
         a {
           text-decoration: none;
           color: white;
-        
-          transition: all 0.3s ease;
+          transition: color 0.3s ease;
+          position: relative;
+
           &:hover {
             color: $cor-laranja-clara;
-            transform: translateY(-2px);
-            text-shadow: 0 0 8px $cor-laranja-clara, 0 0 12px $cor-laranja-clara;
           }
+
           &.active {
-            color: white;
-            border-bottom: 6px solid white;
-            padding-bottom: 5px;
+            color: $cor-laranja;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+          }
+
+          &:hover::after,
+          &.active::after {
+            width: 100%;
           }
         }
       }
@@ -134,171 +90,202 @@ html, body {
 }
 
 
-
-.main-content-form {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.forms-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 50px; 
-  flex-wrap: wrap; 
-  animation: slideInUp 1s ease-out 0.5s forwards;
-  opacity: 0;
-}
-
+/* Logo do Card */
 .logo-section {
-  text-align: right;
-  h1 {
-    font-family: $fonte-black-mesa-logo;
-    font-size: 5.8rem;
-    color: white;
-    filter: drop-shadow(0 0 8px rgba(white, 0.6)); 
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin: 0;
-  }
-  p {
-    filter: drop-shadow(0 0 20px rgba($cor-laranja, 0.7)); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
 
-    font-family: $fonte-principal;
-    font-size: 1.2rem;
-    color: $cor-laranja;
-    margin-top: 5px;
+  .logo-cracha {
+    width: 120px;
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+    object-fit: contain;
   }
-}
-
-.cracha {
-  background: $cor-fundo-card;
-  padding: 3.5rem 4.5rem;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0);
-  animation: slideInUp 1s ease-out 0.5s forwards;
-  opacity: 0;
 
   h1 {
     font-family: $fonte-black-mesa-logo;
     font-size: 2rem;
-    color: white;
+    color: $cor-primaria;
     letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-    position: relative;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 2px;
-      background: $cor-laranja;
-    }
+    text-shadow: 0 0 5px rgba($cor-primaria, 0.2);
+  }
+
+  h2 {
+    font-family: $fonte-principal;
+    font-size: 1rem;
+    color: $cor-texto-claro;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $cor-texto-claro;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
   }
 }
 
+/* Vídeo de Fundo */
+.fundo-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -3; /* deve ficar atrás de tudo */
+  filter: brightness(0.55) contrast(1.6) saturate(1.3) blur(12px);
+}
+
+
+/* Card de Cadastro */
+.main-content-form {
+  position: fixed;      
+  top: 50%;            
+  left: 50%;           
+  transform: translate(-50%, -50%); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.cracha {
+  background: $cor-fundo-card;
+  padding: 3rem 4rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px; /* maior que login */
+  text-align: center;
+  box-shadow: none; 
+  animation: slideInUp 1s ease-out forwards;
+
+  h1 {
+    font-family: $fonte-black-mesa-logo;
+    font-size: 2rem;
+    color: $cor-primaria;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba($cor-primaria, 0.2);
+  }
+}
+
+/* Formulário */
 form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.form-group {
+.form-group label {
+  font-size: 0.85rem;
+  color: $cor-texto-claro;
+  margin-bottom: 0.3rem;
+  display: block;
   text-align: left;
-  label {
-    font-size: 0.9rem;
-    color: $cor-laranja;
-    margin-bottom: 0.5rem;
-    display: block;
-    font-family: $fonte-principal;
-  }
-  input {
-    width: 100%;
-    padding: 12px 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: $cor-texto-claro;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    font-family: $fonte-principal;
-    
-    &:focus {
-      outline: none;
-      border-color: $cor-laranja;
-      box-shadow: 0 0 10px rgba(255,102,0,0.6);
-    }
-  }
 }
 
-.botoes {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    background: #333;
-    color: white;
-    font-family: $fonte-principal;
-    
-    &:hover {
-      background: $cor-laranja;
-      color: white;
-    }
-  }
-  .btn-voltar {
-    background: #333;
-    color: white;
-    &:hover {
-      background: #555;
-    }
-  }
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  background: #0a0a0a;
+  color: $cor-texto-claro;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
 }
+
+.form-group input:focus {
+  outline: none;
+  border-color: $cor-primaria;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: $cor-texto-claro;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.password-toggle:hover {
+  opacity: 1;
+  color: $cor-primaria;
+}
+
+.botoes button {
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgb(255, 102, 0); 
+  color: #fff;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+.botoes button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.erro {
+  color: $cor-primaria;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); 
+}
+
 
 .menu-footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 20px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 2s forwards;
-  
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    
-    span {
-      font-size: 0.9rem;
-      color: white;
-      font-family: $fonte-principal;
-    }
+  padding: 10px 30px;
+  background: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: $cor-texto-claro;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  z-index: 100;
+}
+
+.menu-footer span {
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .cracha {
+    padding: 2rem;
+    max-width: 90%;
   }
-  
-  .footer-right {
-    font-size: 0.9rem;
-    color: white;
-    font-family: $fonte-principal;
+
+  .logo-section h1 {
+    font-size: 2rem;
+  }
+
+  .cracha h1 {
+    font-size: 1.5rem;
   }
 }

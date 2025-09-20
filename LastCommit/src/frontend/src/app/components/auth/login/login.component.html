@@ -1,69 +1,66 @@
-<img src="assets/bm.png" alt="Fundo Black Mesa" class="fundo">
-<div class="overlay"></div>
-
+<video class="fundo-video" autoplay muted loop playsinline>
+  <source src="assets/test chamber.mp4" type="video/mp4" />
+  Seu navegador não suporta vídeo HTML5.
+</video>
 
 <header class="menu-header">
   <nav>
-    <ul>
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/login">LOGIN</a>
-      </li>
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a routerLink="/signup">CADASTRO</a>
-      </li>
-    </ul>
+   
+    <div class="menu-items">
+      <ul>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/login">LOGIN</a>
+        </li>
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a routerLink="/signup">CADASTRO</a>
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>
 
+
 <main class="main-content-form">
   <div class="forms-container">
-    
     <div class="cracha">
-  <div class="logo-section">
-    <h1>SECRET PROJECTS</h1>
-  </div>
+      <div class="logo-section">
+        <img src="assets/logo_bms.png" alt="Logo" class="logo-cracha">
+        <h1>SECRET PROJECTS</h1>
+      </div>
 
-  <h1>ENTRAR</h1>
+      <h1>ENTRAR NO LABORATÓRIO</h1>
 
-  <form (ngSubmit)="fazerLogin()">
-    <div class="form-group">
-      <label for="login">LOGIN</label>
-      <input
-        type="text"
-        id="login"
-        [(ngModel)]="usuario"
-        name="usuario"
-        placeholder="Digite um login"
-        required
-      />
+      <form (ngSubmit)="fazerLogin()">
+        <div class="form-group">
+          <label for="login">LOGIN</label>
+          <input
+            type="text"
+            id="login"
+            [(ngModel)]="usuario"
+            name="usuario"
+            placeholder="Digite um login"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="senha">SENHA</label>
+          <input
+            type="password"
+            id="senha"
+            [(ngModel)]="senha"
+            name="senha"
+            placeholder="Digite sua senha"
+            required
+          />
+        </div>
+        <div class="botoes">
+          <button type="submit">ENTRAR</button>
+        </div>
+      </form>
+
+      <p *ngIf="erro" class="erro">{{ erro }}</p>
     </div>
-    <div class="form-group">
-      <label for="senha">SENHA</label>
-      <input
-        type="password"
-        id="senha"
-        [(ngModel)]="senha"
-        name="senha"
-        placeholder="Digite sua senha"
-        required
-      />
-    </div>
-    <div class="botoes">
-      <button type="submit">ENTRAR</button>
-    </div>
-  </form>
-
-  <p *ngIf="erro" class="erro">{{ erro }}</p>
-</div>
-
   </div>
 </main>
 
-<footer class="menu-footer">
-  <div class="footer-left">
-    <span>// BLACK MESA R. F.</span>
-  </div>
-  <div class="footer-right">
-    <span>VERSION: 2.5B</span>
-  </div>
-</footer>
+

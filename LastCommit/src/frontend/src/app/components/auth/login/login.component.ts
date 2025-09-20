@@ -28,6 +28,11 @@ export class LoginComponent {
 
 
   ) {}
+  
+  ngOnInit() {
+    this.audioService.playMusic('assets/soundtrack/bms.mp3')  
+  }
+
 
   gotosignup() {
     this.router.navigate(['/signup']);
@@ -46,7 +51,6 @@ export class LoginComponent {
         if (res.access_token) {
           localStorage.setItem('token', res.access_token);
         }
-        this.audioService.playMusic('assets/soundtrack/menu.mp3', true);
         this.router.navigate(['/homepage']);
       },
       error: (err) => {

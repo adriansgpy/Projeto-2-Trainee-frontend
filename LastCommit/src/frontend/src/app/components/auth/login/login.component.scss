@@ -1,198 +1,193 @@
-$cor-laranja: #ff6600;
-$cor-laranja-clara: #ffad5c;
-$cor-texto-claro: #e0e0e0;
-$cor-borda-fina: #444;
-$cor-fundo-overlay: rgba(0, 0, 0, 0.4);
-$cor-fundo-card: rgba(41, 40, 40, 0.87);
-
+$cor-primaria: #ffffff; // Branco puro
+$cor-secundaria: #808080; // Cinza sutil
+$cor-texto-claro: #e0e0e0; 
+$cor-fundo-overlay: rgb(46, 46, 46); 
+$cor-fundo-card: rgba(66, 66, 66, 0.459); 
+$cor-borda: rgba(255, 255, 255, 0.1); 
+$fonte-menu: 'Inter', sans-serif;
 $fonte-principal: 'Inter', sans-serif;
 $fonte-black-mesa-logo: 'Orbitron', monospace;
-$fonte-menu: 'Inter', sans-serif;
+$cor-laranja: #ff6600;
+$cor-laranja-clara: #ffad5c;
 
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes glitch-effect {
-  0% { transform: translate(0, 0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-3px, -3px); }
-  60% { transform: translate(4px, 4px); }
-  80% { transform: translate(-2px, 3px); }
-  100% { transform: translate(0, 0); }
-}
-
-@keyframes pulse-glow {
-  0% { box-shadow: 0 0 5px $cor-laranja, 0 0 10px $cor-laranja; }
-  50% { box-shadow: 0 0 15px $cor-laranja, 0 0 20px $cor-laranja-clara; }
-  100% { box-shadow: 0 0 5px $cor-laranja, 0 0 10px $cor-laranja; }
-}
-
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
   font-family: $fonte-principal;
   color: $cor-texto-claro;
-  overflow-x: hidden; /* Mantém a rolagem horizontal oculta */
-  overflow-y: scroll; /* Mantém a rolagem vertical, se necessário */
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  background-color: #000;
 }
 
-.fundo {
 
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  animation: glitch-effect 8s infinite linear alternate;
-}
-
-.overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: $cor-fundo-overlay;
-  z-index: -1;
-}
 
 .menu-header {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  box-sizing: border-box;
+  padding: 40px 60px;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 100;
-  background: transparent;
-  overflow: hidden; 
-}
-
-.menu-header nav {
+  z-index: 10;
+  overflow: hidden;
+  animation: fadeIn 1s ease-out 0.2s forwards;
   display: flex;
-  position: relative;
-  width: auto;
-  background: transparent;
-  padding: 10px 30px 10px 20px;
-  z-index: 1;
+  justify-content: flex-start;
+
+
+  nav {
+    width: auto;
+    background: transparent;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 50px;
+
+      li {
+        font-family: $fonte-menu;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+
+        a {
+          text-decoration: none;
+          color: white;
+          transition: color 0.3s ease;
+          position: relative;
+
+          &:hover {
+            color: $cor-laranja-clara;
+          }
+
+          &.active {
+            color: $cor-laranja;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+          }
+
+          &:hover::after,
+          &.active::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }
 
-.menu-header nav::before {
-  content: '';
-  position: absolute;
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .logo-cracha {
+    width: 120px; 
+    height: auto;
+    border-radius: 20px ;
+    margin-bottom: 0.5rem;
+    object-fit: contain;
+  }
+
+  h1 {
+    font-family: $fonte-black-mesa-logo;
+    font-size: 2rem;
+    color: $cor-primaria;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px rgba($cor-primaria, 0.2);
+  }
+}
+
+.fundo-video {
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba($cor-laranja, 0.7);
-  transform: skewX(-20deg);
-  transform-origin: left bottom;
-  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0; 
+  filter: brightness(0.7) blur(4px) contrast(1.4) saturate(1.2);
 }
 
-.menu-header nav::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -20px;
-  bottom: 0;
-  width: 40px;
-  background: rgba(0, 0, 0, 0.7);
-  transform: skewX(-20deg);
-  transform-origin: right bottom;
-  z-index: 0;
-}
 
-.menu-header nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 30px;
-}
 
-.menu-header nav ul li {
-  font-family: $fonte-menu;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.menu-header nav ul li a {
-  text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.menu-header nav ul li a:hover {
-  color: $cor-laranja-clara;
-  transform: translateY(-2px);
-  text-shadow: 0 0 8px $cor-laranja-clara, 0 0 12px $cor-laranja-clara;
-}
-
-.menu-header nav ul li a.active {
-  color: $cor-laranja-clara;
-  border-bottom: 2px solid white;
-  padding-bottom: 5px;
-}
 
 .main-content-form {
-  margin-top: 20px;
-  flex-grow: 1;
+  position: fixed;      
+  top: 50%;            
+  left: 50%;           
+  transform: translate(-50%, -50%); 
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
 }
 
 .cracha {
   background: $cor-fundo-card;
-  padding: 3.5rem 4.5rem;
+  padding: 3rem 4rem;
   border-radius: 12px;
   width: 100%;
-  max-width: 500px;
+  max-width: 420px;
   text-align: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0);
-  animation: slideInUp 1s ease-out 0.5s forwards, pulse-glow 2s infinite;
-  opacity: 0;
+  border: 1px solid $cor-borda; 
+  box-shadow: none; 
+  animation: slideInUp 1s ease-out forwards;
+}
+
+.logo-section h1 {
+  font-family: $fonte-black-mesa-logo;
+  font-size: 2.5rem;
+  color: $cor-primaria;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba($cor-primaria, 0.4); 
+}
+
+.logo-section h2 {
+  font-family: $fonte-principal;
+  font-size: 1rem;
+  color: $cor-texto-claro;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+.logo-section p {
+  font-size: 0.9rem;
+  color: $cor-texto-claro;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
 }
 
 .cracha h1 {
   font-family: $fonte-black-mesa-logo;
-  font-size: 2rem;
-  color: white;
-  letter-spacing: 2px;
+  font-size: 1.8rem;
+  color: $cor-primaria;
+  margin-bottom: 2rem;
   text-transform: uppercase;
-  margin-bottom: 2.5rem;
-  position: relative;
-}
-
-.cracha h1:after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 2px;
-  background: $cor-laranja;
+  letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba($cor-primaria, 0.2);
 }
 
 form {
@@ -201,118 +196,107 @@ form {
   gap: 1.5rem;
 }
 
-.logo-section {
-  text-align: right;
-}
-
-.logo-section h1 {
-  font-family: $fonte-black-mesa-logo;
-  font-size: 3.5rem;
-  color: white;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)); 
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.logo-section p {
-  filter: drop-shadow(0 0 20px rgba($cor-laranja, 0.7));
-  font-family: $fonte-principal;
-  font-size: 1.2rem;
-  color: $cor-laranja;
-  margin-top: 5px;
-}
-
-.form-group {
-  text-align: left;
-}
-
 .form-group label {
-  font-size: 0.9rem;
-  color: $cor-laranja;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: $cor-texto-claro;
+  margin-bottom: 0.3rem;
   display: block;
-  font-family: $fonte-principal;
+  text-align: left;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  background: #0a0a0a;
   color: $cor-texto-claro;
   font-size: 1rem;
   transition: all 0.3s ease;
-  border-radius: 4px;
-  font-family: $fonte-principal;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: $cor-laranja;
-  box-shadow: 0 0 10px rgba(255,102,0,0.6);
+  border-color: $cor-primaria;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  animation: none; 
 }
 
-.botoes {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
+.password-field {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: $cor-texto-claro;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.password-toggle:hover {
+  opacity: 1;
+  color: $cor-primaria;
 }
 
 .botoes button {
-  flex: 1;
   padding: 14px;
-  border: none;
-  cursor: pointer;
   font-size: 1rem;
-  text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  border: 1px solid $cor-borda;
+  cursor: pointer;
+  background: rgb(255, 102, 0); 
+  color: #fff;
+  box-shadow: none;
   transition: all 0.3s ease;
-  border-radius: 4px;
-  background: #333;
-  color: white;
-  font-family: $fonte-principal;
 }
 
 .botoes button:hover {
-  background: $cor-laranja;
-  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-.botoes .btn-voltar {
-  background: #333;
-  color: white;
-}
-
-.botoes .btn-voltar:hover {
-  background: #555;
+.erro {
+  color: $cor-primaria;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); 
 }
 
 .menu-footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding: 20px;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 2s forwards;
+  padding: 10px 30px;
+  background: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: $cor-texto-claro;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  z-index: 100;
 }
 
-.footer-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.menu-footer span {
+  letter-spacing: 0.5px;
 }
 
-.footer-left span {
-  font-size: 0.9rem;
-  color: white;
-  font-family: $fonte-principal;
-}
+@media (max-width: 768px) {
+  .cracha {
+    padding: 2rem;
+    max-width: 90%;
+  }
 
-.footer-right {
-  font-size: 0.9rem;
-  color: white;
-  font-family: $fonte-principal;
+  .logo-section h1 {
+    font-size: 2rem;
+  }
+
+  .cracha h1 {
+    font-size: 1.4rem;
+  }
 }
