@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { AudioService } from '../../services/soundtrack.service';
 
 interface Campanha {
   titulo: string;
@@ -32,7 +33,7 @@ export class CampanhasComponent implements OnInit {
   personagens: Personagem[] = [];
   private apiUrl = 'http://127.0.0.1:8000/personagens';
   campanhaSelecionada: Campanha | null = null;
-  constructor(private http: HttpClient, private router : Router) {}
+  constructor(private http: HttpClient, private router : Router, private audioService : AudioService) {}
 
   ngOnInit() {
     this.campanhas = [
@@ -100,9 +101,11 @@ selecionarPersonagem(personagem: any) {
 
   switch (this.campanhaSelecionada?.titulo) {
     case 'Força Oposta':
+      this.audioService.stopMusic();
       rotaIntro = '/intro/hecu';
       break;
     case 'Black Mesa':
+      this.audioService.stopMusic();
       rotaIntro = '/intro/cientista'  
       break;
     default:

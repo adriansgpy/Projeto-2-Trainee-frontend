@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { audioServiceHecuIntro } from '../../../services/audioServiceHecuIntro';
+import { audioServiceIntro } from '../../../services/audioServiceIntro';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -47,7 +47,7 @@ Capitão Hughes, você e sua equipe sabem o que fazer. Cada passo, cada disparo,
 
   constructor(
     private router: Router,
-    private audioService: audioServiceHecuIntro,
+    private audioService: audioServiceIntro,
     private renderer: Renderer2,
     private el: ElementRef
   ) {}

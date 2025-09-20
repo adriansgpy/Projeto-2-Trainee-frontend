@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, Renderer2, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { audioServiceHecuIntro } from '../../../services/audioServiceHecuIntro';
+import { audioServiceIntro } from '../../../services/audioServiceIntro';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,15 +11,13 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class CientistaIntroComponent implements OnInit, AfterViewInit, OnDestroy {
-  fullText: string = `DATA: 13 de Novembro de 200X
-HORA: 06:47 AM
-LOCAL: Instalação Black Mesa, Novo México
+  fullText  = `
+  <h1>Black Mesa Research Facility</h1>
+  <h2>Setor C – Materiais Anômalos</h2>
+  Hoje, você foi designado para colaborar em um dos experimentos mais avançados já conduzidos na área de física de partículas. O objetivo é submeter uma amostra de cristal não identificado a um feixe de energia de alta intensidade. Sua tarefa é simples: inserir a amostra no espectrômetro rotacional e monitorar as leituras geradas pelos sensores. Cada detalhe importa — ajustes de calibração, precisão nos registros e sincronia com a equipe de suporte. Este é um momento histórico para a ciência, e você está no centro dele.
+`;
 
-Gordon Freeman, você é o responsável pelo experimento que acabou de ser ativado. Uma falha crítica ocorreu, abrindo portais interdimensionais e liberando entidades desconhecidas dentro do laboratório.
 
-Os cientistas estão em pânico. Alguns civis tentam escapar, mas o caminho está bloqueado. Sua missão é clara: sobreviver, coletar informações, e tentar conter o desastre antes que ele se torne irreversível.
-
-Prepare-se, Gordon. Cada decisão será vital. Nada pode falhar.`;
   lights: any[] = [];
   displayedText: string = '';
   showTitle: boolean = true;
@@ -36,26 +34,26 @@ Prepare-se, Gordon. Cada decisão será vital. Nada pode falhar.`;
 
   constructor(
     private router: Router,
-    private audioService: audioServiceHecuIntro,
+    private audioService: audioServiceIntro,
     private renderer: Renderer2,
     private el: ElementRef
   ) {}
 
-  ngOnInit() {
-    this.currentImageIndex = Math.floor(Math.random() * this.images.length);
-    this.startIntroSequence();
-    this.createLights(30);
-    setTimeout(() => {
-      this.showTitle = false;
-      setTimeout(() => {
-        this.typeText();
-        this.startRandomImageCycle();
-        this.audioService.playAudios([
-          'assets/soundtrack/blackmesa_intro.mp3'
-        ], 2000);
-      }, 0);
-    }, 3000);
-  }
+ ngOnInit() {
+  this.currentImageIndex = Math.floor(Math.random() * this.images.length);
+  this.startIntroSequence();
+  this.createLights(30);
+  this.audioService.playAudios([
+        'assets/soundtrack/bms.mp3'
+      ], 500);
+  setTimeout(() => {
+    this.showTitle = false;
+
+    this.typeText();
+    this.startRandomImageCycle();
+
+  }, 3000);
+}
 
   ngAfterViewInit() {
     this.createParticles(this.NUM_PARTICLES);
@@ -82,7 +80,6 @@ Prepare-se, Gordon. Cada decisão será vital. Nada pode falhar.`;
   }
 
   private startIntroSequence() {
-    // Esconde o título após 3 segundos
         setTimeout(() => {
         this.showTitle = false;
         }, 3000); // 3000 milissegundos = 3 segundos
