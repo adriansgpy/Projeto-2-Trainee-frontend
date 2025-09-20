@@ -1,0 +1,290 @@
+/* Estilo Total em Black e Mesa - Cinematográfico e Moderno com Luzes Caindo */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+$bm-orange: #ff7f00;
+$bm-black: #000000;
+$bm-glow: #ee9d08;
+$bm-gray: #333333;
+
+:host {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $bm-black;
+  font-family: 'Roboto Mono', monospace;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.intro-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+      linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.7;
+  }
+}
+
+.title-force {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6rem;
+  font-weight: 400;
+  color: #ff7b00;
+  letter-spacing: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
+  
+  /* Múltiplos brilhos para profundidade */
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.6), /* Brilho interno, mais nítido */
+    0 0 15px rgba(255, 255, 255, 0.4), /* Brilho intermediário, mais suave */
+    0 0 30px rgba(255, 255, 255, 0.2); /* Brilho externo, mais difuso */
+  
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+
+  &.show {
+    opacity: 1;
+    /* Animação combinada de pulsação e glitch */
+    animation: cinematic-pulse 8s infinite alternate, glitch 0.3s infinite alternate;
+  }
+
+  &.hide {
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------- */
+/* ANIMAÇÕES CINEMATOGRÁFICAS                                       */
+/* ------------------------------------------------------------------- */
+
+/* Título 'respirando' lentamente na tela */
+@keyframes cinematic-pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.01); opacity: 0.95; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Glitch mais sutil, como uma falha de transmissão */
+@keyframes glitch {
+  0% { text-shadow: 0 0 5px rgba(250, 92, 0, 0.986), 2px 2px 0px $bm-black; }
+  25% { text-shadow: 0 0 5px rgba(221, 70, 0, 0.6), -2px 2px 0px $bm-black; }
+  50% { text-shadow: 0 0 5px rgba(241, 70, 2, 0.836), 1px -1px 0px $bm-black; }
+  75% { text-shadow: 0 0 5px rgba(240, 88, 0, 0.733), -1px 1px 0px $bm-black; }
+  100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 2px 2px 0px $bm-black; }
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.background-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+  filter: grayscale(20%) brightness(1) contrast(1.2);
+  transform: scale(1.05);
+}
+
+.background-image.active {
+  opacity: 0.1;
+  animation: backgroundPulse 15s infinite ease-in-out;
+  filter: grayscale(80%) brightness(0.4) contrast(1.2) blur(1.5px);
+  transform: scale(1);
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.text-content {
+  max-width: 800px;
+  text-align: left;
+  line-height: 1.7;
+  font-size: 1.3rem;
+  font-weight: 400;
+  white-space: pre-wrap;
+
+  p {
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 0 8px $bm-glow;
+  }
+}
+
+.btn-continue {
+  background: none;
+  border: 2px solid $bm-orange;
+  color: $bm-orange;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 30px;
+  opacity: 0;
+  transition: opacity 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 0 10px rgba($bm-orange, 0.5);
+
+  &:hover {
+    background-color: $bm-orange;
+    color: $bm-black;
+    box-shadow: 0 0 20px rgba($bm-orange, 0.8);
+  }
+}
+
+.btn-continue.show {
+  opacity: 1;
+}
+
+p::after {
+  content: '|';
+  display: inline-block;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+.light-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.light {
+  position: absolute;
+  background: linear-gradient(to bottom, rgba(255, 180, 50, 0.9), rgba(255, 127, 0, 0.6) 70%, rgba(255, 127, 0, 0.0) 100%);
+  filter: blur(8px);
+  opacity: 0.7; /* começa mais visível */
+  animation: light-fall var(--animation-duration) linear infinite;
+  transform: translateY(0vh);
+}
+
+
+@keyframes light-fall {
+  0% { opacity: 0; transform: translateY(-20vh); }
+  10% { opacity: 0.8; }
+  80% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(100vh); }
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background-color: rgba(255, 115, 0, 0.897);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-float 8s infinite ease-in-out;
+  box-shadow: 0 0 5px rgba($bm-orange, 0.5);
+}
+
+@keyframes particle-float {
+  0% { opacity: 0; transform: translateY(0) translateX(0) scale(0.5); }
+  30% { opacity: 1; transform: translateY(-20vh) translateX(10vw) scale(1); }
+  60% { opacity: 1; transform: translateY(-50vh) translateX(-5vw) scale(0.8); }
+  100% { opacity: 0; transform: translateY(-100vh) translateX(0) scale(0.3); }
+}
+
+.overlay-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.3;
+  background: 
+    linear-gradient(to right, rgba($bm-orange, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba($bm-orange, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-pulse 20s infinite alternate;
+  filter: brightness(0.8);
+}
+
+@keyframes grid-pulse {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 0.1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch {
+  0%, 100% { text-shadow: 0 0 20px $bm-glow, 2px 2px 0px $bm-black, -2px -2px 0px $bm-black; }
+  25% { text-shadow: 0 0 20px $bm-glow, -2px 2px 0px $bm-black, 2px -2px 0px $bm-black; }
+  50% { text-shadow: 0 0 20px $bm-glow, 1px -1px 0px $bm-black, -1px 1px 0px $bm-black; }
+  75% { text-shadow: 0 0 20px $bm-glow, -1px 1px 0px $bm-black, 1px -1px 0px $bm-black; }
+}
+
+@keyframes backgroundPulse {
+  0% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.03); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.3; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: $bm-glow; }
+}

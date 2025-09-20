@@ -4,6 +4,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
 import { HecuIntroComponent } from './components/intro/hecu-intro/hecu_intro.component';
+import { CientistaIntroComponent } from './components/intro/cientista-intro/cientista_intro.component';
 import { jogoComponent } from './components/game/jogo.component';
 
 export const routes: Routes = [
@@ -26,6 +27,12 @@ export const routes: Routes = [
   path: 'intro/hecu',
   loadComponent: () =>
     import('./components/intro/hecu-intro/hecu_intro.component').then(m => m.HecuIntroComponent)
+  },
+
+  {
+  path: 'intro/cientista',
+  loadComponent: () =>
+    import('./components/intro/cientista-intro/cientista_intro.component').then(m => m.CientistaIntroComponent)
   },
 
   {
