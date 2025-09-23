@@ -1,9 +1,11 @@
 <div class="campanhas-container">
+
   <div class="banner">
     <div class="banner-info">
       <h1>Black Mesa</h1>
       <p>
-        A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo. Escolha seu personagem e foque na missão principal para sobreviver à nova realidade dentro da instalação.
+        A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo.
+        Escolha seu personagem e foque na missão principal para sobreviver à nova realidade dentro da instalação.
       </p>
     </div>
   </div>
@@ -28,17 +30,19 @@
         *ngFor="let camp of campanhas"
         class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
+        
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
         <div class="card-info">
-          <h3>{{camp.titulo}}</h3>
+          <h3>{{ camp.titulo }}</h3>
           <button 
             class="btn-entrar"
-            [disabled]="!camp.habilitado"
+            [disabled]="!camp.habilitado || !personagemGlobalSelecionado"
             (click)="entrarCampanha(camp)">
-            {{ camp.habilitado ? 'Começar Campanha' : 'Bloqueada' }}
+            {{ getTextoBotaoCampanha(camp) }}
           </button>
         </div>
       </div>
     </div>
   </div>
+
 </div>
