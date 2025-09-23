@@ -47,126 +47,126 @@ export class CampanhasComponent implements OnInit {
         titulo: 'Materiais Desconhecidos',
         descricao: 'Explore o laboratório e descubra os materiais experimentais que deram início ao desastre.',
         tipo: 'cientista',
-        imagem: 'assets/cap1.jpg',
-        habilitado: true
+        imagem: 'assets/bmib.png',
+        habilitado: false
       },
       {
         titulo: 'Consequências Inesperadas',
         descricao: 'Após um experimento dar errado, o caos se instala no laboratório e você deve reagir.',
         tipo: 'cientista',
-        imagem: 'assets/cap2.jpg',
+        imagem: 'assets/unforeseen_consequences.jpg',
         habilitado: true
       },
       {
         titulo: 'Complexo Administrativo',
         descricao: 'Percorra os escritórios e áreas administrativas enquanto o laboratório entra em colapso.',
         tipo: 'cientista',
-        imagem: 'assets/cap3.jpg',
+        imagem: 'assets/office.jpg',
         habilitado: true
       },
       {
         titulo: 'Hostis à Vista',
         descricao: 'Enfrente os soldados H.E.C.U. enviados para conter o desastre e eliminar testemunhas.',
         tipo: 'cientista',
-        imagem: 'assets/cap4.jpg',
+        imagem: 'assets/hostiles.png',
         habilitado: false
       },
       {
         titulo: 'Fossa de Explosão',
         descricao: 'Investigue a área de testes de foguetes e enfrentamentos com criaturas perigosas.',
         tipo: 'cientista',
-        imagem: 'assets/cap5.jpg',
+        imagem: 'assets/rocket.jpg',
         habilitado: false
       },
       {
         titulo: 'Energia Ativada',
         descricao: 'Restaure o fornecimento de energia enquanto o caos continua se espalhando pelo laboratório.',
         tipo: 'cientista',
-        imagem: 'assets/cap6.jpg',
+        imagem: 'assets/powerup.jpg',
         habilitado: false
       },
       {
         titulo: 'Nos Trilhos',
         descricao: 'Use os sistemas de transporte interno para se mover rapidamente entre as áreas do laboratório.',
         tipo: 'cientista',
-        imagem: 'assets/cap7.jpg',
+        imagem: 'assets/rail.jpg',
         habilitado: false
       },
       {
         titulo: 'Detenção',
         descricao: 'Evite capturas e enfrente os soldados que patrulham o laboratório.',
         tipo: 'cientista',
-        imagem: 'assets/cap8.jpg',
+        imagem: 'assets/bo.jpg',
         habilitado: false
       },
       {
         titulo: 'Processamento de Resíduos',
         descricao: 'Navegue pelas áreas de descarte e processamento químico enquanto enfrenta novas ameaças.',
         tipo: 'cientista',
-        imagem: 'assets/cap9.jpg',
+        imagem: 'assets/residue.jpg',
         habilitado: false
       },
       {
         titulo: 'Ética Duvidosa',
         descricao: 'Descubra os segredos por trás dos experimentos e decida como prosseguir.',
         tipo: 'cientista',
-        imagem: 'assets/cap10.jpg',
+        imagem: 'assets/qe.jpeg',
         habilitado: false
       },
       {
         titulo: 'Tensão na Superfície',
         descricao: 'A batalha se aproxima da superfície enquanto inimigos ainda tentam impedir sua fuga.',
         tipo: 'cientista',
-        imagem: 'assets/cap11.jpg',
+        imagem: 'assets/st.jpg',
         habilitado: false
       },
       {
         titulo: 'Esqueça Freeman',
         descricao: 'Os soldados recebem ordens para eliminar qualquer sobrevivente; sua jornada fica crítica.',
         tipo: 'cientista',
-        imagem: 'assets/cap12.jpg',
+        imagem: 'assets/evacuate.png',
         habilitado: false
       },
       {
         titulo: 'Núcleo Lambda',
         descricao: 'Alcance o coração do laboratório e descubra os experimentos mais secretos.',
         tipo: 'cientista',
-        imagem: 'assets/cap13.jpg',
+        imagem: 'assets/lambda.jpeg',
         habilitado: false
       },
       {
         titulo: 'Xênon',
         descricao: 'Viaje para a dimensão alienígena Xênon e enfrente criaturas perigosas.',
         tipo: 'cientista',
-        imagem: 'assets/cap14.jpg',
+        imagem: 'assets/xen.png',
         habilitado: false
       },
       {
         titulo: 'Covil de Gonarch',
         descricao: 'Enfrente o chefe alienígena Gonarch e lute por sobrevivência antes de retornar.',
         tipo: 'cientista',
-        imagem: 'assets/cap15.jpg',
+        imagem: 'assets/gonarch.jpeg',
         habilitado: false
       },
       {
         titulo: 'Intruso',
         descricao: 'Explore Xênon enquanto enfrenta novas ameaças e descobre mais sobre o desastre.',
         tipo: 'cientista',
-        imagem: 'assets/cap16.jpg',
+        imagem: 'assets/interloper.jpg',
         habilitado: false
       },
       {
         titulo: 'Nihilanth',
         descricao: 'Enfrente o poderoso Nihilanth, a mente por trás da invasão alienígena.',
         tipo: 'cientista',
-        imagem: 'assets/cap17.jpg',
+        imagem: 'assets/nihilanth.png',
         habilitado: false
       },
       {
-        titulo: 'Fim de Jogo',
-        descricao: 'Conclua sua jornada, restabeleça a ordem e veja os resultados de suas ações.',
+        titulo: 'O fim?',
+        descricao: '...',
         tipo: 'cientista',
-        imagem: 'assets/cap18.jpg',
+        imagem: 'assets/gman.png',
         habilitado: false
       }
     ];

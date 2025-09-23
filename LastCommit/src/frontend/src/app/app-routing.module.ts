@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-import {HomepageComponent} from './components/homepage/homepage.component';
-import { HecuIntroComponent } from './components/intro/hecu-intro/hecu_intro.component';
-import { CientistaIntroComponent } from './components/intro/cientista-intro/cientista_intro.component';
-import { jogoComponent } from './components/game/jogo.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,40 +13,31 @@ export const routes: Routes = [
     path: 'homepage',
     component: HomepageComponent,
     children: [
-  { path: '', redirectTo: 'inicial', pathMatch: 'full' },
-  { path: 'inicial', loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent), data: { animation: 'InicialPage' } },
-  { path: 'campanhas', loadComponent: () => import('./components/campanhas/campanhas.component').then(m => m.CampanhasComponent), data: { animation: 'CampanhasPage' } },
-  { path: 'personagens', loadComponent: () => import('./components/personagens/personagens.component').then(m => m.PersonagensComponent), data: { animation: 'PersonagensPage' } },
-]
-
+      { path: '', redirectTo: 'inicial', pathMatch: 'full' },
+      { path: 'inicial', loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent) },
+      { path: 'campanhas', loadComponent: () => import('./components/campanhas/campanhas.component').then(m => m.CampanhasComponent) },
+      { path: 'personagens', loadComponent: () => import('./components/personagens/personagens.component').then(m => m.PersonagensComponent) },
+    ]
   },
 
   {
-  path: 'intro/hecu',
-  loadComponent: () =>
-    import('./components/intro/hecu-intro/hecu_intro.component').then(m => m.HecuIntroComponent)
+    path: 'intro/hecu',
+    loadComponent: () => import('./components/intro/hecu-intro/hecu_intro.component').then(m => m.HecuIntroComponent)
   },
 
   {
-  path: 'intro/cientista',
-  loadComponent: () =>
-    import('./components/intro/cientista-intro/cientista_intro.component').then(m => m.CientistaIntroComponent)
+    path: 'intro/cientista',
+    loadComponent: () => import('./components/intro/cientista-intro/cientista_intro.component').then(m => m.CientistaIntroComponent)
   },
 
   {
-  path: 'game',
-  loadComponent: () =>
-    import('./components/game/jogo.component').then(m => m.jogoComponent)
+    path: 'game',
+    loadComponent: () => import('./components/game/jogo.component').then(m => m.jogoComponent)
   },
-
-
-
-
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
-  
-}
+export class AppRoutingModule { }
