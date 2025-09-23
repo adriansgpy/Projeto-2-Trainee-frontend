@@ -1,29 +1,46 @@
-<div class="rpg-container">
-  <div class="overlay"></div>
-  <div class="ambient-lights"></div>
-  <div class="particles"></div>
+<body>
+  <div id="chapter-bg" [style.background-image]="'url(' + chapterImage + ')'"></div>
 
-  <div class="game-content">
-    <div class="story-panel">
-      <div class="story-text" #storyText>
-        <p *ngFor="let line of storyLog">{{ line }}</p>
+  <div class="container">
+    <div class="main-content">
+      <div class="chapter-banner">
+        <h1 class="chapter-title">{{ chapterTitle }}</h1>
+      </div>
+
+      <div class="chapter-text">
+        <p>
+          Você entra na instalação Black Mesa. A luz pisca e ecos de passos são ouvidos ao longe
+        </p>
       </div>
 
       <div class="actions">
-        <button *ngFor="let action of actions" (click)="chooseAction(action)">
-          {{ action }}
-        </button>
+        <h2>O que você faz?</h2>
+        <ul>
+          <li (click)="chooseAction('explorar')">Explorar o corredor</li>
+          <li (click)="chooseAction('examinar')">Examinar o ambiente</li>
+          <li (click)="chooseAction('esperar')">Esperar em silêncio</li>
+          <li (click)="chooseAction('correr')">Correr para a saída</li>
+        </ul>
       </div>
     </div>
 
-    <div class="side-panel">
-      <h2>Status</h2>
-      <p>Vida: {{ player.hp }}</p>
-      <p>Energia: {{ player.energy }}</p>
-      <p>Inventário:</p>
+    <div class="sidebar">
+      <h2>Status do Jogador</h2>
+      <div class="status">
+        <p>HP: {{ player.hp }}/{{ player.maxHp }}</p>
+        <div class="bar hp-bar">
+          <div class="fill" [style.width.%]="(player.hp / player.maxHp) * 100"></div>
+        </div>
+        <p>HEV Battery: {{ player.hevBattery }}%</p>
+        <div class="bar battery-bar">
+          <div class="fill" [style.width.%]="player.hevBattery"></div>
+        </div>
+      </div>
+
+      <h2>Inventário</h2>
       <ul>
         <li *ngFor="let item of player.inventory">{{ item }}</li>
       </ul>
     </div>
   </div>
-</div>
+</body>

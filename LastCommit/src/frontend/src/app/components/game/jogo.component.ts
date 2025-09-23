@@ -1,38 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-rpg',
+  selector: 'app-jogo',
   templateUrl: './jogo.component.html',
-  styleUrls: ['./jogo.component.scss'],
-  standalone: true,
+  styleUrls: ['./jogo.component.scss']
 })
-export class jogoComponent implements OnInit {
-  storyLog: string[] = [
-    "Você acorda em um corredor escuro da Black Mesa...",
-    "O som distante de tiros ecoa pelos túneis.",
-  ];
-
-  actions: string[] = ["Avançar", "Examinar o local", "Esperar"];
+export class jogoComponent {
+  chapterTitle: string = "Materiais Desconhecidos";
+  chapterImage: string = "assets/bmib.png";
 
   player = {
     hp: 100,
-    energy: 50,
-    inventory: ["Pistola", "Kit Médico"],
+    maxHp: 100,
+    hevBattery: 80,
+    inventory: ["Pistola", "Medkit", "Chave"]
   };
 
-  ngOnInit() {}
+
 
   chooseAction(action: string) {
-    if (action === "Avançar") {
-      this.storyLog.push("Você segue pelo corredor em direção ao som dos tiros...");
-      this.actions = ["Atacar", "Se esconder"];
-    } else if (action === "Examinar o local") {
-      this.storyLog.push("Você encontra um rádio quebrado no chão.");
-      this.player.inventory.push("Rádio quebrado");
-      this.actions = ["Avançar", "Esperar"];
-    } else if (action === "Esperar") {
-      this.storyLog.push("O tempo passa... algo se aproxima!");
-      this.player.hp -= 10;
-    }
+    
   }
+
+
 }

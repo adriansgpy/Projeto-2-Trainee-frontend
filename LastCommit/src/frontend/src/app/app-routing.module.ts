@@ -21,11 +21,6 @@ export const routes: Routes = [
   },
 
   {
-    path: 'intro/hecu',
-    loadComponent: () => import('./components/intro/hecu-intro/hecu_intro.component').then(m => m.HecuIntroComponent)
-  },
-
-  {
     path: 'intro/cientista',
     loadComponent: () => import('./components/intro/cientista-intro/cientista_intro.component').then(m => m.CientistaIntroComponent)
   },

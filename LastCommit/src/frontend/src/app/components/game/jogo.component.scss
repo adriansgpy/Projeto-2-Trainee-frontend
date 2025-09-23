@@ -1,81 +1,147 @@
-.rpg-container {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: #000 url('/assets/hecu_background.jpg') center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, app-root {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  font-family: 'Orbitron', monospace;
-  color: #ffa64d;
+  font-family: Arial, sans-serif;
+}
 
-  .overlay {
-    position: absolute;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 0;
-  }
+#chapter-bg {
+  position: fixed;       
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;       
+  background-position: center; 
+  background-repeat: no-repeat;
+  filter: brightness(0.2);      
+  z-index: -1;                  
+}
 
-  .game-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    width: 90%;
-    height: 85%;
-    gap: 20px;
-  }
 
-  .story-panel {
-    flex: 3;
-    background: rgba(20, 20, 20, 0.85);
-    padding: 20px;
-    border-radius: 12px;
-    overflow-y: auto;
-    box-shadow: 0 0 20px rgba(255,102,0,0.4);
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
 
-    .story-text {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+.main-content {
+  flex: 3;
+  padding: 20px;
+  overflow-y: auto;
+  color: #fff;
+  background: transparent;
+}
 
-      button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 6px;
-        background: #ff6600;
-        color: #fff;
-        cursor: pointer;
-        transition: 0.3s;
 
-        &:hover {
-          background: #ff9933;
-          box-shadow: 0 0 15px rgba(255,102,0,0.8);
-        }
-      }
-    }
-  }
+.chapter-banner {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
 
-  .side-panel {
-    flex: 1;
-    background: rgba(30, 30, 30, 0.9);
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(255,102,0,0.5);
+.chapter-title {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 2.5rem;
+  color: #ff6600;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
 
-    h2 {
-      color: #ff6600;
-      margin-bottom: 10px;
-    }
 
-    ul {
-      padding-left: 20px;
-    }
-  }
+.chapter-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 20px;
+  color: #fff;
+  padding: 15px;
+}
+
+
+.sidebar {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.6);
+  color: #ff6600;
+}
+
+
+.sidebar .status .bar {
+  width: 100%;
+  height: 20px;
+  background-color: #222;
+  margin-bottom: 10px;
+}
+
+.sidebar .status .fill {
+  height: 100%;
+  background-color: #ff6600;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar ul li {
+  background-color: #111;
+  padding: 8px;
+  margin-bottom: 5px;
+  transition: background-color 0.2s;
+}
+
+.sidebar ul li:hover {
+  background-color: #222;
+}
+
+
+.main-content::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+
+.actions {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: rgba(0,0,0,0.6);
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.actions h2 {
+  color: #ff6600;
+  margin-bottom: 10px;
+}
+
+.actions ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.actions ul li {
+  background-color: #111;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.actions ul li:hover {
+  background-color: #222;
+  transform: scale(1.02);
 }
