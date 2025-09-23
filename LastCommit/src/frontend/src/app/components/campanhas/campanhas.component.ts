@@ -3,21 +3,22 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AudioService } from '../../services/soundtrack.service';
+import { FormsModule } from '@angular/forms';
 
 interface Campanha {
   titulo: string;
-  tipo: 'cientista' | 'soldado h.e.c.u' | 'black ops' | 'g-man';
+  tipo?: string; 
   habilitado?: boolean;
   imagem?: string;
 }
 
 interface Personagem {
   _id: string;
-  name: string;
-  role: string;
-  age: number;
-  image?: string;
-  campaign: boolean;
+  nome: string;
+  inventario: string[];
+  ultimoCapitulo: string;
+  hpAtual: number;
+  bateriaHEV: number;
 }
 
 @Component({
@@ -25,13 +26,14 @@ interface Personagem {
   templateUrl: './campanhas.component.html',
   styleUrls: ['./campanhas.component.scss'],
   standalone: true,
-  imports: [CommonModule, HttpClientModule, RouterModule]
+  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule]
 })
 export class CampanhasComponent implements OnInit {
   campanhas: Campanha[] = [];
   personagens: Personagem[] = [];
   private apiUrl = 'http://127.0.0.1:8000/personagens';
   campanhaSelecionada: Campanha | null = null;
+  personagemGlobalSelecionado: Personagem | null = null;
 
   constructor(
     private http: HttpClient,
@@ -40,116 +42,25 @@ export class CampanhasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Aqui todos os capítulos já viram campanhas jogáveis
     this.campanhas = [
-      {
-        titulo: 'Materiais Desconhecidos',
-        tipo: 'cientista',
-        imagem: 'assets/bmib.png',
-        habilitado: false
-      },
-      {
-        titulo: 'Consequências Inesperadas',
-        tipo: 'cientista',
-        imagem: 'assets/unforeseen_consequences.jpg',
-        habilitado: true
-      },
-      {
-        titulo: 'Complexo Administrativo',
-        tipo: 'cientista',
-        imagem: 'assets/office.jpg',
-        habilitado: true
-      },
-      {
-        titulo: 'Hostis à Vista',
-        tipo: 'cientista',
-        imagem: 'assets/hostiles.png',
-        habilitado: false
-      },
-      {
-        titulo: 'Satélite',
-        tipo: 'cientista',
-        imagem: 'assets/rocket.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Energia Ativada',
-        tipo: 'cientista',
-        imagem: 'assets/powerup.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Nos Trilhos',
-        tipo: 'cientista',
-        imagem: 'assets/rail.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Detenção',
-        tipo: 'cientista',
-        imagem: 'assets/bo.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Processamento de Resíduos',
-        tipo: 'cientista',
-        imagem: 'assets/residue.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Ética Duvidosa',
-        tipo: 'cientista',
-        imagem: 'assets/qe.jpeg',
-        habilitado: false
-      },
-      {
-        titulo: 'Superfície em batalha',
-        tipo: 'cientista',
-        imagem: 'assets/st.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Perdas suficiente',
-        tipo: 'cientista',
-        imagem: 'assets/evacuate.png',
-        habilitado: false
-      },
-      {
-        titulo: 'Núcleo Lambda',
-        tipo: 'cientista',
-        imagem: 'assets/lambda.jpeg',
-        habilitado: false
-      },
-      {
-        titulo: 'Xênon',
-        tipo: 'cientista',
-        imagem: 'assets/xen.png',
-        habilitado: false
-      },
-      {
-        titulo: 'Covil de Gonarch',
-        tipo: 'cientista',
-        imagem: 'assets/gonarch.jpeg',
-        habilitado: false
-      },
-      {
-        titulo: 'Intruso',
-        tipo: 'cientista',
-        imagem: 'assets/interloper.jpg',
-        habilitado: false
-      },
-      {
-        titulo: 'Nihilanth',
-        tipo: 'cientista',
-        imagem: 'assets/nihilanth.png',
-        habilitado: false
-      },
-      {
-        titulo: 'O fim?',
-        tipo: 'cientista',
-        imagem: 'assets/gman.png',
-        habilitado: false
-      }
+      { titulo: 'Materiais Desconhecidos', imagem: 'assets/bmib.png', habilitado: false },
+      { titulo: 'Consequências Inesperadas', imagem: 'assets/unforeseen_consequences.jpg', habilitado: true },
+      { titulo: 'Complexo Administrativo', imagem: 'assets/office.jpg', habilitado: true },
+      { titulo: 'Hostis à Vista', imagem: 'assets/hostiles.png', habilitado: false },
+      { titulo: 'Satélite', imagem: 'assets/rocket.jpg', habilitado: false },
+      { titulo: 'Energia Ativada', imagem: 'assets/powerup.jpg', habilitado: false },
+      { titulo: 'Nos Trilhos', imagem: 'assets/rail.jpg', habilitado: false },
+      { titulo: 'Detenção', imagem: 'assets/bo.jpg', habilitado: false },
+      { titulo: 'Processamento de Resíduos', imagem: 'assets/residue.jpg', habilitado: false },
+      { titulo: 'Ética Duvidosa', imagem: 'assets/qe.jpeg', habilitado: false },
+      { titulo: 'Superfície em batalha', imagem: 'assets/st.jpg', habilitado: false },
+      { titulo: 'Perdas suficiente', imagem: 'assets/evacuate.png', habilitado: false },
+      { titulo: 'Núcleo Lambda', imagem: 'assets/lambda.jpeg', habilitado: false },
+      { titulo: 'Xênon', imagem: 'assets/xen.png', habilitado: false },
+      { titulo: 'Covil de Gonarch', imagem: 'assets/gonarch.jpeg', habilitado: false },
+      { titulo: 'Intruso', imagem: 'assets/interloper.jpg', habilitado: false },
+      { titulo: 'Nihilanth', imagem: 'assets/nihilanth.png', habilitado: false },
+      { titulo: 'O fim?', imagem: 'assets/gman.png', habilitado: false }
     ];
 
     this.loadPersonagens();
@@ -157,36 +68,45 @@ export class CampanhasComponent implements OnInit {
 
   getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token') || '';
-    return new HttpHeaders({
-      Authorization: token ? `Bearer ${token}` : ''
-    });
+    return new HttpHeaders({ Authorization: token ? `Bearer ${token}` : '' });
   }
 
   loadPersonagens() {
     const token = localStorage.getItem('token');
 
-    this.http.get<Personagem[]>(this.apiUrl, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).subscribe({
-      next: (data) => {
-        this.personagens = data.map(p => ({
-          ...p,
-          _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id
-        }));
-        this.atualizarCampanhas();
-      },
-      error: (err) => console.error('Erro ao carregar personagens:', err)
-    });
+    this.http.get<Personagem[]>(this.apiUrl, { headers: { Authorization: `Bearer ${token}` } })
+      .subscribe({
+        next: (data) => {
+          this.personagens = data.map(p => ({
+            ...p,
+            _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id
+          }));
+
+          const saved = localStorage.getItem('personagemSelecionado');
+          if (saved) {
+            this.personagemGlobalSelecionado = this.personagens.find(p => p._id === saved) || null;
+          } else if (this.personagens.length > 0) {
+            this.personagemGlobalSelecionado = this.personagens[0];
+          }
+
+          this.atualizarCampanhas();
+        },
+        error: (err) => console.error('Erro ao carregar personagens:', err)
+      });
+  }
+
+
+  getCampanhasPorTipo(tipo: string) {
+  return this.campanhas.filter(c => c.tipo?.toLowerCase() === tipo.toLowerCase());
+}
+  onPersonagemChange(personagem: Personagem) {
+    this.personagemGlobalSelecionado = personagem;
+    localStorage.setItem('personagemSelecionado', personagem._id);
   }
 
   atualizarCampanhas() {
-    const tiposDisponiveis = new Set(
-      this.personagens.map(p => p.role.toLowerCase())
-    );
-
-    this.campanhas.forEach(c => {
-      c.habilitado = tiposDisponiveis.has(c.tipo);
-    });
+    const habilitado = this.personagens.length > 0;
+    this.campanhas.forEach(c => c.habilitado = habilitado);
   }
 
   abrirSelecao(campanha: Campanha) {
@@ -197,43 +117,20 @@ export class CampanhasComponent implements OnInit {
     this.campanhaSelecionada = null;
   }
 
-  selecionarPersonagem(personagem: any) {
+  selecionarPersonagem(personagem: Personagem) {
     if (!personagem) return;
 
-    let rotaIntro = '';
-
-    switch (this.campanhaSelecionada?.tipo) {
-      case 'soldado h.e.c.u':
-        this.audioService.stopMusic();
-        rotaIntro = '/intro/hecu';
-        break;
-      case 'cientista':
-        this.audioService.stopMusic();
-        rotaIntro = '/intro/cientista';
-        break;
-      default:
-        console.error('Campanha sem introdução definida!');
-        return;
-    }
-
-    this.router.navigateByUrl(rotaIntro, {
-      state: { personagem }
-    });
-  }
-
-  getPersonagensPorCampanha() {
-    if (!this.campanhaSelecionada) return [];
-    return this.personagens.filter(
-      p => p.role.toLowerCase() === this.campanhaSelecionada!.tipo.toLowerCase()
-    );
+    const rotaIntro = '/intro/cientista'; 
+    this.audioService.stopMusic();
+    this.router.navigateByUrl(rotaIntro, { state: { personagem } });
   }
 
   entrarCampanha(camp: Campanha) {
-    if (!camp.habilitado) return;
-    this.abrirSelecao(camp);
-  }
-
-  getCampanhasPorTipo(tipo: 'cientista' | 'soldado h.e.c.u') {
-    return this.campanhas.filter(c => c.tipo === tipo);
+    if (!camp.habilitado || !this.personagemGlobalSelecionado) {
+      alert('Selecione um personagem válido antes de entrar na campanha!');
+      return;
+    }
+    this.campanhaSelecionada = camp;
+    this.selecionarPersonagem(this.personagemGlobalSelecionado);
   }
 }

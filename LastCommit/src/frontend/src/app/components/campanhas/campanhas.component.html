@@ -2,15 +2,30 @@
   <div class="banner">
     <div class="banner-info">
       <h1>Black Mesa</h1>
-      <p>A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo. Escolha o seu lado e foque na missão principal e tente sobreviver a nova realidade dentro da instalação.</p>
+      <p>
+        A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo. Escolha seu personagem e foque na missão principal para sobreviver à nova realidade dentro da instalação.
+      </p>
     </div>
   </div>
 
-  <div class="campanha-secao" *ngIf="getCampanhasPorTipo('cientista').length">
-    <h2 class="subtitulo-tipo">Cientista</h2>
+  <div class="personagem-global-container" *ngIf="personagens.length > 0">
+    <label for="personagemGlobal">Selecione seu personagem:</label>
+    <select 
+      id="personagemGlobal"
+      class="dropdown-personagem"
+      [(ngModel)]="personagemGlobalSelecionado"
+      (ngModelChange)="onPersonagemChange($event)">
+      <option *ngFor="let p of personagens" [ngValue]="p">
+        {{ p.nome }}
+      </option>
+    </select>
+  </div>
+
+  <div class="campanha-secao">
+    <h2 class="subtitulo-tipo">Capítulos</h2>
     <div class="cards-container full-width">
       <div 
-        *ngFor="let camp of getCampanhasPorTipo('cientista')"
+        *ngFor="let camp of campanhas"
         class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
@@ -23,22 +38,6 @@
             {{ camp.habilitado ? 'Começar Campanha' : 'Bloqueada' }}
           </button>
         </div>
-      </div>
-    </div>
-  </div>
-
- 
-  <div class="modal-overlay" *ngIf="campanhaSelecionada">
-    <div class="modal">
-      <h2>Selecione um personagem para "{{ campanhaSelecionada.titulo }}"</h2>
-      <button
-        *ngFor="let p of getPersonagensPorCampanha()"
-        class="personagem-btn"
-        (click)="selecionarPersonagem(p)">
-        {{ p.name }} ({{ p.role | titlecase }})
-      </button>
-      <div class="modal-acoes">
-        <button class="cancelar" (click)="fecharModal()">Cancelar</button>
       </div>
     </div>
   </div>
