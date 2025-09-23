@@ -30,6 +30,26 @@ export class SignupComponent {
   gotologin(){
     this.router.navigate(['/login'])
   }
+  
+  ngOnInit() {
+     const fullscreenHandler = () => {
+      this.enterFullscreen();
+      // Remove o listener para não chamar de novo
+      document.removeEventListener('click', fullscreenHandler);
+    };
+    document.addEventListener('click', fullscreenHandler);
+  }
+
+ enterFullscreen() {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if ((elem as any).webkitRequestFullscreen) { /* Safari */
+    (elem as any).webkitRequestFullscreen();
+  } else if ((elem as any).msRequestFullscreen) { /* IE11 */
+    (elem as any).msRequestFullscreen();
+  }
+}
 
   registrar() : void{
 

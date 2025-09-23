@@ -32,8 +32,6 @@ html, body {
   color: $cor-texto-claro;
   overflow-x: hidden;
   overflow-y: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .app-wrapper {
@@ -98,7 +96,7 @@ html, body {
   justify-content: flex-start;
 
   /* Fundo semi-transparente + efeito blur */
-  background: rgba(194, 94, 0, 0.534); /* ajusta a transparência como quiser */
+  background: rgba(194, 94, 0, 0.055); /* ajusta a transparência como quiser */
   backdrop-filter: blur(15px); /* o "borrado forte" */
   -webkit-backdrop-filter: blur(15px); /* compatibilidade Safari */
   box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* sombra sutil para destacar do conteúdo */
@@ -157,11 +155,12 @@ html, body {
 }
 
 
-
 .main-content-form {
   flex-grow: 1;
-  display: block; 
+  position: relative; /* Essencial para animação */
+  display: block;
   width: 100%;
-  min-height: calc(100vh - 100px); 
+  min-height: calc(100vh - 100px);
   padding-top: 100px;
+  overflow: hidden; /* Evita scroll durante a animação */
 }

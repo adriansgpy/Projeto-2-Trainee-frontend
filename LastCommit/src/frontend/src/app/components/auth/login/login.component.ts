@@ -31,7 +31,24 @@ export class LoginComponent {
   
   ngOnInit() {
     this.audioService.playMusic('assets/soundtrack/bms.mp3')  
+     const fullscreenHandler = () => {
+      this.enterFullscreen();
+      // Remove o listener para não chamar de novo
+      document.removeEventListener('click', fullscreenHandler);
+    };
+    document.addEventListener('click', fullscreenHandler);
   }
+
+  enterFullscreen() {
+  const elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if ((elem as any).webkitRequestFullscreen) { /* Safari */
+    (elem as any).webkitRequestFullscreen();
+  } else if ((elem as any).msRequestFullscreen) { /* IE11 */
+    (elem as any).msRequestFullscreen();
+  }
+}
 
 
   gotosignup() {
@@ -51,6 +68,7 @@ export class LoginComponent {
         if (res.access_token) {
           localStorage.setItem('token', res.access_token);
         }
+        this.audioService.stopMusic();
         this.router.navigate(['/homepage']);
       },
       error: (err) => {

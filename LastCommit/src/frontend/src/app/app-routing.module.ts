@@ -16,11 +16,12 @@ export const routes: Routes = [
     path: 'homepage',
     component: HomepageComponent,
     children: [
-      { path: '', redirectTo: 'inicial', pathMatch: 'full' },
-      { path: 'inicial', loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent) },
-      { path: 'campanhas', loadComponent: () => import('./components/campanhas/campanhas.component').then(m => m.CampanhasComponent) },
-      { path: 'personagens', loadComponent: () => import('./components/personagens/personagens.component').then(m => m.PersonagensComponent) },
-    ]
+  { path: '', redirectTo: 'inicial', pathMatch: 'full' },
+  { path: 'inicial', loadComponent: () => import('./components/inicial/inicial.component').then(m => m.InicialComponent), data: { animation: 'InicialPage' } },
+  { path: 'campanhas', loadComponent: () => import('./components/campanhas/campanhas.component').then(m => m.CampanhasComponent), data: { animation: 'CampanhasPage' } },
+  { path: 'personagens', loadComponent: () => import('./components/personagens/personagens.component').then(m => m.PersonagensComponent), data: { animation: 'PersonagensPage' } },
+]
+
   },
 
   {

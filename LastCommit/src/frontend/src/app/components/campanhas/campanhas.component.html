@@ -1,12 +1,10 @@
 <div class="campanhas-container">
-  <div class="campanhas-container">
-    <div class="banner">
-  <div class="banner-info">
-    <h1>Black Mesa</h1>
-    <p>A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo. Escolha o seu lado e foque na missão principal e tente sobreviver a nova realidade dentro da instalação.</p>
+  <div class="banner">
+    <div class="banner-info">
+      <h1>Black Mesa</h1>
+      <p>A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo. Escolha o seu lado e foque na missão principal e tente sobreviver a nova realidade dentro da instalação.</p>
+    </div>
   </div>
-</div>
-
 
   <div class="campanha-secao" *ngIf="getCampanhasPorTipo('cientista').length">
     <h2 class="subtitulo-tipo">Cientista</h2>
@@ -15,9 +13,7 @@
         *ngFor="let camp of getCampanhasPorTipo('cientista')"
         class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
-
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
-
         <div class="card-info">
           <h3>{{camp.titulo}}</h3>
           <p class="descricao-longa">{{camp.descricao}}</p>
@@ -39,9 +35,7 @@
         *ngFor="let camp of getCampanhasPorTipo('soldado h.e.c.u')"
         class="card full-card"
         [ngClass]="camp.habilitado ? 'enabled' : 'disabled'">
-        
         <img [src]="camp.imagem" alt="{{camp.titulo}}" class="card-img">
-        
         <div class="card-info">
           <h3>{{camp.titulo}}</h3>
           <p class="descricao-longa">{{camp.descricao}}</p>
@@ -56,23 +50,18 @@
     </div>
   </div>
 
-
- 
-
-<div class="modal-overlay" *ngIf="campanhaSelecionada">
-  <div class="modal">
-    <h2>Selecione um personagem para "{{ campanhaSelecionada.titulo }}"</h2>
-
-   <button
-    *ngFor="let p of getPersonagensPorCampanha()"
-    class="personagem-btn"
-    (click)="selecionarPersonagem(p)">
-    {{ p.name }} ({{ p.role | titlecase }})
-  </button>
-
-
-    <div class="modal-acoes">
-      <button class="cancelar" (click)="fecharModal()">Cancelar</button>
+  <div class="modal-overlay" *ngIf="campanhaSelecionada">
+    <div class="modal">
+      <h2>Selecione um personagem para "{{ campanhaSelecionada.titulo }}"</h2>
+      <button
+        *ngFor="let p of getPersonagensPorCampanha()"
+        class="personagem-btn"
+        (click)="selecionarPersonagem(p)">
+        {{ p.name }} ({{ p.role | titlecase }})
+      </button>
+      <div class="modal-acoes">
+        <button class="cancelar" (click)="fecharModal()">Cancelar</button>
+      </div>
     </div>
   </div>
 </div>

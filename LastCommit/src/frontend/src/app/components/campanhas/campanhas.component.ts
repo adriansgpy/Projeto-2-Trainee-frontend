@@ -33,12 +33,142 @@ export class CampanhasComponent implements OnInit {
   personagens: Personagem[] = [];
   private apiUrl = 'http://127.0.0.1:8000/personagens';
   campanhaSelecionada: Campanha | null = null;
-  constructor(private http: HttpClient, private router : Router, private audioService : AudioService) {}
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private audioService: AudioService
+  ) {}
 
   ngOnInit() {
+    // Aqui todos os capítulos já viram campanhas jogáveis
     this.campanhas = [
-      { titulo: 'Black Mesa', descricao: 'Faça parte do experimento mais temido do laboratório, examine o cristal de outro planeta com os dedos cruzados.', tipo: 'cientista', imagem: 'assets/black_mesa_outside.png' },
-      { titulo: 'Força Oposta', descricao: 'Mandado pelo governo, as forças H.E.C.U terá que invadir a Black Mesa e apagar a existência desse desastre. Tenha certeza de que nenhum Alien ou Cientista escape com vida. Tudo deve ser mantido em segredo.', tipo: 'soldado h.e.c.u', imagem: 'assets/hecu.png' },
+      {
+        titulo: 'Materiais Desconhecidos',
+        descricao: 'Explore o laboratório e descubra os materiais experimentais que deram início ao desastre.',
+        tipo: 'cientista',
+        imagem: 'assets/cap1.jpg',
+        habilitado: true
+      },
+      {
+        titulo: 'Consequências Inesperadas',
+        descricao: 'Após um experimento dar errado, o caos se instala no laboratório e você deve reagir.',
+        tipo: 'cientista',
+        imagem: 'assets/cap2.jpg',
+        habilitado: true
+      },
+      {
+        titulo: 'Complexo Administrativo',
+        descricao: 'Percorra os escritórios e áreas administrativas enquanto o laboratório entra em colapso.',
+        tipo: 'cientista',
+        imagem: 'assets/cap3.jpg',
+        habilitado: true
+      },
+      {
+        titulo: 'Hostis à Vista',
+        descricao: 'Enfrente os soldados H.E.C.U. enviados para conter o desastre e eliminar testemunhas.',
+        tipo: 'cientista',
+        imagem: 'assets/cap4.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Fossa de Explosão',
+        descricao: 'Investigue a área de testes de foguetes e enfrentamentos com criaturas perigosas.',
+        tipo: 'cientista',
+        imagem: 'assets/cap5.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Energia Ativada',
+        descricao: 'Restaure o fornecimento de energia enquanto o caos continua se espalhando pelo laboratório.',
+        tipo: 'cientista',
+        imagem: 'assets/cap6.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Nos Trilhos',
+        descricao: 'Use os sistemas de transporte interno para se mover rapidamente entre as áreas do laboratório.',
+        tipo: 'cientista',
+        imagem: 'assets/cap7.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Detenção',
+        descricao: 'Evite capturas e enfrente os soldados que patrulham o laboratório.',
+        tipo: 'cientista',
+        imagem: 'assets/cap8.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Processamento de Resíduos',
+        descricao: 'Navegue pelas áreas de descarte e processamento químico enquanto enfrenta novas ameaças.',
+        tipo: 'cientista',
+        imagem: 'assets/cap9.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Ética Duvidosa',
+        descricao: 'Descubra os segredos por trás dos experimentos e decida como prosseguir.',
+        tipo: 'cientista',
+        imagem: 'assets/cap10.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Tensão na Superfície',
+        descricao: 'A batalha se aproxima da superfície enquanto inimigos ainda tentam impedir sua fuga.',
+        tipo: 'cientista',
+        imagem: 'assets/cap11.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Esqueça Freeman',
+        descricao: 'Os soldados recebem ordens para eliminar qualquer sobrevivente; sua jornada fica crítica.',
+        tipo: 'cientista',
+        imagem: 'assets/cap12.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Núcleo Lambda',
+        descricao: 'Alcance o coração do laboratório e descubra os experimentos mais secretos.',
+        tipo: 'cientista',
+        imagem: 'assets/cap13.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Xênon',
+        descricao: 'Viaje para a dimensão alienígena Xênon e enfrente criaturas perigosas.',
+        tipo: 'cientista',
+        imagem: 'assets/cap14.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Covil de Gonarch',
+        descricao: 'Enfrente o chefe alienígena Gonarch e lute por sobrevivência antes de retornar.',
+        tipo: 'cientista',
+        imagem: 'assets/cap15.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Intruso',
+        descricao: 'Explore Xênon enquanto enfrenta novas ameaças e descobre mais sobre o desastre.',
+        tipo: 'cientista',
+        imagem: 'assets/cap16.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Nihilanth',
+        descricao: 'Enfrente o poderoso Nihilanth, a mente por trás da invasão alienígena.',
+        tipo: 'cientista',
+        imagem: 'assets/cap17.jpg',
+        habilitado: false
+      },
+      {
+        titulo: 'Fim de Jogo',
+        descricao: 'Conclua sua jornada, restabeleça a ordem e veja os resultados de suas ações.',
+        tipo: 'cientista',
+        imagem: 'assets/cap18.jpg',
+        habilitado: false
+      }
     ];
 
     this.loadPersonagens();
@@ -52,27 +182,21 @@ export class CampanhasComponent implements OnInit {
   }
 
   loadPersonagens() {
-  const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
-  this.http.get<Personagem[]>(this.apiUrl, {
-    headers: { Authorization: `Bearer ${token}` }
-  }).subscribe({
-    next: (data) => {
-      console.log('Personagens carregados do backend:', data);
-
-      this.personagens = data.map(p => ({
-        ...p,
-        _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id
-      }));
-
-      console.log('Personagens processados:', this.personagens);
-
-      this.atualizarCampanhas();
-    },
-    error: (err) => console.error('Erro ao carregar personagens:', err)
-  });
-}
-
+    this.http.get<Personagem[]>(this.apiUrl, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).subscribe({
+      next: (data) => {
+        this.personagens = data.map(p => ({
+          ...p,
+          _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id
+        }));
+        this.atualizarCampanhas();
+      },
+      error: (err) => console.error('Erro ao carregar personagens:', err)
+    });
+  }
 
   atualizarCampanhas() {
     const tiposDisponiveis = new Set(
@@ -82,43 +206,39 @@ export class CampanhasComponent implements OnInit {
     this.campanhas.forEach(c => {
       c.habilitado = tiposDisponiveis.has(c.tipo);
     });
-
-    console.log('Campanhas atualizadas:', this.campanhas);
   }
 
-  abrirSelecao(campanha: any) {
+  abrirSelecao(campanha: Campanha) {
     this.campanhaSelecionada = campanha;
   }
 
   fecharModal() {
     this.campanhaSelecionada = null;
   }
-  
-selecionarPersonagem(personagem: any) {
-  if (!personagem) return;
 
-  let rotaIntro = '';
+  selecionarPersonagem(personagem: any) {
+    if (!personagem) return;
 
-  switch (this.campanhaSelecionada?.titulo) {
-    case 'Força Oposta':
-      this.audioService.stopMusic();
-      rotaIntro = '/intro/hecu';
-      break;
-    case 'Black Mesa':
-      this.audioService.stopMusic();
-      rotaIntro = '/intro/cientista'  
-      break;
-    default:
-      console.error('Campanha sem introdução definida!');
-      return;
+    let rotaIntro = '';
+
+    switch (this.campanhaSelecionada?.tipo) {
+      case 'soldado h.e.c.u':
+        this.audioService.stopMusic();
+        rotaIntro = '/intro/hecu';
+        break;
+      case 'cientista':
+        this.audioService.stopMusic();
+        rotaIntro = '/intro/cientista';
+        break;
+      default:
+        console.error('Campanha sem introdução definida!');
+        return;
+    }
+
+    this.router.navigateByUrl(rotaIntro, {
+      state: { personagem }
+    });
   }
-
-  this.router.navigateByUrl(rotaIntro, {
-    state: { personagem }
-  });
-
-}
-
 
   getPersonagensPorCampanha() {
     if (!this.campanhaSelecionada) return [];
@@ -127,12 +247,10 @@ selecionarPersonagem(personagem: any) {
     );
   }
 
-
   entrarCampanha(camp: Campanha) {
     if (!camp.habilitado) return;
     this.abrirSelecao(camp);
   }
-
 
   getCampanhasPorTipo(tipo: 'cientista' | 'soldado h.e.c.u') {
     return this.campanhas.filter(c => c.tipo === tipo);
