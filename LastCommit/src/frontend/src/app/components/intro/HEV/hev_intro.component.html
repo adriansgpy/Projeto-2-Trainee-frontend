@@ -1,0 +1,30 @@
+<div class="intro-container">
+  <!-- Fundo preto durante o título -->
+  <div class="black-background" [class.hidden]="!showTitle"></div>
+
+  <!-- Título -->
+  <div class="title-force" [class.show]="showTitle">Hazardous Environment Suit</div>
+
+  <!-- Conteúdo principal -->
+  <div [class.hidden]="showTitle" class="content">
+
+    <!-- Imagem fixa de fundo -->
+    <div class="background-image fixed-background"
+         [style.background-image]="'url(assets/hev.png)'">
+    </div>
+
+    <!-- Luzes e partículas -->
+    <div class="light-container"></div>
+    <div class="particles"></div>
+    <div class="overlay-details"></div>
+
+    <!-- Texto e botão continuar -->
+    <div class="text-overlay">
+      <div class="text-content">
+        <p [innerHTML]="displayedText"></p>
+        <button *ngIf="showContinue" (click)="continuar()" class="btn-continue">Continuar</button>
+      </div>
+    </div>
+
+  </div>
+</div>

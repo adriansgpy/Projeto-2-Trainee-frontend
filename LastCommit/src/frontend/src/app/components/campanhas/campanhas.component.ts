@@ -37,6 +37,7 @@ interface Campanha {
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule]
 })
+
 export class CampanhasComponent implements OnInit {
   campanhas: Campanha[] = [];
   personagens: Personagem[] = [];
@@ -51,36 +52,30 @@ export class CampanhasComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.campanhas = [
-      { titulo: 'Materiais Desconhecidos', imagem: 'assets/bmib.png', habilitado: false },
-      { titulo: 'Consequências Inesperadas', imagem: 'assets/unforeseen_consequences.jpg', habilitado: false },
-      { titulo: 'Complexo Administrativo', imagem: 'assets/office.jpg', habilitado: false },
-      { titulo: 'Hostis à Vista', imagem: 'assets/hostiles.png', habilitado: false },
-      { titulo: 'Satélite', imagem: 'assets/rocket.jpg', habilitado: false },
-      { titulo: 'Energia Ativada', imagem: 'assets/powerup.jpg', habilitado: false },
-      { titulo: 'Nos Trilhos', imagem: 'assets/rail.jpg', habilitado: false },
-      { titulo: 'Detenção', imagem: 'assets/bo.jpg', habilitado: false },
-      { titulo: 'Processamento de Resíduos', imagem: 'assets/residue.jpg', habilitado: false },
-      { titulo: 'Ética Duvidosa', imagem: 'assets/qe.jpeg', habilitado: false },
-      { titulo: 'Superfície em batalha', imagem: 'assets/st.jpg', habilitado: false },
-      { titulo: 'Perdas suficiente', imagem: 'assets/evacuate.png', habilitado: false },
-      { titulo: 'Núcleo Lambda', imagem: 'assets/lambda.jpeg', habilitado: false },
-      { titulo: 'Xênon', imagem: 'assets/xen.png', habilitado: false },
-      { titulo: 'Covil de Gonarch', imagem: 'assets/gonarch.jpeg', habilitado: false },
-      { titulo: 'Intruso', imagem: 'assets/interloper.jpg', habilitado: false },
-      { titulo: 'Nihilanth', imagem: 'assets/nihilanth.png', habilitado: false },
-      { titulo: 'O fim?', imagem: 'assets/gman.png', habilitado: false }
+      { titulo: 'Caos Instalado', imagem: 'assets/bmib.png', habilitado: false },
+      { titulo: 'Invasão Hostil', imagem: 'assets/unforeseen_consequences.jpg', habilitado: false },
+      { titulo: 'Esperança na Superfície', imagem: 'assets/office.jpg', habilitado: false },
+      { titulo: 'Laboratório Lambda', imagem: 'assets/hostiles.png', habilitado: false },
+      { titulo: 'Xen', imagem: 'assets/rocket.jpg', habilitado: false },
+      { titulo: 'Fonte do Caos', imagem: 'assets/powerup.jpg', habilitado: false },
+    
     ];
 
     this.loadPersonagens();
+
   }
 
   getAuthHeaders(): HttpHeaders {
+
     const token = localStorage.getItem('token') || '';
     return new HttpHeaders({ Authorization: token ? `Bearer ${token}` : '' });
+
   }
 
   loadPersonagens() {
+
     const token = localStorage.getItem('token');
 
     this.http.get<Personagem[]>(this.apiUrl, { headers: { Authorization: `Bearer ${token}` } })
@@ -102,21 +97,26 @@ export class CampanhasComponent implements OnInit {
         },
         error: (err) => console.error('Erro ao carregar personagens:', err)
       });
+
   }
 
   onPersonagemChange(personagem: Personagem) {
+
     this.personagemGlobalSelecionado = personagem;
     localStorage.setItem('personagemSelecionado', personagem._id);
     this.atualizarCampanhas();
+
   }
 
   atualizarCampanhas() {
+
     if (!this.personagemGlobalSelecionado) return;
 
     const capitulos = this.personagemGlobalSelecionado.capitulos || [];
     let encontrouDesbloqueada = false;
 
     this.campanhas.forEach(campanha => {
+      
       const cap = capitulos.find(c => c.titulo === campanha.titulo);
 
       if (cap?.completo) {
@@ -130,10 +130,13 @@ export class CampanhasComponent implements OnInit {
         campanha.habilitado = false;
         campanha.concluido = false;
       }
+
     });
+
   }
 
   getTextoBotaoCampanha(camp: Campanha): string {
+
     if (!this.personagemGlobalSelecionado) return 'Bloqueada';
 
     const capitulos = this.personagemGlobalSelecionado.capitulos || [];
@@ -142,9 +145,11 @@ export class CampanhasComponent implements OnInit {
     if (cap?.completo) return 'Concluído';
     if (this.personagemGlobalSelecionado.ultimoCapitulo === camp.titulo) return 'Continuar';
     return 'Começar Campanha';
+
   }
 
   entrarCampanha(camp: Campanha) {
+
     if (!camp.habilitado || !this.personagemGlobalSelecionado) {
       alert('Selecione um personagem válido antes de entrar na campanha!');
       return;
@@ -169,4 +174,5 @@ export class CampanhasComponent implements OnInit {
     this.audioService.stopMusic();
     this.router.navigateByUrl(rotaIntro, { state: { personagem } });
   }
+
 }

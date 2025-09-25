@@ -14,7 +14,7 @@ export class CientistaIntroComponent implements OnInit, AfterViewInit, OnDestroy
   fullText  = `
   <h1>Black Mesa Research Facility</h1>
   <h2>Setor C – Materiais Anômalos</h2>
-  Hoje, você foi designado para colaborar em um dos experimentos mais avançados já conduzidos na área de física de partículas. O objetivo é submeter uma amostra de cristal não identificado a um feixe de energia de alta intensidade. Sua tarefa é simples: inserir a amostra no espectrômetro rotacional e monitorar as leituras geradas pelos sensores. Cada detalhe importa — ajustes de calibração, precisão nos registros e sincronia com a equipe de suporte. Este é um momento histórico para a ciência, e você está no centro dele.
+  Hoje, você foi designado para colaborar em um dos experimentos mais avançados já conduzidos na área de física de partículas. O objetivo é submeter uma amostra de cristal não identificado a um feixe de energia de alta intensidade. Sua tarefa é simples: inserir a amostra no espectrômetro rotacional e monitorar as leituras geradas pelos sensores. Vá e coloque a roupa de teste H.E.V para ficar protegido durante o experimento.
 `;
 
 
@@ -96,7 +96,8 @@ export class CientistaIntroComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   continuar() {
-    this.router.navigate(['/game']);
+    this.audioService.stopAll();
+    this.router.navigate(['intro/HEV']);
   }
 
   private createLights(count: number) {

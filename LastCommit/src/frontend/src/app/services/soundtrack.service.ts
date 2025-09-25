@@ -14,7 +14,7 @@ export class AudioService {
 
     this.audio = new Audio(src);
     this.audio.loop = loop;
-    this.audio.volume = 1; // volume inicial (0 a 1)
+    this.audio.volume = 1; 
     this.audio.play().catch(err => console.warn('Erro ao tocar música:', err));
   }
 
