@@ -30,7 +30,16 @@ export class jogoComponent implements OnInit {
 
     {
       titulo: "Caos instalado",
-      contexto: "Após chegar em Black Mesa e vestir a roupa H.E.V você volta para o corredor principal..."
+      contexto: "Após chegar em Black Mesa e vestir a roupa H.E.V você volta para o corredor principal...",
+       regras: [
+        "O jogador ainda não pode sair de Black Mesa.",
+        "Os inimigos iniciais são apenas headcrabs e alguns zumbis.",
+        "Não introduza personagens de fora da instalação nesta fase.",
+        "As armas disponíveis devem ser apenas pistola e crowbar.",
+        "O capítulo deve ter inimigos e mortes APENAS depois da ressonancia em cascata",
+        "Não conte nada ameaçador para o jogador antes que o desastre aconteça",
+        "Me de as opções em ingles e conte a história em ingles"
+      ]
     },
 
     {
@@ -56,6 +65,7 @@ export class jogoComponent implements OnInit {
     this.llmService.startChapter({
       chapter: index,
       context: chapter.contexto,
+       rules: chapter.regras || [],  
       player_state: this.player
     }).subscribe({
       next: (res) => {
@@ -79,7 +89,8 @@ export class jogoComponent implements OnInit {
     const payload = {
       last_narrative: this.narrative,
       action,
-      player_state: this.player
+      player_state: this.player,
+      rules: this.chapters[this.currentChapterIndex]?.regras || []
     };
 
     this.llmService.turn(payload).subscribe({
