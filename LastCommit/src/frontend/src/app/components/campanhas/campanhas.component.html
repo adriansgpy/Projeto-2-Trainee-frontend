@@ -2,10 +2,9 @@
 
   <div class="banner">
     <div class="banner-info">
-      <h1>Black Mesa</h1>
+      <h1>Comece a exterminar</h1>
       <p>
-        A origem de tudo, o maior desastre já visto pelos cientistas. Explore o laboratório e enfrente os eventos que mudaram tudo.
-        Escolha seu personagem e foque na missão principal para sobreviver à nova realidade dentro da instalação.
+        Escolha abaixo alguma lenda e comece a sua luta mortal contra ela.
       </p>
     </div>
   </div>
@@ -24,7 +23,7 @@
   </div>
 
   <div class="campanha-secao">
-    <h2 class="subtitulo-tipo">Capítulos</h2>
+    <h2 class="subtitulo-tipo">Lendas</h2>
     <div class="cards-container full-width">
       <div 
         *ngFor="let camp of campanhas"
@@ -38,11 +37,9 @@
             class="btn-entrar"
             [disabled]="!camp.habilitado || !personagemGlobalSelecionado"
             (click)="entrarCampanha(camp)">
-            {{ getTextoBotaoCampanha(camp) }}
           </button>
         </div>
       </div>
     </div>
   </div>
-
 </div>

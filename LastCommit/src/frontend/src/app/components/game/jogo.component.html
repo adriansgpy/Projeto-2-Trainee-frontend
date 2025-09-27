@@ -11,40 +11,46 @@
         <p>{{ narrative }}</p>
       </div>
 
-      <div class="actions" *ngIf="choices.length > 0">
+      <div class="actions">
         <h2>O que você faz?</h2>
-        <ul>
-          <li *ngFor="let choice of choices" (click)="chooseAction(choice)">
-            {{ choice }}
-          </li>
-        </ul>
+
+        <input
+          type="text"
+          placeholder="Digite sua ação aqui..."
+          [(ngModel)]="playerAction"
+          (keyup.enter)="sendAction()"
+        />
+        <button (click)="sendAction()">Enviar</button>
+
+        <div *ngIf="choices.length > 0">
+          <h3>Ações sugeridas:</h3>
+          <ul>
+            <li *ngFor="let choice of choices" (click)="chooseAction(choice)">
+              {{ choice }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="sidebar">
-      <h2>Status do Jogador</h2>
+      <h2>Jogador</h2>
       <div class="status">
-        <p>HP: {{ player.hp }}/{{ player.maxHp }}</p>
-        <div class="bar hp-bar">
-          <div
-            class="fill"
-            [style.width.%]="(player.hp / player.maxHp) * 100"
-          ></div>
-        </div>
-
-        <p>HEV Battery: {{ player.hevBattery }}%</p>
-        <div class="bar battery-bar">
-          <div
-            class="fill"
-            [style.width.%]="player.hevBattery"
-          ></div>
-        </div>
+        <p><strong>Nome:</strong> {{ player.nome }}</p>
+        <p><strong>HP:</strong> {{ player.hp }} / {{ player.maxHp }}</p>
+        <p><strong>Stamina:</strong> {{ player.stamina }} / {{ player.maxStamina }}</p>
+        <p><strong>Inventário:</strong></p>
+        <ul>
+          <li *ngFor="let item of player.inventory">{{ item }}</li>
+        </ul>
       </div>
 
-      <h2>Inventário</h2>
-      <ul>
-        <li *ngFor="let item of player.inventory">{{ item }}</li>
-      </ul>
+      <h2>Lenda</h2>
+      <div class="status">
+        <p><strong>Nome:</strong> {{ enemy.nome }}</p>
+        <p><strong>HP:</strong> {{ enemy.hp }} / {{ enemy.maxHp }}</p>
+        <p><strong>Stamina:</strong> {{ enemy.stamina }} / {{ enemy.maxStamina }}</p>
+      </div>
     </div>
   </div>
 </body>

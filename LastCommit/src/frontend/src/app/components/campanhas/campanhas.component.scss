@@ -27,7 +27,7 @@
 .titulo-tela {
 font-family:monospace;
 font-size:3rem;
-color:#ff6600;
+color:#ff3300;
 text-align:left;
 letter-spacing:4px;
 margin-bottom:20px;
@@ -37,7 +37,7 @@ margin-bottom:20px;
 .banner {
 position:relative;
 width:100%;
-background-image:url("/assets/banner.png");
+background-image:url("/assets/banheiro.jpg");
 height:400px;
 background-size:cover;
 background-position:center;
@@ -63,7 +63,7 @@ z-index:1;
 .banner-info {
 position:relative;
 z-index:2;
-color:#fff;
+color:#b62b2b;
 max-width:800px;
 font-family:'Orbitron',monospace;
 text-shadow:0 0 10px rgba(0,0,0,0.7);
@@ -91,8 +91,8 @@ line-height:1.5;
 .subtitulo-tipo {
 font-family:'FF DIN Bold',monospace;
 font-size:2rem;
-color:#ff9933;
-border-bottom:2px solid #ff6600;
+color:#ff3333;
+border-bottom:2px solid #ff0000;
 padding-bottom:5px;
 }
 

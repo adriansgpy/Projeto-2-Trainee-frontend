@@ -5,24 +5,19 @@
       <h2 class="section-title">Personagens Criados</h2>
       <ul class="characters-list">
         <li *ngFor="let character of characters" class="character-card">
-        <div class="character-info">
-          <div class="details">
-            <strong>{{ character.nome }}</strong>
-            <span>HP: {{ character.hpAtual }}</span>
-            <span>Bateria HEV: {{ character.bateriaHEV }}</span>
-            <span>{{ character.ultimoCapitulo || 'Nenhum capítulo iniciado' }}</span>
-            <span>
-              Inventário: 
-              {{ character.inventario.length > 0 ? character.inventario.join(', ') : 'Nenhum item encontrado' }}
-            </span>
+          <div class="character-info">
+            <div class="details">
+              <strong>{{ character.nome }}</strong>
+              <span>Classe: {{ character.role }}</span>
+              <span>HP: {{ character.hpAtual }}</span>
+              <span>Stamina: {{ character.stamina }}</span>
+              <span>Ataque Especial: {{ character.ataqueEspecial }}</span>
+            </div>
           </div>
-        </div>
-        <div class="card-buttons">
-          <button class="view-btn" (click)="viewCharacter(character)">Ver Detalhes</button>
-          <button class="delete-btn" (click)="deleteCharacter(character)">Deletar</button>
-        </div>
-    </li>
-
+          <div class="card-buttons">
+            <button class="delete-btn" (click)="deleteCharacter(character)">Deletar</button>
+          </div>
+        </li>
       </ul>
       <p *ngIf="characters.length === 0" class="empty-msg">
         Nenhum personagem criado ainda. Comece a criar o seu!
@@ -32,20 +27,27 @@
     <section class="create-character-section">
       <h2 class="section-title">Criar Novo Personagem</h2>
       <form (ngSubmit)="createCharacter()">
+
+      
         <div class="form-group">
           <label for="newCharName">Nome do Personagem:</label>
           <input type="text" id="newCharName" [(ngModel)]="newCharacter.nome" name="nome" placeholder="Nome Completo" required>
         </div>
 
         <div class="form-group">
-          <ul>
-            <li *ngFor="let item of newCharacter.inventario">
-              {{ item }}
-            </li>
-          <li *ngFor="let item of newCharacter.inventario?.length ? newCharacter.inventario : []">
-          </ul>
+          <label for="classeSelect">Escolha a Classe:</label>
+          <select id="classeSelect" [(ngModel)]="newCharacter.role" name="role" (change)="onClasseChange(newCharacter.role ?? '')" required>
+            <option value="" disabled selected>Selecione uma classe</option>
+            <option *ngFor="let classe of classesDisponiveis" [value]="classe.nome">{{ classe.nome }}</option>
+          </select>
         </div>
 
+        <div *ngIf="newCharacter.role">
+          <p><strong>Descrição:</strong> {{ getClasseSelecionada()?.descricao }}</p>
+          <p><strong>HP Inicial:</strong> {{ newCharacter.hpAtual }}</p>
+          <p><strong>Stamina:</strong> {{ newCharacter.stamina }}</p>
+          <p><strong>Ataque Especial:</strong> {{ newCharacter.ataqueEspecial }}</p>
+        </div>
 
         <button type="submit" class="btn btn-create">Criar Personagem</button>
       </form>

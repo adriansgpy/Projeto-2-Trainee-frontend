@@ -12,7 +12,7 @@ import { AudioService } from '../../services/soundtrack.service';
   imports: [CommonModule, RouterModule, FormsModule]
 })
 export class HomepageComponent implements OnInit, OnDestroy {
-  private backgroundImages = ['hev.png','bmrf.png', 'bmrf3.png', 'bmrf4.png', 'xen_bg.png', 'black_mesa_bg.jpg', 'black_mesa_bg2.jpg'];
+  private backgroundImages = ['cuca.png', 'mula.png', 'pe_grande.png', 'cabeca_cuia.png'];
   currentBackgroundImage = '';
   private imageInterval: any;
 

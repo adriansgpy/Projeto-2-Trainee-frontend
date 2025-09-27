@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AudioService } from '../../services/soundtrack.service';
 import { FormsModule } from '@angular/forms';
+import { LENDAS } from '../game/lendas.model';
+
 
 interface Capitulo {
   titulo: string;
@@ -18,12 +20,12 @@ interface Personagem {
   inventario: string[];
   ultimoCapitulo: string | null;
   hpAtual: number;
-  bateriaHEV: number;
   capitulos: Capitulo[];
 }
 
 interface Campanha {
   titulo: string;
+  descricao: string;
   tipo?: string; 
   habilitado?: boolean;
   imagem?: string;
@@ -54,14 +56,26 @@ export class CampanhasComponent implements OnInit {
   ngOnInit() {
 
     this.campanhas = [
-      { titulo: 'Caos Instalado', imagem: 'assets/bmib.png', habilitado: false },
-      { titulo: 'Invasão Hostil', imagem: 'assets/unforeseen_consequences.jpg', habilitado: false },
-      { titulo: 'Esperança na Superfície', imagem: 'assets/office.jpg', habilitado: false },
-      { titulo: 'Laboratório Lambda', imagem: 'assets/hostiles.png', habilitado: false },
-      { titulo: 'Xen', imagem: 'assets/rocket.jpg', habilitado: false },
-      { titulo: 'Fonte do Caos', imagem: 'assets/powerup.jpg', habilitado: false },
-    
-    ];
+  { 
+    titulo: 'Mula sem Cabeça', 
+    descricao: 'Lute contra uma ameaça flamejante, mas cuidado, ela é rápida e pode cuspir fogo...', 
+    imagem: 'assets/mula.png', 
+    habilitado: true 
+  },
+  { 
+    titulo: 'Cabeça de Cuia', 
+    descricao: 'Um espírito travesso que prega peças e confunde viajantes nas noites de lua cheia.', 
+    imagem: 'assets/cabeca_cuia.png', 
+    habilitado: true 
+  },
+  { 
+    titulo: 'Pé Grande', 
+    descricao: 'Uma criatura gigantesca e evasiva, cuja presença é anunciada apenas por pegadas misteriosas.', 
+    imagem: 'assets/pe_grande.png', 
+    habilitado: true 
+  },
+];
+
 
     this.loadPersonagens();
 
@@ -93,7 +107,6 @@ export class CampanhasComponent implements OnInit {
             this.personagemGlobalSelecionado = this.personagens[0];
           }
 
-          this.atualizarCampanhas();
         },
         error: (err) => console.error('Erro ao carregar personagens:', err)
       });
@@ -104,75 +117,36 @@ export class CampanhasComponent implements OnInit {
 
     this.personagemGlobalSelecionado = personagem;
     localStorage.setItem('personagemSelecionado', personagem._id);
-    this.atualizarCampanhas();
+   
 
   }
 
-  atualizarCampanhas() {
 
-    if (!this.personagemGlobalSelecionado) return;
 
-    const capitulos = this.personagemGlobalSelecionado.capitulos || [];
-    let encontrouDesbloqueada = false;
-
-    this.campanhas.forEach(campanha => {
-      
-      const cap = capitulos.find(c => c.titulo === campanha.titulo);
-
-      if (cap?.completo) {
-        campanha.habilitado = true;
-        campanha.concluido = true;
-      } else if (!encontrouDesbloqueada) {
-        campanha.habilitado = true;
-        campanha.concluido = false;
-        encontrouDesbloqueada = true;
-      } else {
-        campanha.habilitado = false;
-        campanha.concluido = false;
-      }
-
-    });
-
+ entrarCampanha(camp: Campanha) {
+  if (!camp.habilitado || !this.personagemGlobalSelecionado) {
+    alert('Selecione um personagem válido antes de entrar na campanha!');
+    return;
   }
 
-  getTextoBotaoCampanha(camp: Campanha): string {
+  const personagem = this.personagemGlobalSelecionado;
+  const lenda = LENDAS.find(l => l.nome === camp.titulo);
+  if (!lenda) return;
 
-    if (!this.personagemGlobalSelecionado) return 'Bloqueada';
+  // Salva no localStorage
+  localStorage.setItem('playerSelected', JSON.stringify(personagem));
+  localStorage.setItem('lendaSelected', JSON.stringify(lenda));
 
-    const capitulos = this.personagemGlobalSelecionado.capitulos || [];
-    const cap = capitulos.find(c => c.titulo === camp.titulo);
+  // Navega para o jogo
+  this.router.navigateByUrl('/game');
+}
 
-    if (cap?.completo) return 'Concluído';
-    if (this.personagemGlobalSelecionado.ultimoCapitulo === camp.titulo) return 'Continuar';
-    return 'Começar Campanha';
-
-  }
-
-  entrarCampanha(camp: Campanha) {
-
-    if (!camp.habilitado || !this.personagemGlobalSelecionado) {
-      alert('Selecione um personagem válido antes de entrar na campanha!');
-      return;
-    }
-
-    const personagemId = this.personagemGlobalSelecionado._id;
-    const payload = { ultimoCapitulo: camp.titulo };
-
-    this.http.patch(`${this.apiUrl}/${personagemId}`, payload, { headers: this.getAuthHeaders() })
-      .subscribe({
-        next: (updated: any) => {
-          this.personagemGlobalSelecionado!.ultimoCapitulo = camp.titulo;
-          this.atualizarCampanhas();
-          this.selecionarPersonagem(this.personagemGlobalSelecionado!);
-        },
-        error: (err) => console.error('Erro ao iniciar capítulo:', err)
-      });
-  }
 
   selecionarPersonagem(personagem: Personagem) {
-    const rotaIntro = '/intro/cientista';
+    const rotaIntro = '/game';
     this.audioService.stopMusic();
-    this.router.navigateByUrl(rotaIntro, { state: { personagem } });
+    console.log("personagem: " + personagem.nome)
+    //this.router.navigateByUrl(rotaIntro, { state: { personagem } });
   }
 
 }

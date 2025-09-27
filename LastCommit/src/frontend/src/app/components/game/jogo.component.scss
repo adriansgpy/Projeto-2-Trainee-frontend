@@ -1,3 +1,6 @@
+/* ======================================= */
+/* Reset Básico e Configurações de Base */
+/* ======================================= */
 * {
   margin: 0;
   padding: 0;
@@ -7,141 +10,275 @@
 html, body, app-root {
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+  /* Fonte limpa e profissional */
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Fundo preto puro */
+  background-color: #000000;
+  /* Cor de texto suave */
+  color: #f0f0f0;
 }
 
+/* Scrollbar Clean */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+/* ======================================= */
+/* Fundo do Capítulo (Minimalista) */
+/* ======================================= */
 #chapter-bg {
-  position: fixed;       
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-size: cover;       
-  background-position: center; 
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(0.2);      
-  z-index: -1;                  
+  /* Filtro muito suave, apenas para escurecer */
+  filter: brightness(0.15);
+  z-index: -1;
+  /* Transição rápida e limpa */
+  transition: background-image 0.3s ease-in-out;
 }
 
-
+/* ======================================= */
+/* Container Principal */
+/* ======================================= */
 .container {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100%;
-  background: transparent;
+  padding: 30px;
+  gap: 30px;
 }
 
-
+/* ======================================= */
+/* Área Principal (Clean Panel) */
+/* ======================================= */
 .main-content {
   flex: 3;
-  padding: 20px;
+  padding: 30px;
   overflow-y: auto;
-  color: #fff;
-  background: transparent;
+  /* Fundo sutilmente transparente e opaco */
+  background: rgba(10, 10, 10, 0.85);
+  border-radius: 8px; /* Bordas mais discretas */
+  /* Sombra interna e externa mínimas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* Remoção do backdrop-filter para um visual mais flat */
+  border: 1px solid #222; /* Borda de separação sutil */
 }
 
-
+/* ======================================= */
+/* Banner e Título */
+/* ======================================= */
 .chapter-banner {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 180px; /* Mais baixo */
+  /* Fundo quase preto, sem gradiente complexo */
+  background: #1a1a1a;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .chapter-title {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
   font-size: 2.5rem;
-  color: #ff6600;
-  font-weight: bold;
-  letter-spacing: 2px;
+  /* Cor de destaque neutra/tecnológica */
+  color: #00bcd4;
+  font-weight: 700;
+  /* Sem text-shadow exagerado */
+  text-shadow: none;
+  letter-spacing: 0.5px;
+  text-transform: none;
 }
 
-
+/* ======================================= */
+/* Texto do Capítulo */
+/* ======================================= */
 .chapter-text {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
   margin-top: 20px;
-  color: #fff;
-  padding: 15px;
-}
-
-
-.sidebar {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  background-color: rgba(0,0,0,0.6);
-  color: #ff6600;
-}
-
-
-.sidebar .status .bar {
-  width: 100%;
-  height: 20px;
-  background-color: #222;
-  margin-bottom: 10px;
-}
-
-.sidebar .status .fill {
-  height: 100%;
-  background-color: #ff6600;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.sidebar ul li {
-  background-color: #111;
-  padding: 8px;
-  margin-bottom: 5px;
-  transition: background-color 0.2s;
-}
-
-.sidebar ul li:hover {
-  background-color: #222;
-}
-
-
-.main-content::-webkit-scrollbar,
-.sidebar::-webkit-scrollbar {
-  width: 0;
+  padding: 0; /* Remove padding desnecessário */
   background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border-left: none;
+  color: #ccc;
 }
 
+.chapter-text p {
+    margin-bottom: 1.2em;
+}
 
+/* ======================================= */
+/* Área de Ações */
+/* ======================================= */
 .actions {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: rgba(0,0,0,0.6);
-  border: 1px solid #333;
+  margin-top: 30px;
+  padding: 20px;
+  background: #151515; /* Painel sutilmente mais claro */
   border-radius: 8px;
+  border: 1px solid #333;
+  box-shadow: none;
 }
 
 .actions h2 {
-  color: #ff6600;
-  margin-bottom: 10px;
+  color: #00bcd4;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
 }
 
+.actions input[type="text"] {
+  width: 70%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  /* Borda minimalista */
+  border: 1px solid #555;
+  background-color: #222;
+  color: #f0f0f0;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.actions input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #00bcd4; /* Foco clean */
+}
+
+.actions button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  /* Botão sólido, foco na funcionalidade */
+  background: #00bcd4;
+  color: #111;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: none;
+}
+
+.actions button:hover {
+  transform: translateY(0);
+  background: #0097a7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Lista de escolhas (Links) */
 .actions ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.actions ul li {
+  background: transparent;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  /* Linha inferior como separador */
+  border-bottom: 1px solid #222;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.actions ul li:last-child {
+    border-bottom: none;
+}
+
+.actions ul li:hover {
+  background: #1a1a1a;
+  transform: none;
+  color: #f0f0f0;
+}
+
+/* ======================================= */
+/* Sidebar Lateral (Status Panel) */
+/* ======================================= */
+.sidebar {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  /* Combina com o main-content */
+  background: rgba(10, 10, 10, 0.85);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid #222;
+}
+
+.sidebar h2 {
+  color: #00bcd4;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+/* Status de jogador e inimigo */
+.sidebar .status {
+  margin-bottom: 25px;
+  background: transparent;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  box-shadow: none;
+}
+
+.sidebar .status p {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.sidebar .status ul {
   list-style: none;
   padding-left: 0;
 }
 
-.actions ul li {
-  background-color: #111;
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+.sidebar .status ul li {
+  background: transparent;
+  padding: 6px 0;
+  margin-bottom: 3px;
+  border-radius: 0;
+  transition: color 0.2s;
 }
 
-.actions ul li:hover {
-  background-color: #222;
-  transform: scale(1.02);
+.sidebar .status ul li:hover {
+  background: transparent;
+  transform: none;
+  color: #00bcd4; /* Destaque no hover */
+}
+
+/* Scroll invisível - mantido para as áreas com overflow */
+.main-content::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
 }
