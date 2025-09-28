@@ -69,7 +69,7 @@ html, body, app-root {
   padding: 30px;
   overflow-y: auto;
   /* Fundo sutilmente transparente e opaco */
-  background: rgba(10, 10, 10, 0.85);
+  background: rgba(10, 10, 10, 0);
   border-radius: 8px; /* Bordas mais discretas */
   /* Sombra interna e externa mínimas */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -85,7 +85,7 @@ html, body, app-root {
   width: 100%;
   height: 180px; /* Mais baixo */
   /* Fundo quase preto, sem gradiente complexo */
-  background: #1a1a1a;
+  background: #1a1a1a00;
   border-radius: 6px;
   display: flex;
   align-items: flex-end;
@@ -96,7 +96,7 @@ html, body, app-root {
 .chapter-title {
   font-size: 2.5rem;
   /* Cor de destaque neutra/tecnológica */
-  color: #00bcd4;
+  color: #d40000;
   font-weight: 700;
   /* Sem text-shadow exagerado */
   text-shadow: none;
@@ -162,7 +162,7 @@ html, body, app-root {
 .actions input[type="text"]:focus {
     outline: none;
     box-shadow: none;
-    border-color: #00bcd4; /* Foco clean */
+    border-color: #00bcd4; 
 }
 
 .actions button {
@@ -281,4 +281,68 @@ html, body, app-root {
 .sidebar::-webkit-scrollbar {
   width: 6px;
   background: transparent;
+}
+
+
+/* ======================================= */
+/* CHAT BOX E MENSAGENS */
+/* ======================================= */
+.chat-box {
+    /* Altura que permite scroll, preenche o espaço antes das ações */
+    flex-grow: 1; 
+    height: 60vh; /* Define uma altura inicial razoável (60% da viewport height) */
+    overflow-y: auto;
+    padding-right: 15px; /* Espaço para a scrollbar limpa */
+    margin-bottom: 20px;
+}
+
+.chat-message {
+    max-width: 85%; /* As mensagens não preenchem a largura total */
+    padding: 12px 18px;
+    margin-bottom: 15px;
+    border-radius: 18px; /* Bordas arredondadas para um visual de chat */
+    line-height: 1.5;
+    font-size: 1rem;
+    position: relative;
+    /* Sombra sutil para "levantar" a mensagem */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo Base do Parágrafo dentro da Mensagem */
+.chat-message p {
+    margin: 0;
+    color: inherit; /* Garante que o texto herde a cor definida no bloco principal */
+}
+
+/* ------------------ */
+/* Estilo do LLM/Sistema (Lenda) */
+/* ------------------ */
+.llm-msg {
+    /* Alinhado à esquerda (padrão) */
+    margin-right: auto;
+    background-color: #1a1a1a; /* Cor escura, discreta */
+    border: 1px solid #222;
+    color: #f0f0f0;
+    /* Borda inferior/lateral levemente "quebrada" no canto oposto */
+    border-bottom-left-radius: 4px;
+}
+
+/* ------------------ */
+/* Estilo do Jogador */
+/* ------------------ */
+.player-msg {
+    /* Alinhado à direita */
+    margin-left: auto;
+    background-color: #00bcd4; /* Cor de destaque (código azul/ciano) */
+    color: #111; /* Texto escuro para contraste */
+    font-weight: 500;
+    /* Borda inferior/lateral levemente "quebrada" no canto oposto */
+    border-bottom-right-radius: 4px;
+}
+
+
+.chat-message p > br {
+    display: block;
+    content: "";
+    margin-top: 0.5em; 
 }

@@ -7,13 +7,15 @@
         <h1 class="chapter-title">{{ chapterTitle }}</h1>
       </div>
 
-      <div class="chapter-text">
-        <p>{{ narrative }}</p>
-      </div>
+        <div class="chat-box">
+          <div *ngFor="let msg of chat" 
+              [ngClass]="{'player-msg': msg.from === 'player', 'llm-msg': msg.from === 'llm'}" 
+              class="chat-message">
+            <p [innerHTML]="msg.formattedText"></p>
+          </div>
+        </div>
 
       <div class="actions">
-        <h2>O que você faz?</h2>
-
         <input
           type="text"
           placeholder="Digite sua ação aqui..."
