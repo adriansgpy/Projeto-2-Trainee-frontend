@@ -63,40 +63,48 @@ this.campanhas = [
   {
     titulo: "Pé Grande",
     imagem: 'assets/pe_grande_bar.png',
+    habilitado: true,
     descricao: "Insatisfeito com os jogos caros na Steam, o Pé Grande decidiu largar os jogos e abrir um bar na floresta para abrigar as outras lendas. Porém, eles estão tocando músicas em um volume muito alto, perturbando os moradores da região. Extermine o bar do Pé Grande para que os trabalhadores CLT possam descansar em paz."
   },
   {
     titulo: "Corpo Seco",
+    habilitado: true,
     imagem: 'assets/corpo_seco_bombado.jpg',
     descricao: "Corpo Seco ou Corpo Bombado? Sim, ele mudou de vida. Cansado de sofrer bullying, o Corpo Seco agora está frequentando as academias de São Paulo sem pagar e ainda está roubando whey dos marombeiros que encontra. Renato Cariani está contando com você para acabar com esse absurdo."
   },
   {
     titulo: "Mula sem Cabeça",
+    habilitado: true,
     imagem: 'assets/mula_sem_cabeca_rua.png',
     descricao: "Ao criar uma conta no TikTok, a Mula agora faz lives à meia-noite, dando cavalos de pau e queimando postes da cidade para ganhar seguidores. Vá e cancele a Mula, mas cuidado com o que você faz ou fala, pois pode ser cancelado pelos seguidores."
   },
   {
     titulo: "Lobisomem",
+    habilitado: true,
     imagem: 'assets/lobisomem_politico.jpg',
     descricao: "O Lobisomem está tentando entrar na política e se candidatar à presidência. Porém, ele é meio 'inapropriado' para receber o cargo. Vá até Brasília e retire-o do Palácio da Alvorada, mas cuidado, ele realmente quer ficar lá."
   },
   {
     titulo: "Slenderman",
+    habilitado: true,
     imagem: 'assets/slender_shopping.png',
     descricao: "Sendo alto demais, ele está furioso tentando fazer com que os alfaiates confeccionem um terno para seus incríveis 2,5 metros, e ainda não quer pagar. Vá até o shopping e retire-o de lá."
   },
   {
     titulo: "Chupa-Cabra",
+    habilitado: true,
     imagem: 'assets/chupa_cabra_prof.png',
     descricao: "Esse ser andou dando aulas na Alura sobre bolsa de valores e economia, mas seus estudantes estão reclamando que ele apenas vendia cursos falsos até ser removido da plataforma. Enfurecido, ele está ameaçando professores de economia por não ensinarem o estilo 'Economia Chupada' para seus alunos. Vá e mostre para ele com quantos reais se faz uma conta poupança."
   },
   {
     titulo: "Bicho-Papão",
+    habilitado: true,
     imagem: 'assets/papao.jpg',
     descricao: "Influenciado pelo Chupa-Cabra, o Bicho-Papão está fazendo dinheiro de forma meio suja, aplicando golpes em pessoas por meio de pirâmides que prometem lucro dobrado. Ele deve estar em São Paulo em algum lugar…"
   },
   {
     titulo: "Boi da Cara Preta",
+    habilitado: true,
     imagem: 'assets/boi_hacker.jpg',
     descricao: "Após assistir Gustavo Guanabara e aprender Python, o Boi anda hackeando pequenas lojas e espalhando vírus nas redes Wi-Fi. Vá e quebre seu notebook."
   }
