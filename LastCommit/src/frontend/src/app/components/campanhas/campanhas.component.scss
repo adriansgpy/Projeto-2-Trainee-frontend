@@ -1,343 +1,486 @@
-/* Container principal */
+// ===========================================
+// VARIÁVEIS DE TEMA (Terror/Alerta)
+// ===========================================
+$cor-alerta: #900C3F;       // Vermelho Escuro/Sangue (Títulos e Destaque Principal)
+$cor-destaque: #C70039;     // Laranja Queimado/Ferrugem (Botões, Hover, Subtítulos)
+$cor-texto-claro: #f0f0f0;  // Texto padrão claro
+$cor-texto-secundario: #ddd; // Descrições
+$cor-fundo-card: rgba(39, 39, 39, 0.7); // Fundo dos cards (escuro e semi-transparente)
+$cor-fundo-modal: #1a1a1a;  // Fundo do modal (opaco e escuro)
+$cor-fundo-modal-acao: #555; // Fundo de ações secundárias no modal
 
+$sombra-alerta: rgba($cor-destaque, 0.4); // Sombra para o hover do card
+$sombra-banner: rgba(0, 0, 0, 0.7); // Sombra do texto no banner
+
+$fonte-titulo-principal: monospace;
+$fonte-subtitulo:monospace;
+$fonte-banner: monospace;
+
+
+/* ======================================= */
+/* LAYOUT E CONTAINERS BASE */
+/* ======================================= */
 
 .campanhas-container {
-  width: 100vw;           /* largura total da tela */
-  margin: 0;               /* remove margens automáticas */
-  padding: 0 20px;         /* só um pouco de padding lateral */
-  display: flex;
-  flex-direction: column;  /* uma seção embaixo da outra */
-  gap: 40px;
-  box-sizing: border-box;  /* inclui padding na largura total */
+    width: 100%; /* Largura 100% da viewport, não 100vw para evitar barra de rolagem horizontal */
+    margin: 0 auto; 
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    box-sizing: border-box;
 }
 
 .campanha-secao {
-  flex: 1 1 100%;   /* ocupa 100% do espaço horizontal */
-  min-width: 200px; /* mantém legibilidade em telas pequenas */
-  max-width: none; 
-  width: 100%; /* remove limite de largura */
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+    /* Corrigido: flex: 1 1 100% está correto para seções verticais */
+    flex: 1 1 100%; 
+    min-width: 200px;
+    max-width: 100%; /* Permite que ocupe toda a largura */
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
+/* ======================================= */
+/* TÍTULOS E TEXTOS */
+/* ======================================= */
 
-
-/* Título principal da tela */
 .titulo-tela {
-font-family:monospace;
-font-size:3rem;
-color:#ff3300;
-text-align:left;
-letter-spacing:4px;
-margin-bottom:20px;
+    font-family: $fonte-titulo-principal;
+    font-size: 3rem;
+    color: $cor-alerta;
+    text-align: left;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
 }
 
-/* Banner */
-.banner {
-position:relative;
-width:100%;
-background-image:url("/assets/banheiro.jpg");
-height:400px;
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-display:flex;
-align-items:flex-end;
-padding:20px 40px;
-border-radius:10px;
-overflow:hidden;
-}
-
-.banner::after {
-content:'';
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-z-index:1;
-}
-
-.banner-info {
-position:relative;
-z-index:2;
-color:#b62b2b;
-max-width:800px;
-font-family:'Orbitron',monospace;
-text-shadow:0 0 10px rgba(0,0,0,0.7);
-}
-
-.banner-info h1 {
-font-size:4rem;
-margin-bottom:0.5rem;
-}
-
-.banner-info p {
-font-size:1.8rem;
-line-height:1.5;
-}
-
-.campanha-secao {
-  width: 100vh;
-  flex: 1 1 45%; /* Already correct, this helps it fill space */
-  min-width: 380px;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
 .subtitulo-tipo {
-font-family:'FF DIN Bold',monospace;
-font-size:2rem;
-color:#ff3333;
-border-bottom:2px solid #ff0000;
-padding-bottom:5px;
+    font-family: $fonte-subtitulo;
+    font-size: 2rem;
+    color: $cor-destaque;
+    border-bottom: 2px solid $cor-alerta;
+    padding-bottom: 5px;
 }
 
-
-.cards-container {
-  display: flex;
-  flex-direction: row;
-  margin: 12px;
-  flex-wrap: nowrap;       
-  overflow-x: auto;        
-  gap: 20px;
-  padding: 10px 0;
-  width: 100vw;
-  box-sizing: border-box;
-}
-
-.card {
-  flex: 1 1 320px;       
-  min-width: 500px;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  height: 650px;         
-  background: #27272791;
-  margin: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-cards-container::-webkit-scrollbar {
-  height: 8px;
-}
-
-.card.disabled {
-opacity:0.6;
-filter:grayscale(80%);
-cursor:not-allowed;
-box-shadow:none;
-}
-
-.card.enabled:hover {
-transform:translateY(-8px);
-box-shadow:15px 12px 30px rgba(255,102,0,0.4);
-}
-
-.card-img {
-  height: 300px;        
-  width: 100%;
-  object-fit: cover;
-}
-
-.card.enabled:hover .card-img {
-transform:scale(1.03);
-}
-
-
-.card-info {
-  flex: 1;              
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 15px;
-}
 .card-info h3 {
-color:#ff6600;
-font-family:'FF DIN Bold',monospace;
-margin-bottom:8px;
-font-size:3rem;
+    color: $cor-destaque;
+    font-family: $fonte-subtitulo;
+    margin-bottom: 8px;
+    font-size: 3rem;
 }
 
 .descricao-longa {
-font-size:1.9rem;
-color:#ddd;
-margin-bottom:15px;
-line-height:1.6;
+    font-size: 1.9rem;
+    color: $cor-texto-secundario;
+    margin-bottom: 15px;
+    line-height: 1.6;
 }
 
+
+/* ======================================= */
+/* BANNER (Destaque Principal) */
+/* ======================================= */
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 40px;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    /* Conteúdo ficará acima do pseudo-elemento */
+    z-index: 1;
+    color: #fff; // exemplo para textos
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/assets/terminator.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.4); // aqui aplicamos o blur só na imagem
+    z-index: 0; // atrás do conteúdo
+}
+
+
+.banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Escurecimento */
+    z-index: 1;
+}
+
+.banner-info {
+    position: relative;
+    z-index: 2;
+    color: $cor-destaque; /* Tom de alerta no banner */
+    max-width: 800px;
+    font-family: $fonte-banner;
+    text-shadow: 0 0 10px $sombra-banner;
+}
+
+.banner-info h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.banner-info p {
+    font-size: 1.8rem;
+    line-height: 1.5;
+}
+
+
+/* ======================================= */
+/* CARDS E LISTAGEM */
+/* ======================================= */
+
+.cards-container {
+    display: flex;
+    flex-direction: row;
+    margin: 12px 0; /* Ajustado para 0 lateralmente */
+    flex-wrap: nowrap; 
+    overflow-x: auto; /* Permite rolar horizontalmente */
+    gap: 20px;
+    padding: 10px 0;
+    width: calc(100% + 40px); /* Ajusta para compensar o padding do .campanhas-container */
+    margin-left: -20px; /* Puxa para a esquerda */
+    box-sizing: border-box;
+    
+    /* SCROLLBAR para o container de cards */
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 4px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #1a1a1a;
+    }
+}
+
+.card {
+    flex: 0 0 500px; /* Base 500px, não cresce nem encolhe (mantém o overflow-x) */
+    min-width: 500px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    height: 650px; 
+    background: $cor-fundo-card;
+    margin: 20px; /* Mantém a margem para espaçamento visual */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card.disabled {
+    opacity: 0.6;
+    filter: grayscale(80%);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.card.enabled:hover {
+    transform: translateY(-8px);
+    box-shadow: 15px 12px 30px $sombra-alerta;
+}
+
+.card-img {
+    height: 300px; 
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card.enabled:hover .card-img {
+    transform: scale(1.03);
+}
+
+.card-info {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+
+/* ======================================= */
+/* BOTÃO DE AÇÃO (ENTRAR) */
+/* ======================================= */
+
 .btn-entrar {
-background:#ff6600;
-color:#fff;
-padding:16px 28px;
-border:none;
-width: 100%;
-border-radius:6px;
-font-size: large;
-font-weight:bold;
-cursor:pointer;
-text-transform:uppercase;
-transition:all 0.3s ease;
-align-self:flex-start;
+    background: $cor-destaque;
+    color: #fff;
+    padding: 16px 28px;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    align-self: flex-start;
 }
 
 .btn-entrar:hover:not(:disabled) {
-background:#ff9933;
-box-shadow:0 4px 15px rgba(255,102,0,0.5);
+    background: $cor-alerta; /* Fica mais escuro/saturado no hover */
+    box-shadow: 0 4px 15px $sombra-alerta;
 }
 
 .btn-entrar:disabled {
-background:#555;
-cursor:not-allowed;
-}
-
-/* Responsividade */
-@media (max-width:992px) {
-.card {
-width:calc(100% - 15px);
-}
-
-.cards-container {
-flex-direction:column;
-gap:20px;
-}
-}
-
-@media (max-width:768px) {
-.card-info h3 {
-font-size:1.6rem;
-}
-}
-
-@media (max-width:576px) {
-.campanhas-container {
-padding:40px 20px 20px 20px;
-}
-
-.titulo-tela {
-font-size:2.2rem;
-}
+    background: #555;
+    cursor: not-allowed;
 }
 
 
-/* Overlay do modal */
+/* ======================================= */
+/* MODAL E OVERLAY */
+/* ======================================= */
+
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6); /* escurece o fundo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-/* Modal centralizado */
 .modal {
-  background: #1a1a1a;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  animation: scaleIn 0.3s ease;
+    background: $cor-fundo-modal;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: scaleIn 0.3s ease;
+    border: 1px solid $cor-destaque; /* Borda de destaque */
 }
 
-/* Animação de entrada */
 @keyframes scaleIn {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .modal h2 {
-  font-family: 'Orbitron', monospace;
-  color: #ff6600;
-  font-size: 1.8rem;
-  margin: 0;
+    font-family: $fonte-banner;
+    color: $cor-destaque;
+    font-size: 1.8rem;
+    margin: 0;
 }
 
 .personagens-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .personagem-btn {
-  padding: 12px 20px;
-  background: #ff6600;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    padding: 12px 20px;
+    background: $cor-destaque;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .personagem-btn:hover {
-  background: #ff9933;
+    background: $cor-alerta;
 }
 
 .modal-acoes {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .modal-acoes .cancelar {
-  padding: 10px 20px;
-  background: #555;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    padding: 10px 20px;
+    background: $cor-fundo-modal-acao;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .modal-acoes .cancelar:hover {
-  background: #777;
+    background: #777;
 }
 
 .personagem-global-container {
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .personagem-global-container label {
-  font-size: 16px;
-  font-weight: bold;
-  color: #ff6600;
+    font-size: 16px;
+    font-weight: bold;
+    color: $cor-destaque;
 }
 
 .dropdown-personagem {
-  width: 40%;
-  padding: 10px;
-  font-size: 16px;
-  background-color: #111;
-  color: #fff;
-  border: 2px solid #ff6600;
-  border-radius: 8px;
-  outline: none;
-  cursor: pointer;
+    width: 40%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #111;
+    color: #fff;
+    border: 2px solid $cor-destaque;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
 }
 
 .dropdown-personagem:hover {
-  border-color: #ff9933;
+    border-color: $cor-alerta;
+}
+
+
+/* ======================================= */
+/* RESPONSIVIDADE */
+/* ======================================= */
+
+@media (max-width: 992px) {
+    .card {
+        /* Desativa a rolagem horizontal e força a coluna */
+        flex: 1 1 100%;
+        min-width: auto;
+        max-width: 100%;
+        height: auto; /* Permite que a altura se ajuste ao conteúdo */
+        margin: 10px 0;
+    }
+
+    .cards-container {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%; /* Ajusta para a largura normal */
+        margin-left: 0;
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 768px) {
+    .titulo-tela {
+        font-size: 2.2rem;
+    }
+    
+    .banner-info h1 {
+        font-size: 3rem;
+    }
+    
+    .banner-info p {
+        font-size: 1.4rem;
+    }
+
+    .card-info h3 {
+        font-size: 1.6rem;
+    }
+    
+    .descricao-longa {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .campanhas-container {
+        padding: 40px 10px 20px 10px;
+    }
+
+    .titulo-tela {
+        font-size: 1.8rem;
+    }
+    
+    .banner {
+        height: 250px;
+        padding: 15px 20px;
+    }
+    
+    .banner-info h1 {
+        font-size: 2.5rem;
+    }
+    
+    .btn-entrar {
+        padding: 12px 20px;
+        font-size: medium;
+    }
+}
+
+
+
+.card-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info h3 {
+  font-family: 'Creepster', cursive; // fonte de terror/zoeira
+  font-size: 1.8rem;
+  color: #900C3F; // vermelho sangue
+  margin-bottom: 8px;
+  text-shadow: 0 0 8px rgba(144, 12, 63, 0.7);
+}
+
+.card-descricao {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #d0d0d0; // texto suave
+  line-height: 1.5;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  min-height: 50px; // garante altura mínima para cards uniformes
+}
+
+/* Botão de entrar */
+.btn-entrar {
+  padding: 10px 20px;
+  background-color: #C70039; // laranja sangue
+  border: 1px solid #900C3F;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.btn-entrar:disabled {
+  background-color: #555;
+  border-color: #333;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-entrar:hover:not(:disabled) {
+  background-color: #900C3F;
+  box-shadow: 0 0 15px rgba(144, 12, 63, 0.7);
+  transform: translateY(-2px);
 }

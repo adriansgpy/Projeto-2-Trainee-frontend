@@ -1,302 +1,347 @@
-$cor-primaria: #ffffff; // Branco puro
-$cor-secundaria: #808080; // Cinza sutil
-$cor-texto-claro: #e0e0e0; 
-$cor-fundo-overlay: rgb(46, 46, 46); 
-$cor-fundo-card: rgba(66, 66, 66, 0.459); 
-$cor-borda: rgba(255, 255, 255, 0.1); 
+// ===========================================
+// NOVAS VARIÁVEIS DE TEMA DE TERROR
+// ===========================================
+// Cores principais
+$cor-alerta: #900C3F;          // Vermelho Escuro/Sangue (Alerta Principal)
+$cor-destaque: #C70039;        // Laranja Queimado/Ferrugem (Hover e Borda de Ação)
+$cor-texto-claro: #e0e0e0;     // Texto padrão claro (mantido)
+$cor-texto-secundario: #a8a8a8; // Cinza escuro para textos secundários
+
+// Reatribuindo variáveis originais para o tema de terror
+$cor-primaria: $cor-texto-claro; // Texto e luz principal
+$cor-secundaria: #3a3a3a;      // Cinza escuro
+$cor-fundo-overlay: rgb(15, 15, 15); // Fundo escuro opaco
+$cor-fundo-card: rgba(1, 1, 1, 0.75); // Fundo do card (mais escuro e opaco)
+$cor-borda: rgba($cor-destaque, 0.3); // Borda sutil de alerta
+$cor-laranja: $cor-alerta; // Substituído pelo Vermelho Sangue
+$cor-laranja-clara: $cor-destaque; // Substituído pelo Laranja Ferrugem
+
+// Fontes
 $fonte-menu: 'Inter', sans-serif;
 $fonte-principal: 'Inter', sans-serif;
 $fonte-black-mesa-logo: 'Orbitron', monospace;
-$cor-laranja: #ff6600;
-$cor-laranja-clara: #ffad5c;
 
+
+/* =========================================== */
+/* BASE E FUNDO */
+/* =========================================== */
 html,
 body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: $fonte-principal;
-  color: $cor-texto-claro;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-}
-
-
-
-.menu-header {
-  width: 100%;
-  padding: 40px 60px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  overflow: hidden;
-  animation: fadeIn 1s ease-out 0.2s forwards;
-  display: flex;
-  justify-content: flex-start;
-
-
-  nav {
-    width: auto;
-    background: transparent;
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 50px;
-
-      li {
-        font-family: $fonte-menu;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        position: relative;
-
-        a {
-          text-decoration: none;
-          color: white;
-          transition: color 0.3s ease;
-          position: relative;
-
-          &:hover {
-            color: $cor-laranja-clara;
-          }
-
-          &.active {
-            color: $cor-laranja;
-          }
-
-          &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 0;
-            height: 2px;
-            background: white;
-            transition: width 0.3s ease;
-          }
-
-          &:hover::after,
-          &.active::after {
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
-}
-
-
-.logo-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-
-  .logo-cracha {
-    width: 120px; 
-    height: auto;
-    border-radius: 20px ;
-    margin-bottom: 0.5rem;
-    object-fit: contain;
-  }
-
-  h1 {
-    font-family: $fonte-black-mesa-logo;
-    font-size: 2rem;
-    color: $cor-primaria;
-    letter-spacing: 2px;
-    text-shadow: 0 0 5px rgba($cor-primaria, 0.2);
-  }
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: $fonte-principal;
+    color: $cor-texto-claro;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
 }
 
 .fundo-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 0; 
-  filter: brightness(0.7) blur(4px) contrast(1.4) saturate(1.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0; 
+    /* NOVO: Filtros mais agressivos para o efeito "sujo" e de alerta */
+    filter: brightness(0.4) blur(3px) contrast(1.8) saturate(1.8); 
+    
+    /* NOVO: Adiciona uma camada escura por cima do vídeo */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); 
+    }
 }
 
 
+/* =========================================== */
+/* HEADER E NAVEGAÇÃO */
+/* =========================================== */
+.menu-header {
+    width: 100%;
+    padding: 25px 60px; /* Reduzindo um pouco */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    overflow: hidden;
+    animation: fadeIn 1s ease-out 0.2s forwards;
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba($cor-alerta, 0.1); 
 
 
+    nav {
+        width: auto;
+        background: transparent;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 40px; 
+
+            li {
+                font-family: $fonte-menu;
+                font-size: 1.1rem; 
+                text-transform: uppercase;
+                letter-spacing: 3px; 
+                position: relative;
+
+                a {
+                    text-decoration: none;
+                    color: $cor-texto-claro;
+                    transition: color 0.3s ease;
+                    position: relative;
+                    
+                    &:hover { color: $cor-laranja-clara; } // Ferrugem
+
+                    &.active { color: $cor-laranja; } // Sangue
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: -5px; 
+                        width: 0;
+                        height: 2px;
+                        background: $cor-laranja; // Linha de Sangue
+                        transition: width 0.3s ease;
+                    }
+
+                    &:hover::after,
+                    &.active::after {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* =========================================== */
+/* CONTEÚDO PRINCIPAL E CARD (CRACHÁ) */
+/* =========================================== */
 .main-content-form {
-  position: fixed;      
-  top: 50%;            
-  left: 50%;           
-  transform: translate(-50%, -50%); 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
 }
 
 .cracha {
-  background: $cor-fundo-card;
-  padding: 3rem 4rem;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 420px;
-  text-align: center;
-  border: 1px solid $cor-borda; 
-  box-shadow: none; 
-  animation: slideInUp 1s ease-out forwards;
+    background: $cor-fundo-card;
+    padding: 3rem 4rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    /* NOVO: Borda e sombra de alerta forte */
+    border: 1px solid $cor-borda; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7), 0 0 15px rgba($cor-alerta, 0.4); 
+    animation: slideInUp 1s ease-out forwards;
 }
 
-.logo-section h1 {
-  font-family: $fonte-black-mesa-logo;
-  font-size: 2.5rem;
-  color: $cor-primaria;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba($cor-primaria, 0.4); 
+/* Logo Section */
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem; 
+
+    .logo-cracha {
+        width: 100px; 
+        height: auto;
+        border-radius: 5px; /* Mais angular */
+        margin-bottom: 1rem;
+        object-fit: contain;
+        border: 2px solid $cor-alerta; 
+        box-shadow: 0 0 10px rgba($cor-alerta, 0.3);
+    }
+
+    h1 {
+        font-family: $fonte-black-mesa-logo;
+        font-size: 2rem;
+        color: $cor-alerta; /* Título principal na cor de Sangue */
+        letter-spacing: 3px;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 10px rgba($cor-alerta, 0.4), 0 0 5px rgba(0, 0, 0, 0.8); 
+    }
+
+    h2 {
+        font-family: $fonte-principal;
+        font-size: 1rem;
+        color: $cor-texto-secundario;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+        opacity: 0.7;
+    }
+
+    p {
+        font-size: 0.8rem;
+        color: $cor-texto-secundario;
+        margin-bottom: 1.5rem;
+        opacity: 0.6;
+    }
 }
 
-.logo-section h2 {
-  font-family: $fonte-principal;
-  font-size: 1rem;
-  color: $cor-texto-claro;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
-  opacity: 0.8;
-}
-
-.logo-section p {
-  font-size: 0.9rem;
-  color: $cor-texto-claro;
-  margin-bottom: 1.5rem;
-  opacity: 0.7;
-}
-
+/* Título dentro do Crachá (se diferente do logo) */
 .cracha h1 {
-  font-family: $fonte-black-mesa-logo;
-  font-size: 1.8rem;
-  color: $cor-primaria;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 0 5px rgba($cor-primaria, 0.2);
+    font-family: $fonte-black-mesa-logo;
+    font-size: 1.8rem;
+    color: $cor-alerta;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba($cor-alerta, 0.2);
 }
 
+/* =========================================== */
+/* FORMULÁRIO E INPUTS */
+/* =========================================== */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .form-group label {
-  font-size: 0.85rem;
-  color: $cor-texto-claro;
-  margin-bottom: 0.3rem;
-  display: block;
-  text-align: left;
+    font-size: 0.85rem;
+    color: $cor-destaque; /* Destaque no label */
+    margin-bottom: 0.3rem;
+    display: block;
+    text-align: left;
+    text-transform: uppercase;
 }
 
 .form-group input {
-  width: 100%;
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2); 
-  background: #0a0a0a;
-  color: $cor-texto-claro;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding: 14px 15px; /* Mais alto */
+    border-radius: 4px; /* Mais quadrado */
+    border: 1px solid rgba($cor-destaque, 0.4); 
+    background: #050505; /* Preto absoluto */
+    color: $cor-texto-claro;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.8);
 }
 
 .form-group input:focus {
-  outline: none;
-  border-color: $cor-primaria;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  animation: none; 
+    outline: none;
+    border-color: $cor-alerta; /* Foco em Vermelho Sangue */
+    box-shadow: 0 0 10px rgba($cor-alerta, 0.5);
+    animation: none; 
 }
 
 .password-field {
-  position: relative;
+    position: relative;
 }
 
 .password-toggle {
-  position: absolute;
-  right: 15px;
-  top: 55%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: $cor-texto-claro;
-  opacity: 0.4;
-  transition: opacity 0.3s ease;
+    position: absolute;
+    right: 15px;
+    top: 55%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: $cor-texto-claro;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
 }
 
 .password-toggle:hover {
-  opacity: 1;
-  color: $cor-primaria;
+    opacity: 1;
+    color: $cor-alerta;
 }
 
+/* Botões */
 .botoes button {
-  padding: 14px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 8px;
-  border: 1px solid $cor-borda;
-  cursor: pointer;
-  background: rgb(255, 102, 0); 
-  color: #fff;
-  box-shadow: none;
-  transition: all 0.3s ease;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    border: 1px solid $cor-destaque;
+    cursor: pointer;
+    background: $cor-alerta; 
+    color: #fff;
+    box-shadow: 0 0 10px rgba($cor-alerta, 0.5);
+    transition: all 0.3s ease;
 }
 
 .botoes button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    background: $cor-destaque; /* Hover para Ferrugem */
+    box-shadow: 0 0 15px rgba($cor-destaque, 0.8);
+    transform: translateY(-2px);
 }
 
 .erro {
-  color: $cor-primaria;
-  font-weight: bold;
-  margin-top: 0.5rem;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); 
+    color: $cor-destaque; /* Erro na cor de Ferrugem/Alerta */
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-shadow: 0 0 5px rgba($cor-destaque, 0.4); 
 }
 
+
+/* =========================================== */
+/* FOOTER */
+/* =========================================== */
 .menu-footer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 30px;
-  background: rgba(0, 0, 0, 0.7);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: $cor-texto-claro;
-  font-size: 0.75rem;
-  opacity: 0.5;
-  z-index: 100;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background: rgba(0, 0, 0, 0.85); /* Mais opaco */
+    border-top: 1px solid rgba($cor-destaque, 0.1); 
+    color: $cor-texto-secundario;
+    font-size: 0.7rem; 
+    opacity: 0.7; 
+    z-index: 100;
 }
 
 .menu-footer span {
-  letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-family: monospace; 
 }
 
+/* =========================================== */
+/* RESPONSIVIDADE */
+/* =========================================== */
 @media (max-width: 768px) {
-  .cracha {
-    padding: 2rem;
-    max-width: 90%;
-  }
+    .cracha {
+        padding: 2rem;
+        max-width: 90%;
+    }
+    
+    .menu-header {
+        padding: 20px 20px;
+    }
 
-  .logo-section h1 {
-    font-size: 2rem;
-  }
+    .logo-section h1 {
+        font-size: 1.5rem;
+    }
 
-  .cracha h1 {
-    font-size: 1.4rem;
-  }
+    .cracha h1 {
+        font-size: 1.2rem;
+    }
+    
+    .menu-header nav ul {
+        gap: 20px;
+    }
 }

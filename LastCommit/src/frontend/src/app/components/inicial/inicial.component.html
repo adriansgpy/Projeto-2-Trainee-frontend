@@ -1,29 +1,52 @@
 <main class="inicial-main">
-  <div class="inicial-container">
-    <h1 class="titulo-principal">Exterminador de Lendas</h1>
 
-    <div class="descricao-banner">
-      <p>
-        Exterminador de Lendas é um RPG cômico aonde você luta contra as lendas mais famosas.
-      </p>
+    <div class="background-glitch"></div> 
+
+    <div class="inicial-container">
+        <h1 class="titulo-principal">O EXTERMINADOR DE LENDAS</h1>
+
+        <div class="descricao-banner">
+            <p>
+                Bem-vindo ao **Brasil paralelo**, onde as lendas urbanas decidiram que vão tomar conta do país! 🐉👻 E sim, o Saci agora é um problema de trânsito.
+            </p>
+        </div>
+
+        <div class="info-container">
+            <p class="data-e-hora">{{ currentDateTime }}</p>
+            <p class="mensagem">Atenção: A Anomalia está ATIVA.</p>
+        </div>
+        
+        <p class="alerta-urgente piscar">Eles estão esperando. (E estão impacientes.)</p>
+
+        <button routerLink="/homepage/campanhas" class="btn-start">
+            SELECIONAR LENDAS
+        </button>
     </div>
 
-    <div class="info-container">
-      <p class="data-e-hora">{{ currentDateTime }}</p>
-      <p class="mensagem">Escolha sua campanha e comece a aventura!</p>
-    </div>
+    <section class="sobre-jogo-vertical">
+        <h2 class="titulo-secundario">SOBRE A BAGUNÇA BRASILEIRA</h2>
+        
+        <div class="descricao-vertical">
+            
+            <h3 class="subtitulo-vertical">O CAOS, GERALMENTE</h3>
+            <p>
+                O Brasil está uma loucura, e não é só a política. A população reclama de **monstros que fazem festa na cidade**, assombram o trânsito e causam pânico geral. Sua missão é resolver essa palhaçada sobrenatural e devolver a tranquilidade (falsa) para o povo.
+            </p>
 
-    <button routerLink="/homepage/campanhas" class="btn-start">
-      INICIAR CAÇADA
-    </button>
-  </div>
+            <h3 class="subtitulo-vertical">MONSTROS... MAS COM PIADA</h3>
+            <p>
+                Cada **lenda** tem seus truques: o Curupira erra o caminho de propósito, a Mula Sem Cabeça queima pneus no asfalto e o Corpo Seco reclama do aluguel. O jogo é sobre encarar esse **caos sobrenatural** de frente. Se você não rir, você surta.
+            </p>
 
-<section class="sobre-blackmesa-vertical">
-  <h2 class="titulo-secundario">Sobre o jogo</h2>
-  <div class="descricao-vertical">
-    <p>
-      Crie o seu personagem com as suas características personalizadas de forma livre e comece a sua aventura em busca da cabeça de lendas famosas. 
-    </p>
-  </div>
-</section>
+            <h3 class="subtitulo-vertical">A TROPA DE EXTERMINADORES</h3>
+            <p>
+                Aqui você cria seus **Exterminadores** – aqueles personagens que não têm medo de encarar o Boto Cor-de-Rosa. Defina as **habilidades** e **fraquezas** deles. Planeje, ataque, sobreviva e, por favor, tente **não perder a paciência** enquanto a Cuca rouba o seu Wi-Fi.
+            </p>
+
+            <h3 class="subtitulo-vertical">LEMA DE VIDA (E MORTE)</h3>
+            <p>
+                O medo é real. A dor é **temporária**. O meme é **eterno**. Prepare-se para ser o herói mais estressado do folclore nacional. 💀😂
+            </p>
+        </div>
+    </section>
 </main>

@@ -6,7 +6,6 @@ import { AudioService } from '../../services/soundtrack.service';
 import { FormsModule } from '@angular/forms';
 import { LENDAS } from '../game/lendas.model';
 
-
 interface Capitulo {
   titulo: string;
   completo: boolean;
@@ -26,7 +25,6 @@ interface Personagem {
 interface Campanha {
   titulo: string;
   descricao: string;
-  tipo?: string; 
   habilitado?: boolean;
   imagem?: string;
   concluido?: boolean;
@@ -55,26 +53,56 @@ export class CampanhasComponent implements OnInit {
 
   ngOnInit() {
 
-    this.campanhas = [
-  { 
-    titulo: 'Mula sem Cabeça', 
-    descricao: 'Lute contra uma ameaça flamejante, mas cuidado, ela é rápida e pode cuspir fogo...', 
-    imagem: 'assets/mula.png', 
-    habilitado: true 
+this.campanhas = [
+  {
+    titulo: "Loira do Banheiro",
+    imagem: 'assets/loira.png',
+    habilitado: true,
+    descricao: "Devido à inflação violenta, os donos das lojas Boticário Make B e L’Oréal estão reclamando que a Loira do Banheiro anda assaltando as lojas do Rio de Janeiro. Vá e coloque um fim nesse absurdo!"
   },
-  { 
-    titulo: 'Cabeça de Cuia', 
-    descricao: 'Um espírito travesso que prega peças e confunde viajantes nas noites de lua cheia.', 
-    imagem: 'assets/cabeca_cuia.png', 
-    habilitado: true 
+  {
+    titulo: "Pé Grande",
+    imagem: 'assets/pe_grande_bar.png',
+    descricao: "Insatisfeito com os jogos caros na Steam, o Pé Grande decidiu largar os jogos e abrir um bar na floresta para abrigar as outras lendas. Porém, eles estão tocando músicas em um volume muito alto, perturbando os moradores da região. Extermine o bar do Pé Grande para que os trabalhadores CLT possam descansar em paz."
   },
-  { 
-    titulo: 'Pé Grande', 
-    descricao: 'Uma criatura gigantesca e evasiva, cuja presença é anunciada apenas por pegadas misteriosas.', 
-    imagem: 'assets/pe_grande.png', 
-    habilitado: true 
+  {
+    titulo: "Corpo Seco",
+    imagem: 'assets/corpo_seco_bombado.jpg',
+    descricao: "Corpo Seco ou Corpo Bombado? Sim, ele mudou de vida. Cansado de sofrer bullying, o Corpo Seco agora está frequentando as academias de São Paulo sem pagar e ainda está roubando whey dos marombeiros que encontra. Renato Cariani está contando com você para acabar com esse absurdo."
   },
+  {
+    titulo: "Mula sem Cabeça",
+    imagem: 'assets/mula_sem_cabeca_rua.png',
+    descricao: "Ao criar uma conta no TikTok, a Mula agora faz lives à meia-noite, dando cavalos de pau e queimando postes da cidade para ganhar seguidores. Vá e cancele a Mula, mas cuidado com o que você faz ou fala, pois pode ser cancelado pelos seguidores."
+  },
+  {
+    titulo: "Lobisomem",
+    imagem: 'assets/lobisomem_politico.jpg',
+    descricao: "O Lobisomem está tentando entrar na política e se candidatar à presidência. Porém, ele é meio 'inapropriado' para receber o cargo. Vá até Brasília e retire-o do Palácio da Alvorada, mas cuidado, ele realmente quer ficar lá."
+  },
+  {
+    titulo: "Slenderman",
+    imagem: 'assets/slender_shopping.png',
+    descricao: "Sendo alto demais, ele está furioso tentando fazer com que os alfaiates confeccionem um terno para seus incríveis 2,5 metros, e ainda não quer pagar. Vá até o shopping e retire-o de lá."
+  },
+  {
+    titulo: "Chupa-Cabra",
+    imagem: 'assets/chupa_cabra_prof.png',
+    descricao: "Esse ser andou dando aulas na Alura sobre bolsa de valores e economia, mas seus estudantes estão reclamando que ele apenas vendia cursos falsos até ser removido da plataforma. Enfurecido, ele está ameaçando professores de economia por não ensinarem o estilo 'Economia Chupada' para seus alunos. Vá e mostre para ele com quantos reais se faz uma conta poupança."
+  },
+  {
+    titulo: "Bicho-Papão",
+    imagem: 'assets/papao.jpg',
+    descricao: "Influenciado pelo Chupa-Cabra, o Bicho-Papão está fazendo dinheiro de forma meio suja, aplicando golpes em pessoas por meio de pirâmides que prometem lucro dobrado. Ele deve estar em São Paulo em algum lugar…"
+  },
+  {
+    titulo: "Boi da Cara Preta",
+    imagem: 'assets/boi_hacker.jpg',
+    descricao: "Após assistir Gustavo Guanabara e aprender Python, o Boi anda hackeando pequenas lojas e espalhando vírus nas redes Wi-Fi. Vá e quebre seu notebook."
+  }
 ];
+
+
 
 
     this.loadPersonagens();
