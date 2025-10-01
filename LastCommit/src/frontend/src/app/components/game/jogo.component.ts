@@ -50,7 +50,6 @@ export class jogoComponent implements OnInit {
 
   async ngOnInit() {
 
-  
     const state = this.router.getCurrentNavigation()?.extras?.state as { personagem?: any; lenda?: Lenda } | undefined;
 
     const personagemData = state?.personagem ?? JSON.parse(localStorage.getItem('playerSelected') || 'null');
@@ -185,10 +184,7 @@ export class jogoComponent implements OnInit {
     const data = await response.json();
     const narrativaArray = Array.isArray(data.narrativa) ? data.narrativa : [data.narrativa || ''];
 
-    // adiciona narrativa principal
     this.addChatMessage('llm', narrativaArray.join('\n'));
-
-    // adiciona turn_result formatado
     if (data.turn_result) {
       let resultText = '..............................\n\nRESULTADO\n\n';
       if (data.turn_result.enemy) {
@@ -223,11 +219,35 @@ export class jogoComponent implements OnInit {
       this.enemy.stamina = data.status.enemy.stamina;
     }
 
+    // ✅ Verificação de fim de jogo
+    if (this.player.hp <= 0 || this.enemy.hp <= 0) {
+      this.onGameOver({
+        winner: this.player.hp > 0 ? 'player' : 'enemy',
+        loser: this.player.hp <= 0 ? 'player' : 'enemy'
+      });
+    }
+
   } catch (err) {
     console.error("Erro ao processar turno:", err);
     this.addChatMessage('llm', 'Erro ao processar turno...');
   }
 }
+
+// Callback personalizável
+onGameOver(result: { winner: string; loser: string }) {
+  if (result.winner === "player") {
+    alert("Você venceu a batalha!");
+  } else {
+    alert("Você foi derrotado!");
+  }
+  // Aqui você pode adicionar navegação ou lógica adicional
+  // this.router.navigate(['/game-over'], { state: { result } });
+}
+
+
+  exitGame() {
+    this.router.navigate(['/homepage']); // substitua '/menu' pela sua rota de destino
+  }
 
 
   sendAction() {

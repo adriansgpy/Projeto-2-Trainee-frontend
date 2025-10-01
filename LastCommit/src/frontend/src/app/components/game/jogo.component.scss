@@ -346,3 +346,18 @@ html, body, app-root {
     content: "";
     margin-top: 0.5em; 
 }
+
+.exit-button {
+  float: right;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.exit-button:hover {
+  background-color: #d32f2f;
+}

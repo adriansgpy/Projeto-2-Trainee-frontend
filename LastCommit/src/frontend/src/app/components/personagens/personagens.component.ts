@@ -21,8 +21,13 @@ interface Personagem {
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule]
 })
+
 export class PersonagensComponent implements OnInit {
   characters: Personagem[] = [];
+  errorMessage: string = '';
+  showModal: boolean = false;
+  modalMessage: string = '';
+  modalType: 'error' | 'success' = 'success';
 
   classesDisponiveis = [
     { nome: 'Mago', descricao: 'Mestre de magias folclóricas, frágil fisicamente.', hp: 80, stamina: 100, ataqueEspecial: 'Lança feitiços que alteram o ambiente ou inimigos' },
@@ -62,13 +67,15 @@ export class PersonagensComponent implements OnInit {
   loadCharacters() {
     this.http.get<Personagem[]>(this.apiUrl, { headers: this.getAuthHeaders() }).subscribe({
       next: (data) => {
-        // Garante que _id seja string simples
+
         this.characters = data.map(c => ({
           ...c,
           _id: (c as any)._id?.$oid ? (c as any)._id.$oid : c._id
         }));
       },
+
       error: (err) => console.error('Erro ao carregar personagens:', err)
+
     });
   }
 
@@ -82,35 +89,61 @@ export class PersonagensComponent implements OnInit {
     }
   }
 
-  createCharacter() {
-    if (!this.newCharacter.nome || !this.newCharacter.role) return;
+  
 
-    const payload: Personagem = {
-      _id: '',
-      nome: this.newCharacter.nome!,
-      role: this.newCharacter.role!,
-      hpAtual: this.newCharacter.hpAtual!,
-      stamina: this.newCharacter.stamina!,
-      ataqueEspecial: this.newCharacter.ataqueEspecial!
-    };
+ createCharacter() {
+  const vazioRegex = /^\s*$/;
 
-    this.http.post<Personagem>(this.apiUrl, payload, { headers: this.getAuthHeaders() }).subscribe({
-      next: (created) => {
-        created._id = (created as any)._id?.$oid ? (created as any)._id.$oid : created._id;
-        this.characters.push(created);
-
-        
-        this.newCharacter = {
-          nome: '',
-          role: '',
-          hpAtual: 100,
-          stamina: 100,
-          ataqueEspecial: ''
-        };
-      },
-      error: (err) => console.error('Erro ao criar personagem:', err)
-    });
+  if (!this.newCharacter.nome || vazioRegex.test(this.newCharacter.nome)) {
+    this.openModal('O nome do personagem não pode estar vazio!', 'error');
+    return;
   }
+
+  if (!this.newCharacter.role || vazioRegex.test(this.newCharacter.role)) {
+    this.openModal('Você precisa escolher uma classe!', 'error');
+    return;
+  }
+
+  const payload: Personagem = {
+    _id: '',
+    nome: this.newCharacter.nome!,
+    role: this.newCharacter.role!,
+    hpAtual: this.newCharacter.hpAtual!,
+    stamina: this.newCharacter.stamina!,
+    ataqueEspecial: this.newCharacter.ataqueEspecial!
+  };
+
+  this.http.post<Personagem>(this.apiUrl, payload, { headers: this.getAuthHeaders() }).subscribe({
+    next: (created) => {
+      created._id = (created as any)._id?.$oid ? (created as any)._id.$oid : created._id;
+      this.characters.push(created);
+
+      this.newCharacter = {
+        nome: '',
+        role: '',
+        hpAtual: 100,
+        stamina: 100,
+        ataqueEspecial: ''
+      };
+
+      this.openModal('Personagem criado com sucesso!', 'success');
+    },
+    error: (err) => {
+      console.error('Erro ao criar personagem:', err);
+
+      // Mostra mensagem específica se o personagem já existe
+      if (err.status === 400 && err.error?.detail === "Você já possui um personagem com esse nome") {
+        this.openModal('Já existe um personagem com esse nome!', 'error');
+      } else {
+        this.openModal('Erro ao criar personagem. Tente novamente.', 'error');
+      }
+    }
+  });
+}
+
+
+
+
 
   viewCharacter(character: Personagem) {
     console.log('Visualizar personagem:', character);
@@ -124,4 +157,20 @@ export class PersonagensComponent implements OnInit {
       error: (err) => console.error('Erro ao deletar personagem:', err)
     });
   }
+
+ 
+openModal(message: string, type: 'error' | 'success' = 'success') {
+  this.modalMessage = message;
+  this.modalType = type;
+  this.showModal = true;
+}
+
+closeModal() {
+  this.showModal = false;
+  this.modalMessage = '';
+}
+
+
+
+
 }

@@ -55,3 +55,11 @@
 
   </div>
 </div>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-box" [ngClass]="modalType">
+    <p>{{ modalMessage }}</p>
+    <button class="modal-btn" (click)="closeModal()">OK</button>
+  </div>
+</div>
+

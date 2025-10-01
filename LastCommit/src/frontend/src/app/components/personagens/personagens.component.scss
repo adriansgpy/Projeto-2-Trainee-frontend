@@ -1,207 +1,312 @@
+// ===========================================
+// NOVAS VARIÁVEIS DE TEMA DE TERROR
+// ===========================================
+$cor-alerta: #900C3F;          // Vermelho Escuro/Sangue (Alerta Principal)
+$cor-destaque: #C70039;        // Laranja Queimado/Ferrugem (Hover e Botões de Ação)
+$cor-laranja: $cor-destaque;   // Redefinindo Laranja
+$cor-laranja-clara: #E44C65;   // Um tom mais claro do alerta
+$cor-preto: #050505;           // Preto absoluto
+$cor-cinza: #141414;           // Fundo escuro do card
+$cor-cinza-claro: #222222;     // Fundo dos inputs
+$cor-texto: #e0e0e0;           // Texto padrão claro
+$cor-erro: #e74c3c;            // Erro padrão (mantido por ser eficaz)
+$cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
 
-$cor-laranja: #ff6600;
-$cor-laranja-clara: #ff944d;
-$cor-preto: #0f0f0f;
-$cor-cinza: #1c1c1c;
-$cor-cinza-claro: #2b2b2b;
-$cor-texto: #e0e0e0;
 
+/* ======================================= */
+/* LAYOUT E CONTAINER PRINCIPAL */
+/* ======================================= */
 .characters-page {
-  color: $cor-texto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-  font-family:sans-serif;
-  letter-spacing: 0.5px;
+    color: $cor-texto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 2rem; /* Mais espaçamento superior/inferior */
+    font-family: sans-serif;
+    letter-spacing: 1px; /* Mais espaçado */
+    /* Garante o fundo preto */
 }
 
 .characters-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  width: 100%;
-  max-width: 1200px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem; /* Mais espaço entre as seções */
+    width: 100%;
+    max-width: 1300px; /* Um pouco mais largo */
+    
+    @media (max-width: 992px) {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
 }
 
 .section-title {
-  font-size: 1.5rem;
-  color: $cor-laranja;
-  text-transform: uppercase;
-  border-bottom: 2px solid $cor-laranja;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
+    font-size: 1.8rem; /* Um pouco maior */
+    color: $cor-alerta; /* Vermelho Sangue */
+    text-transform: uppercase;
+    border-bottom: 3px solid $cor-alerta; /* Borda mais grossa */
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px rgba($cor-alerta, 0.5);
 }
 
+
+/* ======================================= */
+/* LISTA DE PERSONAGENS (Cards) */
+/* ======================================= */
 .characters-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem; /* Mais espaço entre os cards */
 }
 
 .character-card {
-  background: $cor-cinza;
-  border-left: 5px solid $cor-laranja;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  border-radius: 8px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: $cor-cinza;
+    border-left: 6px solid $cor-destaque; /* Borda mais grossa, cor Ferrugem */
+    padding: 1.2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    border-radius: 4px; /* Mais angular */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-right: 1px solid rgba($cor-cinza-claro, 0.2);
 
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 10px rgba($cor-laranja, 0.7);
-  }
+    &:hover {
+        transform: scale(1.02);
+        /* Sombra forte na cor de alerta */
+        box-shadow: 0 0 15px rgba($cor-alerta, 0.6); 
+    }
 }
 
 .character-info {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    gap: 1.5rem;
 
-  .character-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border: 2px solid $cor-laranja;
-    border-radius: 6px;
-    background: $cor-cinza-claro;
-  }
+    .character-img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border: 3px solid $cor-destaque; /* Borda de Ferrugem */
+        border-radius: 4px; /* Mais angular */
+        background: $cor-cinza-claro;
+    }
 
-  .details {
+    .details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        strong {
+            font-size: 1.4rem; /* Maior */
+            margin-bottom: 0.3rem;
+            color: $cor-laranja-clara; /* Tom mais claro do alerta */
+            text-transform: uppercase;
+        }
+
+        span {
+            font-size: 0.95rem;
+            color: $cor-texto;
+            opacity: 0.7;
+        }
+
+        .campaign-indicator {
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background: rgba($cor-destaque, 0.2);
+            border: 1px solid $cor-destaque;
+            color: $cor-destaque;
+
+            &.none {
+                /* Mantido vermelho forte para indicar perigo/ausência */
+                background: rgba($cor-erro, 0.2); 
+                border-color: $cor-erro;
+                color: $cor-erro;
+            }
+        }
+    }
+}
+
+
+/* Botões de Ação do Card */
+.card-buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 0.6rem;
 
-    strong {
-      font-size: 1.2rem;
-      margin-bottom: 0.2rem;
-      color: $cor-laranja-clara;
+    button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: monospace;
+        letter-spacing: 1px;
+
+        &.view-btn {
+            background: $cor-destaque; /* Ferrugem */
+            color: $cor-preto;
+            font-weight: bold;
+
+            &:hover {
+                background: $cor-alerta; /* Sangue no hover */
+                box-shadow: 0 0 8px rgba($cor-destaque, 0.5);
+            }
+        }
+
+        &.delete-btn {
+            background: transparent;
+            border: 1px solid $cor-erro; /* Vermelho Erro */
+            color: $cor-erro;
+
+            &:hover {
+                background: rgba($cor-erro, 0.2);
+            }
+        }
     }
-
-    span {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-
-    .campaign-indicator {
-      margin-top: 0.3rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      background: rgba($cor-laranja, 0.2);
-      border: 1px solid $cor-laranja;
-      color: $cor-laranja;
-
-      &.none {
-        background: rgba(255, 0, 0, 0.2);
-        border-color: #ff3333;
-        color: #ff3333;
-      }
-    }
-  }
-}
-
-
-.card-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-
-  button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &.view-btn {
-      background: $cor-laranja;
-      color: $cor-preto;
-      font-weight: bold;
-
-      &:hover {
-        background: darken($cor-laranja, 10%);
-      }
-    }
-
-    &.delete-btn {
-      background: transparent;
-      border: 1px solid #ff3333;
-      color: #ff3333;
-
-      &:hover {
-        background: rgba(255, 0, 0, 0.2);
-      }
-    }
-  }
 }
 
 .empty-msg {
-  text-align: center;
-  font-style: italic;
-  margin-top: 1rem;
-  color: #aaa;
+    text-align: center;
+    font-style: italic;
+    margin-top: 1.5rem;
+    color: $cor-texto;
+    opacity: 0.5;
+    font-size: 1rem;
 }
 
+
+/* ======================================= */
+/* SEÇÃO DE CRIAÇÃO (Side Panel) */
+/* ======================================= */
 .create-character-section {
-  background: $cor-cinza;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid $cor-laranja;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid $cor-alerta; /* Borda de Sangue */
+    box-shadow: 0 0 10px rgba($cor-alerta, 0.3);
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-
-    label {
-      font-weight: bold;
-      font-size: 0.9rem;
-      color: $cor-laranja;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
-    input,
-    select {
-      padding: 0.5rem;
-      border-radius: 4px;
-      border: none;
-      outline: none;
-      background: $cor-cinza-claro;
-      color: $cor-texto;
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
 
-      &:focus {
-        border: 1px solid $cor-laranja;
-        background: darken($cor-cinza-claro, 5%);
-      }
+        label {
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: $cor-destaque; /* Ferrugem */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input,
+        select {
+            padding: 0.6rem;
+            border-radius: 4px;
+            border: 1px solid $cor-cinza;
+            outline: none;
+            background: $cor-cinza-claro;
+            color: $cor-texto;
+            font-size: 1rem;
+
+            &:focus {
+                border: 1px solid $cor-alerta; /* Foco em Sangue */
+                background: darken($cor-cinza-claro, 5%);
+                box-shadow: 0 0 5px rgba($cor-alerta, 0.5);
+            }
+        }
     }
-  }
 
-  .btn-create {
-    background: $cor-laranja;
+    .btn-create {
+        background: $cor-alerta; /* Sangue */
+        color: $cor-preto;
+        font-weight: bold;
+        padding: 0.8rem;
+        border-radius: 4px;
+        border: none;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s;
+        letter-spacing: 2px;
+        margin-top: 1rem;
+
+        &:hover {
+            background: $cor-destaque; /* Ferrugem no hover */
+            box-shadow: 0 0 10px rgba($cor-alerta, 0.7);
+        }
+    }
+}
+
+
+/* ======================================= */
+/* MODAL */
+/* ======================================= */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8); /* Mais opaco */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal-box {
+    background: $cor-cinza; /* Fundo escuro */
+    color: $cor-texto;
+    padding: 25px 30px;
+    border-radius: 6px; /* Mais angular */
+    max-width: 400px; /* Um pouco maior */
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s ease;
+    border: 1px solid $cor-destaque;
+}
+
+.modal-box.error {
+    border-top: 6px solid $cor-erro;
+}
+
+.modal-box.success {
+    border-top: 6px solid $cor-sucesso;
+}
+
+.modal-box p {
+    margin: 0 0 15px;
+    font-size: 1.1rem;
+}
+
+.modal-btn {
+    background: $cor-destaque; /* Ferrugem */
     color: $cor-preto;
-    font-weight: bold;
-    padding: 0.7rem;
-    border-radius: 4px;
     border: none;
-    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: all 0.2s;
+    letter-spacing: 1px;
+}
 
-    &:hover {
-      background: darken($cor-laranja, 10%);
-    }
-  }
+.modal-btn:hover {
+    background: $cor-alerta;
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
