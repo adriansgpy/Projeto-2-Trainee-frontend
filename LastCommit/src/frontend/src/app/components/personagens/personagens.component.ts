@@ -23,6 +23,7 @@ interface Personagem {
 })
 export class PersonagensComponent implements OnInit {
   characters: Personagem[] = [];
+  showValidationModal = false;
 
   classesDisponiveis = [
     { nome: 'Mago', descricao: 'Mestre de magias folclóricas, frágil fisicamente.', hp: 80, stamina: 100, ataqueEspecial: 'Lança feitiços que alteram o ambiente ou inimigos' },
@@ -40,6 +41,11 @@ export class PersonagensComponent implements OnInit {
     stamina: 100,
     ataqueEspecial: ''
   };
+
+  // Modais
+  showCharacterExistsModal = false;
+  showSuccessModal = false;
+  isSubmitting = false;
 
   private apiUrl = 'http://127.0.0.1:8000/personagens';
 
@@ -62,7 +68,6 @@ export class PersonagensComponent implements OnInit {
   loadCharacters() {
     this.http.get<Personagem[]>(this.apiUrl, { headers: this.getAuthHeaders() }).subscribe({
       next: (data) => {
-        // Garante que _id seja string simples
         this.characters = data.map(c => ({
           ...c,
           _id: (c as any)._id?.$oid ? (c as any)._id.$oid : c._id
@@ -83,7 +88,12 @@ export class PersonagensComponent implements OnInit {
   }
 
   createCharacter() {
-    if (!this.newCharacter.nome || !this.newCharacter.role) return;
+    if (!this.newCharacter.nome || !this.newCharacter.role) {
+      this.showValidationModal = true;
+      return;
+    }
+
+    this.isSubmitting = true;
 
     const payload: Personagem = {
       _id: '',
@@ -99,7 +109,7 @@ export class PersonagensComponent implements OnInit {
         created._id = (created as any)._id?.$oid ? (created as any)._id.$oid : created._id;
         this.characters.push(created);
 
-        
+        // Limpa formulário
         this.newCharacter = {
           nome: '',
           role: '',
@@ -107,13 +117,27 @@ export class PersonagensComponent implements OnInit {
           stamina: 100,
           ataqueEspecial: ''
         };
+
+        this.isSubmitting = false;
+        this.showSuccessModal = true;
       },
-      error: (err) => console.error('Erro ao criar personagem:', err)
+      error: (err) => {
+        this.isSubmitting = false;
+        if (err.status === 400 && err.error?.detail === "Você já possui um personagem com esse nome") {
+          this.showCharacterExistsModal = true;
+        } else {
+          console.error('Erro ao criar personagem:', err);
+        }
+      }
     });
   }
 
-  viewCharacter(character: Personagem) {
-    console.log('Visualizar personagem:', character);
+  closeCharacterExistsModal() {
+    this.showCharacterExistsModal = false;
+  }
+
+  closeSuccessModal() {
+    this.showSuccessModal = false;
   }
 
   deleteCharacter(character: Personagem) {

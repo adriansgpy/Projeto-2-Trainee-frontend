@@ -55,3 +55,32 @@
 
   </div>
 </div>
+
+
+<!-- Modal de personagem existente -->
+<div class="modal-overlay" *ngIf="showCharacterExistsModal">
+  <div class="modal">
+    <h2>Erro de Exterminador</h2>
+    <p>Você já possui um exterminador com esse nome. Escolha outro.</p>
+    <button (click)="closeCharacterExistsModal()">Fechar</button>
+  </div>
+</div>
+
+<!-- Modal de sucesso -->
+<div class="modal-overlay" *ngIf="showSuccessModal">
+  <div class="modal">
+    <h2>Agora o chinelo vai cantar.</h2>
+    <p>Exterminador criado com sucesso.</p>
+    <button (click)="closeSuccessModal()">OK</button>
+  </div>
+</div>
+
+<!-- Modal de validação -->
+<div class="modal-overlay" *ngIf="showValidationModal">
+  <div class="modal">
+    <h2>Calma lá!</h2>
+    <p>Por favor, preencha o nome antes de criar o exterminador.</p>
+    <button (click)="showValidationModal=false">Fechar</button>
+  </div>
+</div>
+

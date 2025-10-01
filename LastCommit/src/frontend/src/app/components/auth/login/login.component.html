@@ -64,3 +64,20 @@
 </main>
 
 
+<!-- Modal de campos obrigatórios -->
+<div class="modal-overlay" *ngIf="showEmptyFieldsModal">
+  <div class="modal">
+    <h2>Campos obrigatórios</h2>
+    <p>Por favor, preencha todos os campos para continuar.</p>
+    <button (click)="closeEmptyFieldsModal()">Fechar</button>
+  </div>
+</div>
+
+<!-- Modal de credenciais inválidas -->
+<div class="modal-overlay" *ngIf="showInvalidCredentialsModal">
+  <div class="modal">
+    <h2>Erro de Login</h2>
+    <p>Usuário ou senha inválidos. Verifique suas credenciais.</p>
+    <button (click)="closeInvalidCredentialsModal()">Fechar</button>
+  </div>
+</div>

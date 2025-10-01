@@ -1,4 +1,16 @@
 <body>
+ 
+  <div class="modal-overlay" *ngIf="showConfirmModal">
+    <div class="modal">
+      <h2>Confirmação</h2>
+      <p>Se você sair agora, perderá o progresso atual do capítulo. Tem certeza que deseja continuar?</p>
+      <div class="modal-buttons">
+        <button (click)="exitGame()">Confirmar</button>
+        <button (click)="cancelExit()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <div id="chapter-bg" [style.background-image]="'url(' + chapterImage + ')'"></div>
 
   <div class="container">
@@ -7,13 +19,13 @@
         <h1 class="chapter-title">{{ chapterTitle }}</h1>
       </div>
 
-        <div class="chat-box">
-          <div *ngFor="let msg of chat" 
-              [ngClass]="{'player-msg': msg.from === 'player', 'llm-msg': msg.from === 'llm'}" 
-              class="chat-message">
-            <p [innerHTML]="msg.formattedText"></p>
-          </div>
+      <div class="chat-box">
+        <div *ngFor="let msg of chat" 
+             [ngClass]="{'player-msg': msg.from === 'player', 'llm-msg': msg.from === 'llm'}" 
+             class="chat-message">
+          <p [innerHTML]="msg.formattedText"></p>
         </div>
+      </div>
 
       <div class="actions">
         <input
@@ -53,6 +65,12 @@
         <p><strong>HP:</strong> {{ enemy.hp }} / {{ enemy.maxHp }}</p>
         <p><strong>Stamina:</strong> {{ enemy.stamina }} / {{ enemy.maxStamina }}</p>
       </div>
+
+      <div class="exit-button-container">
+        <button class="btn-exit" (click)="confirmExit()">Sair para Campanhas</button>
+      </div>
+
+
     </div>
   </div>
 </body>

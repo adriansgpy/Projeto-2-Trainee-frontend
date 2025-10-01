@@ -1,5 +1,3 @@
-
-
 <div class="overlay"></div>
 
 <header class="menu-header">
@@ -24,6 +22,11 @@
       </div>
 
       <h1>CRIAR CONTA</h1>
+
+      <!-- Mensagens de erro e sucesso -->
+      <div *ngIf="erro" class="error-msg">{{ erro }}</div>
+      <div *ngIf="resposta" class="success-msg">{{ resposta }}</div>
+
       <form (ngSubmit)="registrar()">
         <div class="form-group">
           <label for="nome">NOME</label>
@@ -42,13 +45,27 @@
           <input type="password" id="confirmarSenha" placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha" name="confirmarSenha" required />
         </div>
         <div class="botoes">
-          <button type="submit">CADASTRAR</button>
+          <button type="submit" [disabled]="isSubmitting">CADASTRAR</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
+<!-- Modal de usuário existente -->
+<div class="modal-overlay" *ngIf="showUserExistsModal">
+  <div class="modal">
+    <h2>Ops!</h2>
+    <p>O nome de usuário já existe. Escolha outro.</p>
+    <button (click)="closeUserExistsModal()">Fechar</button>
+  </div>
+</div>
 
-
-
+<!-- Modal de conta criada com sucesso -->
+<div class="modal-overlay" *ngIf="showSuccessModal">
+  <div class="modal">
+    <h2>Pronto para exterminar?</h2>
+    <p>Sua conta foi criada com sucesso.</p>
+    <button (click)="goToLogin()">Ir para login</button>
+  </div>
+</div>
