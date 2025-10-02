@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-inicial',
@@ -13,7 +13,7 @@ export class InicialComponent implements OnInit, OnDestroy {
   currentDateTime: string;
   private dateTimeInterval: any;
 
-  constructor() {
+  constructor(private router: Router) {
     this.currentDateTime = this.getFormattedDateTime();
   }
 
@@ -21,6 +21,14 @@ export class InicialComponent implements OnInit, OnDestroy {
     this.dateTimeInterval = setInterval(() => {
       this.currentDateTime = this.getFormattedDateTime();
     }, 1000);
+  }
+
+  logout(): void {
+    // Remove o token do localStorage
+    localStorage.removeItem('token');
+
+    // Redireciona para a tela inicial
+    this.router.navigate(['/login']); // ou '/inicial', conforme sua rota
   }
 
   ngOnDestroy(): void {

@@ -14,9 +14,10 @@ interface Player {
 }
 
 interface ChatMessage {
-  from: 'player' | 'llm';
+  from: 'player' | 'llm' | 'system';
   text: string;
   formattedText: string;
+   buttons?: { label: string; action: string }[];
 }
 
 @Component({
@@ -32,6 +33,7 @@ export class jogoComponent implements OnInit {
   chapterTitle: string = '';
   chapterImage: string = '';
   choices: string[] = [];
+  isGameOver : boolean = false;
   playerAction: string = '';
   chat: ChatMessage[] = [];
 
@@ -72,7 +74,7 @@ export class jogoComponent implements OnInit {
     await this.startGame();
   }
 
-  addChatMessage(from: 'player' | 'llm', text: string) {
+  addChatMessage(from: 'player' | 'llm' | 'system', text: string) {
     this.chat.push({ from, text, formattedText: text.replace(/\n/g, '<br>') });
   }
 
@@ -141,80 +143,102 @@ export class jogoComponent implements OnInit {
     }
   }
 
-  async processTurn(action: string) {
-    this.addChatMessage('player', action);
+ async processTurn(action: string) {
+  this.addChatMessage('player', action);
 
-    const payload = {
-      action,
-      state: {
-        player: {
-          nome: this.player.nome,
-          hp: this.player.hp,
-          max_hp: this.player.maxHp,
-          stamina: this.player.stamina,
-          max_stamina: this.player.maxStamina,
-          inventario: this.player.inventory
-        },
-        enemy: {
-          nome: this.enemy.nome,
-          hp: this.enemy.hp,
-          max_hp: this.enemy.maxHp,
-          stamina: this.enemy.stamina,
-          max_stamina: this.enemy.maxStamina
-        },
-        chapter: this.chapterTitle,
-        narrative: "",
-        choices: this.choices
-      }
-    };
-
-    try {
-      const response = await fetch('http://localhost:8000/llm/turn', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await response.json();
-      const narrativaArray = Array.isArray(data.narrativa) ? data.narrativa : [data.narrativa || ''];
-      this.addChatMessage('llm', narrativaArray.join('\n'));
-
-      if (data.turn_result) {
-        let resultText = '..............................\n\nRESULTADO\n\n';
-        if (data.turn_result.enemy) {
-          resultText += `${this.enemy.nome}:\n`;
-          if (data.turn_result.enemy.hp_change)
-            resultText += `${data.turn_result.enemy.hp_change > 0 ? '+' : ''}${data.turn_result.enemy.hp_change} HP\n`;
-          if (data.turn_result.enemy.stamina_change)
-            resultText += `${data.turn_result.enemy.stamina_change > 0 ? '+' : ''}${data.turn_result.enemy.stamina_change} Stamina\n`;
-          resultText += '\n';
-        }
-        if (data.turn_result.player) {
-          resultText += `${this.player.nome}:\n`;
-          if (data.turn_result.player.hp_change)
-            resultText += `${data.turn_result.player.hp_change > 0 ? '+' : ''}${data.turn_result.player.hp_change} HP\n`;
-          if (data.turn_result.player.stamina_change)
-            resultText += `${data.turn_result.player.stamina_change > 0 ? '+' : ''}${data.turn_result.player.stamina_change} Stamina\n`;
-        }
-        this.addChatMessage('llm', resultText);
-      }
-
-      this.choices = data.escolhas ?? [];
-
-      if (data.status?.player) {
-        this.player.hp = data.status.player.hp;
-        this.player.stamina = data.status.player.stamina;
-        this.player.inventory = data.status.player.inventario ?? this.player.inventory;
-      }
-      if (data.status?.enemy) {
-        this.enemy.hp = data.status.enemy.hp;
-        this.enemy.stamina = data.status.enemy.stamina;
-      }
-    } catch (err) {
-      console.error("Erro ao processar turno:", err);
-      this.addChatMessage('llm', 'Erro ao processar turno...');
+  const payload = {
+    action,
+    state: {
+      player: {
+        nome: this.player.nome,
+        hp: this.player.hp,
+        max_hp: this.player.maxHp,
+        stamina: this.player.stamina,
+        max_stamina: this.player.maxStamina,
+        inventario: this.player.inventory
+      },
+      enemy: {
+        nome: this.enemy.nome,
+        hp: this.enemy.hp,
+        max_hp: this.enemy.maxHp,
+        stamina: this.enemy.stamina,
+        max_stamina: this.enemy.maxStamina
+      },
+      chapter: this.chapterTitle,
+      narrative: "",
+      choices: this.choices
     }
+  };
+
+  try {
+    const response = await fetch('http://localhost:8000/llm/turn', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    // narrativa do turno
+    const narrativaArray = Array.isArray(data.narrativa) ? data.narrativa : [data.narrativa || ''];
+    this.addChatMessage('llm', narrativaArray.join('\n'));
+
+    // resultado numérico (hp/stamina changes)
+    if (data.turn_result) {
+      let resultText = '..............................\n\nRESULTADO\n\n';
+      if (data.turn_result.enemy) {
+        resultText += `${this.enemy.nome}:\n`;
+        if (data.turn_result.enemy.hp_change)
+          resultText += `${data.turn_result.enemy.hp_change > 0 ? '+' : ''}${data.turn_result.enemy.hp_change} HP\n`;
+        if (data.turn_result.enemy.stamina_change)
+          resultText += `${data.turn_result.enemy.stamina_change > 0 ? '+' : ''}${data.turn_result.enemy.stamina_change} Stamina\n`;
+        resultText += '\n';
+      }
+      if (data.turn_result.player) {
+        resultText += `${this.player.nome}:\n`;
+        if (data.turn_result.player.hp_change)
+          resultText += `${data.turn_result.player.hp_change > 0 ? '+' : ''}${data.turn_result.player.hp_change} HP\n`;
+        if (data.turn_result.player.stamina_change)
+          resultText += `${data.turn_result.player.stamina_change > 0 ? '+' : ''}${data.turn_result.player.stamina_change} Stamina\n`;
+      }
+      this.addChatMessage('llm', resultText);
+    }
+
+    // escolhas para o próximo turno
+    this.choices = data.escolhas ?? [];
+
+    // atualizar status do jogador
+    if (data.status?.player) {
+      this.player.hp = data.status.player.hp;
+      this.player.stamina = data.status.player.stamina;
+      this.player.inventory = data.status.player.inventario ?? this.player.inventory;
+    }
+
+    // atualizar status do inimigo
+    if (data.status?.enemy) {
+      this.enemy.hp = data.status.enemy.hp;
+      this.enemy.stamina = data.status.enemy.stamina;
+    }
+
+    // verificar derrota do inimigo
+    if (this.enemy.hp <= 0) {
+      this.enemy.hp = 0;
+      this.gameOver(true);
+      return;
+    }
+
+    // verificar derrota do jogador
+    if (this.player.hp <= 0) {
+      this.player.hp = 0;
+      this.gameOver(false);
+      return;
+    }
+
+  } catch (err) {
+    console.error("Erro ao processar turno:", err);
+    this.addChatMessage('llm', 'Erro ao processar turno...');
   }
+}
 
   sendAction() {
     if (!this.playerAction.trim()) return;
@@ -225,4 +249,49 @@ export class jogoComponent implements OnInit {
   chooseAction(choice: string) {
     this.processTurn(choice);
   }
+
+
+  gameOver(vitoria: boolean) {
+  this.isGameOver = true;
+
+  if (vitoria) {
+    this.addChatMessage('system', `🏆 Vitória! Você derrotou ${this.enemy.nome} com honra!`);
+  } else {
+    this.addChatMessage('system', `💀 Derrota... ${this.enemy.nome} acabou com você.`);
+  }
+
+  // Mensagem final com botões
+  this.chat.push({
+    from: 'system',
+    text: '',
+    formattedText: '',
+    buttons: [
+      { label: '🚪 O seu trabalho foi terminado. Volte pra casa.', action: 'exitToCampaigns' }
+    ]
+  });
 }
+
+handleButtonAction(action: string) {
+  if (action === 'exitToCampaigns') {
+    this.router.navigate(['/homepage/campanhas']); // ajuste conforme sua rota
+  }
+}
+
+
+restartGame() {
+  this.isGameOver = false;
+  this.chat = [];
+  this.player.hp = this.player.maxHp;
+  this.player.stamina = this.player.maxStamina;
+  this.enemy.hp = this.enemy.maxHp;
+  this.enemy.stamina = this.enemy.maxStamina;
+  this.addChatMessage('system', '⚔️ Uma nova batalha começa!');
+}
+
+
+
+
+
+}
+
+
