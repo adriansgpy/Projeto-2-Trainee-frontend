@@ -204,30 +204,25 @@ export class jogoComponent implements OnInit {
       this.addChatMessage('llm', resultText);
     }
 
-    // escolhas para o próximo turno
     this.choices = data.escolhas ?? [];
 
-    // atualizar status do jogador
     if (data.status?.player) {
       this.player.hp = data.status.player.hp;
       this.player.stamina = data.status.player.stamina;
       this.player.inventory = data.status.player.inventario ?? this.player.inventory;
     }
 
-    // atualizar status do inimigo
     if (data.status?.enemy) {
       this.enemy.hp = data.status.enemy.hp;
       this.enemy.stamina = data.status.enemy.stamina;
     }
 
-    // verificar derrota do inimigo
     if (this.enemy.hp <= 0) {
       this.enemy.hp = 0;
       this.gameOver(true);
       return;
     }
 
-    // verificar derrota do jogador
     if (this.player.hp <= 0) {
       this.player.hp = 0;
       this.gameOver(false);
@@ -271,27 +266,20 @@ export class jogoComponent implements OnInit {
   });
 }
 
-handleButtonAction(action: string) {
-  if (action === 'exitToCampaigns') {
-    this.router.navigate(['/homepage/campanhas']); // ajuste conforme sua rota
+  handleButtonAction(action: string) {
+    if (action === 'exitToCampaigns') {
+      this.router.navigate(['/homepage/campanhas']); // ajuste conforme sua rota
+    }
+  }
+
+
+  restartGame() {
+    this.isGameOver = false;
+    this.chat = [];
+    this.player.hp = this.player.maxHp;
+    this.player.stamina = this.player.maxStamina;
+    this.enemy.hp = this.enemy.maxHp;
+    this.enemy.stamina = this.enemy.maxStamina;
+    this.addChatMessage('system', '⚔️ Uma nova batalha começa!');
   }
 }
-
-
-restartGame() {
-  this.isGameOver = false;
-  this.chat = [];
-  this.player.hp = this.player.maxHp;
-  this.player.stamina = this.player.maxStamina;
-  this.enemy.hp = this.enemy.maxHp;
-  this.enemy.stamina = this.enemy.maxStamina;
-  this.addChatMessage('system', '⚔️ Uma nova batalha começa!');
-}
-
-
-
-
-
-}
-
-

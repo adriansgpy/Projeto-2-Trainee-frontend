@@ -1,209 +1,334 @@
 /* ======================================= */
-/* Reset Básico e Configurações de Base */
+/* Reset Básico e Configurações de Base - O Básico Permanece Sombrio */
 /* ======================================= */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html, body, app-root {
-  width: 100%;
-  height: 100%;
-  /* Fonte limpa e profissional */
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* Fundo preto puro */
-  background-color: #000000;
-  /* Cor de texto suave */
-  color: #f0f0f0;
+    width: 100%;
+    height: 100%;
+    /* Fonte mais agressiva e fria para o terror tech */
+    font-family: 'Courier New', monospace;
+    /* Fundo de abismo - quase preto, mas com uma leve sujeira */
+    background-color: #0d0d0d;
+    /* Cor de texto pálida e fria */
+    color: #a0a0a0;
 }
 
-/* Scrollbar Clean */
+/* Scrollbar Sanguinolenta e Desgastada */
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px; /* Mais grossa */
 }
 ::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 3px;
+    background: #500000; /* Vermelho escuro/sangue */
+    border-radius: 0px; /* Bordas quadradas/duras */
+    border: 1px solid #220000;
 }
 ::-webkit-scrollbar-track {
-    background: #111;
+    background: #000000;
+}
+
+/* Scroll invisível - mantido para as áreas com overflow */
+.main-content::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
 }
 
 /* ======================================= */
-/* Fundo do Capítulo (Minimalista) */
+/* Fundo do Capítulo (Mortal) */
 /* ======================================= */
 #chapter-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* Filtro muito suave, apenas para escurecer */
-  filter: brightness(0.15);
-  z-index: -1;
-  /* Transição rápida e limpa */
-  transition: background-image 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Filtro para escurecer drasticamente e adicionar desfoque/distorção */
+    filter: brightness(0.08) contrast(1.2) blur(1px); 
+    z-index: -1;
+    /* Transição mais lenta, para uma sensação de lentidão e peso */
+    transition: background-image 0.8s ease-in-out, filter 0.8s ease-in-out;
 }
 
 /* ======================================= */
-/* Container Principal */
+/* Container Principal e Layout */
 /* ======================================= */
 .container {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-  gap: 30px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 20px; /* Reduzindo um pouco o padding para sensação de aperto */
+    gap: 20px;
 }
 
-/* ======================================= */
-/* Área Principal (Clean Panel) */
-/* ======================================= */
+/* Área Principal (Caixa de Pesadelos) */
 .main-content {
-  flex: 3;
-  padding: 30px;
-  overflow-y: auto;
-  /* Fundo sutilmente transparente e opaco */
-  background: rgba(10, 10, 10, 0);
-  border-radius: 8px; /* Bordas mais discretas */
-  /* Sombra interna e externa mínimas */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  /* Remoção do backdrop-filter para um visual mais flat */
-  border: 1px solid #222; /* Borda de separação sutil */
+    flex: 3;
+    padding: 25px; 
+    overflow-y: auto;
+    /* Fundo mais denso e opaco, como um material pesado */
+    background: rgba(10, 10, 10, 0.95);
+    border-radius: 0px; /* Remoção de bordas arredondadas para um visual duro */
+    /* Sombra interna para profundidade e externa sutilmente vermelha */
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.15), 0 4px 15px rgba(0, 0, 0, 0.5);
+    /* Borda de metal enferrujado/sujo */
+    border: 1px solid #440000; 
+}
+
+/* Sidebar Lateral (Painel de Status) - Registro de Dor */
+.sidebar {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    /* Fundo mais consistente e pesado */
+    background: rgba(10, 10, 10, 0.95);
+    border-radius: 0px;
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.15), 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid #440000;
 }
 
 /* ======================================= */
-/* Banner e Título */
+/* Banner e Título - Manchas de Sangue */
 /* ======================================= */
 .chapter-banner {
-  position: relative;
-  width: 100%;
-  height: 180px; /* Mais baixo */
-  /* Fundo quase preto, sem gradiente complexo */
-  background: #1a1a1a00;
-  border-radius: 6px;
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
-  margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    height: 150px; 
+    /* Fundo preto, sugerindo um vácuo */
+    background: #000000;
+    border-radius: 0px;
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #660000; /* Uma linha de corte vermelha */
 }
 
 .chapter-title {
-  font-size: 2.5rem;
-  /* Cor de destaque neutra/tecnológica */
-  color: #d40000;
-  font-weight: 700;
-  /* Sem text-shadow exagerado */
-  text-shadow: none;
-  letter-spacing: 0.5px;
-  text-transform: none;
+    font-size: 3rem; /* Maior e mais imponente */
+    /* Cor de destaque: o Vermelho Sangue */
+    color: #ff0000; 
+    font-weight: 900;
+    /* Sombra forte para simular um brilho maligno ou neon falho */
+    text-shadow: 0 0 5px #ff0000, 0 0 10px rgba(255, 0, 0, 0.5);
+    letter-spacing: 2px; /* Mais espaçamento, mais ameaçador */
+    text-transform: uppercase;
+    font-family: 'Arial Black', sans-serif; /* Fonte pesada */
 }
 
 /* ======================================= */
-/* Texto do Capítulo */
+/* Texto do Capítulo - Frágil e Sombrio (Não usado no seu HTML, mas mantido) */
 /* ======================================= */
 .chapter-text {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-top: 20px;
-  padding: 0; /* Remove padding desnecessário */
-  background: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  border-left: none;
-  color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.8; /* Aumentando a legibilidade no escuro */
+    margin-top: 20px;
+    padding: 0;
+    background: transparent;
+    color: #ccc; /* Texto levemente mais claro para contraste */
 }
 
 .chapter-text p {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.5em;
+    /* Adicionando uma sutil falha no texto (glitch) */
+    text-shadow: 0 0 1px rgba(100, 255, 255, 0.05);
 }
 
 /* ======================================= */
-/* Área de Ações */
+/* CHAT BOX E MENSAGENS - A Troca de Sussurros */
+/* ======================================= */
+.chat-box {
+    flex-grow: 1; 
+    height: 60vh; 
+    overflow-y: auto;
+    padding-right: 15px; 
+    margin-bottom: 20px;
+    /* Sem bordas no chatbox para que as mensagens se destaquem no main-content */
+}
+
+.chat-message {
+    max-width: 80%; 
+    padding: 15px 20px;
+    margin-bottom: 18px;
+    border-radius: 0px; /* Bordas quadradas, duras */
+    line-height: 1.6;
+    font-size: 1.05rem;
+    position: relative;
+    /* Sombra mais marcada e com um leve tom de névoa */
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.1); 
+    border-left: 3px solid transparent; /* Adicionando um risco lateral */
+}
+
+/* Estilo Base do Parágrafo dentro da Mensagem */
+.chat-message p {
+    margin: 0;
+    color: inherit;
+}
+
+.chat-message p > br {
+    display: block;
+    content: "";
+    margin-top: 0.7em; 
+}
+
+/* ------------------ */
+/* Estilo do LLM/Sistema (Voz da Lenda/Maldição) */
+/* ------------------ */
+.llm-msg {
+    margin-right: auto;
+    background-color: #121212; /* Fundo sombrio */
+    border: 1px solid #333333;
+    color: #f0f0f0;
+    border-left-color: #ff0000; /* Linha de sangue para a Lenda */
+}
+
+/* ------------------ */
+/* Estilo do Jogador (Sua Própria Angústia) */
+/* ------------------ */
+.player-msg {
+    margin-left: auto;
+    background-color: #330000; /* Cor escura, mas com a marca do sangue */
+    color: #e0e0e0; /* Texto mais claro, mas ainda pálido */
+    font-weight: 500;
+    border: 1px solid #660000;
+    border-right-color: #00ff66; /* Linha verde neon de 'hack/vida' */
+}
+
+/* Botões do Chat (Aparecem no final do jogo) */
+.chat-buttons button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid #880000;
+    cursor: pointer;
+    background-color: #440000; /* Vermelho escuro */
+    color: #ff5555;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+.chat-buttons button:hover {
+    background-color: #660000;
+    border-color: #ff0000;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
+}
+
+/* ======================================= */
+/* Área de Ações - Onde o Medo é Tomado */
 /* ======================================= */
 .actions {
-  margin-top: 30px;
-  padding: 20px;
-  background: #151515; /* Painel sutilmente mais claro */
-  border-radius: 8px;
-  border: 1px solid #333;
-  box-shadow: none;
+    margin-top: 30px;
+    padding: 25px;
+    background: #101010; /* Fundo mais escuro para o painel */
+    border-radius: 0px;
+    border: 1px solid #660000; /* Borda de sangue */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); /* Brilho sutil */
 }
 
-.actions h2 {
-  color: #00bcd4;
-  margin-bottom: 15px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-shadow: none;
-  border-bottom: 1px solid #333;
-  padding-bottom: 8px;
+.actions h2 { /* Não está no HTML, mas mantido. O HTML usa <h3>*/
+    color: #ff3333; /* Vermelho/alaranjado de perigo */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 0 3px #ff3333;
+    border-bottom: 2px dashed #440000; /* Linha de corte/rasgo */
+    padding-bottom: 10px;
+}
+
+.actions h3 { /* Não está no HTML, mas mantido. O HTML usa <h3>*/
+    color: #ff3333; /* Vermelho/alaranjado de perigo */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 0 3px #ff3333;
+    border-bottom: 2px dashed #440000; /* Linha de corte/rasgo */
+    padding-bottom: 10px;
 }
 
 .actions input[type="text"] {
-  width: 70%;
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  /* Borda minimalista */
-  border: 1px solid #555;
-  background-color: #222;
-  color: #f0f0f0;
-  font-size: 1rem;
-  transition: border-color 0.2s;
+    width: 80%; /* Mais largo */
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 0px;
+    /* Estilo de terminal/glitch */
+    border: 1px solid #880000;
+    background-color: #0a0a0a;
+    color: #00ff66; /* Cor de terminal 'hackeando' */
+    font-size: 1.1rem;
+    font-family: 'Courier New', monospace;
 }
 
 .actions input[type="text"]:focus {
     outline: none;
-    box-shadow: none;
-    border-color: #00bcd4; 
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.5); /* Brilho neon de terminal */
+    border-color: #00ff66; 
 }
 
 .actions button {
-  padding: 10px 20px;
-  margin-left: 10px;
-  border: none;
-  border-radius: 4px;
-  /* Botão sólido, foco na funcionalidade */
-  background: #00bcd4;
-  color: #111;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-  box-shadow: none;
+    padding: 12px 25px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 0px;
+    /* Botão Vermelho de Ação Perigosa */
+    background: #ff3333; 
+    color: #000000; /* Texto preto para contraste extremo */
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.1s, box-shadow 0.1s;
+    box-shadow: 0 0 5px #ff3333;
 }
 
 .actions button:hover {
-  transform: translateY(0);
-  background: #0097a7;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px); /* Efeito de 'levantar' levemente */
+    background: #cc0000; /* Vermelho mais escuro no hover */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.6);
 }
 
-/* Lista de escolhas (Links) */
+/* Lista de escolhas (Links) - Decisões Fatais */
 .actions ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 10px;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 15px;
+}
+
+.fundo-container {
+    position: fixed;       /* fixa em relação à viewport */
+    top: 0;
+    left: 0;
+    right: 0;             /* garante que vá até o limite direito */
+    bottom: 0;            /* garante que vá até o limite inferior */
+    width: 100%;           /* cobre largura total */
+    height: 100%;          /* cobre altura total */
+    z-index: -3;           /* atrás de tudo */
+    overflow: hidden;      /* impede scroll interno */
+    background-image: url('/assets/horror.png'); /* sua imagem */
+    background-size: cover;    /* cobre toda a área mantendo proporção */
+    background-position: center; /* centraliza a imagem */
+    background-repeat: no-repeat;
 }
 
 .actions ul li {
-  background: transparent;
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  /* Linha inferior como separador */
-  border-bottom: 1px solid #222;
-  transition: background-color 0.2s, color 0.2s;
-  font-size: 1rem;
-  color: #ccc;
+    background: transparent;
+    padding: 12px;
+    margin-bottom: 6px;
+    border-radius: 0px;
+    cursor: pointer;
+    /* Separador fino e pálido */
+    border-bottom: 1px solid #202020;
+    transition: background-color 0.2s, color 0.2s, letter-spacing 0.2s;
+    font-size: 1.1rem;
+    color: #a0a0a0;
 }
 
 .actions ul li:last-child {
@@ -211,259 +336,183 @@ html, body, app-root {
 }
 
 .actions ul li:hover {
-  background: #1a1a1a;
-  transform: none;
-  color: #f0f0f0;
+    background: #080808; /* Fundo que sugere o abismo */
+    color: #ff5555; /* Destaque em vermelho pálido/ferido */
+    letter-spacing: 1px; /* Dando a sensação de que a escolha é enfatizada */
 }
 
 /* ======================================= */
-/* Sidebar Lateral (Status Panel) */
+/* Sidebar (Painel de Status) - Registro de Dor */
 /* ======================================= */
-.sidebar {
-  flex: 1;
-  padding: 30px;
-  overflow-y: auto;
-  /* Combina com o main-content */
-  background: rgba(10, 10, 10, 0.85);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 1px solid #222;
-}
-
 .sidebar h2 {
-  color: #00bcd4;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-shadow: none;
-  border-bottom: 1px solid #333;
-  padding-bottom: 5px;
+    color: #00ff66; /* Cor de destaque "vivo/hack" */
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 0 3px rgba(0, 255, 102, 0.5);
+    border-bottom: 2px dashed #440000;
+    padding-bottom: 8px;
 }
 
-/* Status de jogador e inimigo */
+/* Status de jogador e inimigo - Fichas de Identificação */
 .sidebar .status {
-  margin-bottom: 25px;
-  background: transparent;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #333;
-  box-shadow: none;
+    margin-bottom: 30px;
+    background: #0d0d0d;
+    padding: 15px;
+    border-radius: 0px;
+    border: 1px dashed #660000; /* Borda quebrada */
 }
 
 .sidebar .status p {
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-  color: #ccc;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #e0e0e0; /* Texto claro */
+    font-weight: bold;
+    text-shadow: 0 0 1px #00ff66;
 }
 
 .sidebar .status ul {
-  list-style: none;
-  padding-left: 0;
+    list-style: none;
+    padding-left: 0;
 }
 
 .sidebar .status ul li {
-  background: transparent;
-  padding: 6px 0;
-  margin-bottom: 3px;
-  border-radius: 0;
-  transition: color 0.2s;
+    background: transparent;
+    padding: 8px 0;
+    margin-bottom: 4px;
+    border-radius: 0;
+    transition: color 0.2s;
+    color: #a0a0a0;
+    font-size: 0.95rem;
 }
 
 .sidebar .status ul li:hover {
-  background: transparent;
-  transform: none;
-  color: #00bcd4; /* Destaque no hover */
+    color: #ff5555; /* Destaque no hover em vermelho de ferida */
 }
-
-/* Scroll invisível - mantido para as áreas com overflow */
-.main-content::-webkit-scrollbar,
-.sidebar::-webkit-scrollbar {
-  width: 6px;
-  background: transparent;
-}
-
 
 /* ======================================= */
-/* CHAT BOX E MENSAGENS */
+/* Botão de Sair - A Fuga */
 /* ======================================= */
-.chat-box {
-    /* Altura que permite scroll, preenche o espaço antes das ações */
-    flex-grow: 1; 
-    height: 60vh; /* Define uma altura inicial razoável (60% da viewport height) */
-    overflow-y: auto;
-    padding-right: 15px; /* Espaço para a scrollbar limpa */
-    margin-bottom: 20px;
-}
-
-.chat-message {
-    max-width: 85%; /* As mensagens não preenchem a largura total */
-    padding: 12px 18px;
-    margin-bottom: 15px;
-    border-radius: 18px; /* Bordas arredondadas para um visual de chat */
-    line-height: 1.5;
-    font-size: 1rem;
-    position: relative;
-    /* Sombra sutil para "levantar" a mensagem */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilo Base do Parágrafo dentro da Mensagem */
-.chat-message p {
-    margin: 0;
-    color: inherit; /* Garante que o texto herde a cor definida no bloco principal */
-}
-
-/* ------------------ */
-/* Estilo do LLM/Sistema (Lenda) */
-/* ------------------ */
-.llm-msg {
-    /* Alinhado à esquerda (padrão) */
-    margin-right: auto;
-    background-color: #1a1a1a; /* Cor escura, discreta */
-    border: 1px solid #222;
-    color: #f0f0f0;
-    /* Borda inferior/lateral levemente "quebrada" no canto oposto */
-    border-bottom-left-radius: 4px;
-}
-
-/* ------------------ */
-/* Estilo do Jogador */
-/* ------------------ */
-.player-msg {
-    /* Alinhado à direita */
-    margin-left: auto;
-    background-color: #00bcd4; /* Cor de destaque (código azul/ciano) */
-    color: #111; /* Texto escuro para contraste */
-    font-weight: 500;
-    /* Borda inferior/lateral levemente "quebrada" no canto oposto */
-    border-bottom-right-radius: 4px;
-}
-
-
-.chat-message p > br {
-    display: block;
-    content: "";
-    margin-top: 0.5em; 
-}
-
-
-
-/* Botão de sair */
-/* Botão de sair dentro da sidebar */
 .exit-button-container {
-  margin-top: 20px; /* Espaço entre status e botão */
-  text-align: center; /* Centraliza horizontalmente */
+    margin-top: 30px; 
+    text-align: center;
 }
 
 .btn-exit {
-  padding: 10px 20px;
-  background-color: #ff0055;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+    padding: 12px 25px;
+    background-color: #990000; /* Vermelho mais profundo e ameaçador */
+    color: #fff;
+    border: 2px solid #ff0000; /* Borda de perigo */
+    border-radius: 0px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
 }
 
 .btn-exit:hover {
-  background-color: #ff3377;
-  transform: scale(1.05);
+    background-color: #cc0000;
+    border-color: #ff3333;
+    box-shadow: 0 0 10px #ff3333; /* Brilho de alarme */
 }
 
 .btn-exit:active {
-  transform: scale(0.95);
+    transform: scale(0.98);
 }
 
-
-/* Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-}
-
-.modal {
-  background-color: #1a1a1a;
-  padding: 30px;
-  border-radius: 12px;
-  color: #fff;
-  max-width: 400px;
-  text-align: center;
-}
-
-.modal h2 {
-  margin-bottom: 15px;
-}
-
-.modal p {
-  margin-bottom: 25px;
-}
-
-.modal-buttons button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.modal-buttons button:first-child {
-  background-color: #ff0055;
-  color: #fff;
-}
-
-.modal-buttons button:first-child:hover {
-  background-color: #ff3377;
-  transform: scale(1.05);
-}
-
-.modal-buttons button:last-child {
-  background-color: #555;
-  color: #fff;
-}
-
-.modal-buttons button:last-child:hover {
-  background-color: #777;
-  transform: scale(1.05);
-
+/* Botão de sair no canto (Se for o caso - não usado no HTML principal) */
 .exit-button {
-  float: right;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-weight: bold;
+    float: right;
+    background-color: #440000;
+    color: #ff5555;
+    border: 1px solid #990000;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 0px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
 }
 
 .exit-button:hover {
-  background-color: #d32f2f;
+    background-color: #660000;
 }
 
+/* ======================================= */
+/* Modal - O Aviso Fatal */
+/* ======================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fundo de névoa densa */
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
-.chat-buttons button {
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background-color: #e74c3c; /* vermelho */
-  color: white;
-  font-weight: bold;
+.modal {
+    background-color: #000000; /* Fundo Absoluto */
+    padding: 40px;
+    border-radius: 0px;
+    color: #ff5555; /* Aviso em vermelho/ferida */
+    max-width: 450px;
+    text-align: center;
+    border: 3px solid #ff0000;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); /* Brilho intenso de perigo */
 }
 
-.chat-buttons button:hover {
-  background-color: #c0392b;
+.modal h2 {
+    color: #ff0000;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-shadow: 0 0 5px #ff0000;
+    text-transform: uppercase;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.modal p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.modal-buttons button {
+    padding: 12px 25px;
+    margin: 0 15px;
+    border: 2px solid transparent;
+    border-radius: 0px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s, transform 0.1s, border-color 0.2s;
+}
+
+.modal-buttons button:first-child {
+    background-color: #ff0000; /* Confirmar - A Ação Fatal */
+    color: #000;
+}
+
+.modal-buttons button:first-child:hover {
+    background-color: #cc0000;
+    border-color: #ff3333;
+    transform: scale(1.05);
+}
+
+.modal-buttons button:last-child {
+    background-color: #333; /* Cancelar - Um Alívio Falso */
+    color: #fff;
+    border-color: #555;
+}
+
+.modal-buttons button:last-child:hover {
+    background-color: #555;
+    border-color: #777;
+    transform: scale(1.05);
 }

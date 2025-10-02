@@ -1,89 +1,86 @@
-<body>
-  <!-- Modal de confirmação de saída -->
-  <div class="modal-overlay" *ngIf="showConfirmModal">
+<div class="fundo-container">
+    <img [src]="'assets/horror.png'" class="fundo-transicao">
+</div>
+<div id="chapter-bg"></div> <div class="modal-overlay" *ngIf="showConfirmModal">
     <div class="modal">
-      <h2>Confirmação</h2>
-      <p>Se você sair agora, perderá o progresso atual do capítulo. Tem certeza que deseja continuar?</p>
-      <div class="modal-buttons">
-        <button (click)="exitGame()">Confirmar</button>
-        <button (click)="cancelExit()">Cancelar</button>
-      </div>
+        <h2>Confirmação</h2>
+        <p>Se você sair agora, perderá o progresso atual do capítulo. Tem certeza que deseja continuar?</p>
+        <div class="modal-buttons">
+            <button (click)="exitGame()">Confirmar</button>
+            <button (click)="cancelExit()">Cancelar</button>
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- Background do capítulo -->
-  <div id="chapter-bg" [style.background-image]="'url(' + chapterImage + ')'"></div>
-
-  <div class="container">
+<div class="container">
+    
     <div class="main-content">
-      <div class="chapter-banner">
-        <h1 class="chapter-title">{{ chapterTitle }}</h1>
-      </div>
-
-      <!-- Chat -->
-      <div class="chat-box">
-        <div *ngFor="let msg of chat" 
-             [ngClass]="{
-               'player-msg': msg.from === 'player', 
-               'llm-msg': msg.from === 'llm',
-               'system-msg': msg.from === 'system'
-             }" 
-             class="chat-message">
-          <p [innerHTML]="msg.formattedText"></p>
-
-          <!-- Botões dentro das mensagens (aparecem no final do jogo) -->
-          <div *ngIf="msg.buttons" class="chat-buttons">
-            <button *ngFor="let btn of msg.buttons" (click)="handleButtonAction(btn.action)">
-              {{ btn.label }}
-            </button>
-          </div>
+        
+        <div class="chapter-banner">
+            <h1 class="chapter-title">{{ chapterTitle }}</h1>
         </div>
-      </div>
 
-      <!-- Input de mensagem e ações (visível somente enquanto o jogo não acabou) -->
-      <div class="actions" *ngIf="!isGameOver">
-        <input
-          type="text"
-          placeholder="Digite sua ação aqui..."
-          [(ngModel)]="playerAction"
-          (keyup.enter)="sendAction()"
-        />
-        <button (click)="sendAction()">Enviar</button>
+        <div class="chat-box">
+            <div *ngFor="let msg of chat" 
+                 [ngClass]="{
+                   'player-msg': msg.from === 'player', 
+                   'llm-msg': msg.from === 'llm',
+                   'system-msg': msg.from === 'system'
+                 }" 
+                 class="chat-message">
+                <p [innerHTML]="msg.formattedText"></p>
 
-        <div *ngIf="choices.length > 0">
-          <h3>Ações sugeridas:</h3>
-          <ul>
-            <li *ngFor="let choice of choices" (click)="chooseAction(choice)">
-              {{ choice }}
-            </li>
-          </ul>
+                <div *ngIf="msg.buttons" class="chat-buttons">
+                    <button *ngFor="let btn of msg.buttons" (click)="handleButtonAction(btn.action)">
+                        {{ btn.label }}
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="actions" *ngIf="!isGameOver">
+            
+            <input
+                type="text"
+                placeholder="Digite sua ação aqui..."
+                [(ngModel)]="playerAction"
+                (keyup.enter)="sendAction()"
+            />
+            <button (click)="sendAction()">Enviar</button>
+
+            <div *ngIf="choices.length > 0">
+                <h3>Ações sugeridas:</h3>
+                <ul>
+                    <li *ngFor="let choice of choices" (click)="chooseAction(choice)">
+                        {{ choice }}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="sidebar">
-      <h2>Jogador</h2>
-      <div class="status">
-        <p><strong>Nome:</strong> {{ player.nome }}</p>
-        <p><strong>HP:</strong> {{ player.hp }} / {{ player.maxHp }}</p>
-        <p><strong>Stamina:</strong> {{ player.stamina }} / {{ player.maxStamina }}</p>
-        <p><strong>Inventário:</strong></p>
-        <ul>
-          <li *ngFor="let item of player.inventory">{{ item }}</li>
-        </ul>
-      </div>
+        
+        <h2>Jogador</h2>
+        <div class="status">
+            <p><strong>Nome:</strong> {{ player.nome }}</p>
+            <p><strong>HP:</strong> {{ player.hp }} / {{ player.maxHp }}</p>
+            <p><strong>Stamina:</strong> {{ player.stamina }} / {{ player.maxStamina }}</p>
+            <p><strong>Inventário:</strong></p>
+            <ul>
+                <li *ngFor="let item of player.inventory">{{ item }}</li>
+            </ul>
+        </div>
 
-      <h2>Lenda</h2>
-      <div class="status">
-        <p><strong>Nome:</strong> {{ enemy.nome }}</p>
-        <p><strong>HP:</strong> {{ enemy.hp }} / {{ enemy.maxHp }}</p>
-        <p><strong>Stamina:</strong> {{ enemy.stamina }} / {{ enemy.maxStamina }}</p>
-      </div>
+        <h2>Lenda</h2>
+        <div class="status">
+            <p><strong>Nome:</strong> {{ enemy.nome }}</p>
+            <p><strong>HP:</strong> {{ enemy.hp }} / {{ enemy.maxHp }}</p>
+            <p><strong>Stamina:</strong> {{ enemy.stamina }} / {{ enemy.maxStamina }}</p>
+        </div>
 
-      <!-- Botão de sair sempre visível -->
-      <div class="exit-button-container">
-        <button class="btn-exit" (click)="confirmExit()">Sair para Campanhas</button>
-      </div>
+        <div class="exit-button-container">
+            <button class="btn-exit" (click)="confirmExit()">Sair para Campanhas</button>
+        </div>
     </div>
-  </div>
-</body>
+</div>
