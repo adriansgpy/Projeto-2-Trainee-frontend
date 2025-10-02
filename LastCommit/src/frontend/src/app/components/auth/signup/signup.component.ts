@@ -63,8 +63,9 @@ export class SignupComponent implements OnInit {
 
   registrar(): void {
     const nomeRegex = /^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ\s'-]+$/;
-    const loginRegex = /^[a-z0-9_]{4,20}$/;
-    const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const loginRegex = /^[a-zA-Z0-9]+$/;
+    const senhaRegex = /^.{6,}$/;
+
 
     // Limpa status de erro/resposta antes de começar
     this.erro = null;
@@ -73,7 +74,7 @@ export class SignupComponent implements OnInit {
     this.showUserExistsModal = false;
 
     // 1. Validações de Campos
-    /*if (!this.nome || !this.usuario || !this.senha || !this.confirmarSenha) {
+    if (!this.nome || !this.usuario || !this.senha || !this.confirmarSenha) {
       this.showValidationErrorMessage('Por favor, preencha todos os campos obrigatórios para continuar.');
       return;
     }
@@ -89,14 +90,14 @@ export class SignupComponent implements OnInit {
     }
 
     if (!loginRegex.test(this.usuario)) {
-      this.showValidationErrorMessage('Login inválido. Use apenas letras minúsculas, números, underline (_), e tenha entre 4 e 20 caracteres.');
+      this.showValidationErrorMessage('Login inválido. Use apenas letras e números.');
       return;
     }
 
     if (!senhaRegex.test(this.senha)) {
-      this.showValidationErrorMessage('A senha deve ter no mínimo 8 caracteres, contendo pelo menos 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial (@ $ ! % * ? &).');
+      this.showValidationErrorMessage('A senha deve ter no mínimo 6 caracteres.');
       return;
-    }*/
+    }
 
     // Fim das validações, inicia submissão
     this.isSubmitting = true;
