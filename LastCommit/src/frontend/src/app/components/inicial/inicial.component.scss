@@ -152,27 +152,10 @@ html, body, app-root {
 
 
 /* BOTÃO START */
-.btn-start {
-    padding: 18px 45px;
-    font-size: 1.3rem;
-    background-color: $cor-destaque;
-    border: 1px solid $cor-alerta; 
-    border-radius: 12px;
-    cursor: pointer;
-    color: #fff;
-    font-family: $fonte-principal;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba($cor-destaque, 0.5);
 
-    &:hover {
-        background-color: $cor-alerta;
-        box-shadow: 0 0 30px rgba($cor-alerta, 0.8);
-        transform: translateY(-2px);
-    }
-}
+/* BOTÃO START ESTILO TERROR */
+
+
 
 
 /* ======================================= */
@@ -261,4 +244,87 @@ html, body, app-root {
         padding: 12px 30px;
         font-size: 1rem;
     }
+}
+
+.btn-logout {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  background-color: #1a1a1a; /* fundo escuro */
+  color: #ff0000; /* vermelho sangue */
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border: 2px solid #ff0000;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000 inset;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-logout::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 0, 0, 0.1);
+  transform: rotate(45deg);
+  transition: all 0.5s;
+}
+
+.btn-logout:hover {
+  color: #fff;
+  background-color: #660000;
+  box-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000 inset;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.btn-logout:active {
+  transform: scale(0.95) rotate(1deg);
+  box-shadow: 0 0 5px #ff0000 inset;
+}
+
+
+.btn-start {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  background-color: #1a1a1a; /* fundo escuro */
+  color: #ff0000; /* vermelho sangue */
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  border: 2px solid #ff0000;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000 inset;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-start::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 0, 0, 0.1);
+  transform: rotate(45deg);
+  transition: all 0.5s;
+}
+
+.btn-start:hover {
+  color: #fff;
+  background-color: #660000;
+  box-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000 inset;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.btn-start:active {
+  transform: scale(0.95) rotate(1deg);
+  box-shadow: 0 0 5px #ff0000 inset;
 }

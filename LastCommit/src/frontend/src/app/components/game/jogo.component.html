@@ -1,5 +1,5 @@
 <body>
- 
+  <!-- Modal de confirmação de saída -->
   <div class="modal-overlay" *ngIf="showConfirmModal">
     <div class="modal">
       <h2>Confirmação</h2>
@@ -11,25 +11,37 @@
     </div>
   </div>
 
+  <!-- Background do capítulo -->
   <div id="chapter-bg" [style.background-image]="'url(' + chapterImage + ')'"></div>
 
   <div class="container">
     <div class="main-content">
       <div class="chapter-banner">
         <h1 class="chapter-title">{{ chapterTitle }}</h1>
-        <button class="exit-button" (click)="exitGame()">Sair</button>
-
       </div>
 
+      <!-- Chat -->
       <div class="chat-box">
         <div *ngFor="let msg of chat" 
-             [ngClass]="{'player-msg': msg.from === 'player', 'llm-msg': msg.from === 'llm'}" 
+             [ngClass]="{
+               'player-msg': msg.from === 'player', 
+               'llm-msg': msg.from === 'llm',
+               'system-msg': msg.from === 'system'
+             }" 
              class="chat-message">
           <p [innerHTML]="msg.formattedText"></p>
+
+          <!-- Botões dentro das mensagens (aparecem no final do jogo) -->
+          <div *ngIf="msg.buttons" class="chat-buttons">
+            <button *ngFor="let btn of msg.buttons" (click)="handleButtonAction(btn.action)">
+              {{ btn.label }}
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="actions">
+      <!-- Input de mensagem e ações (visível somente enquanto o jogo não acabou) -->
+      <div class="actions" *ngIf="!isGameOver">
         <input
           type="text"
           placeholder="Digite sua ação aqui..."
@@ -68,11 +80,10 @@
         <p><strong>Stamina:</strong> {{ enemy.stamina }} / {{ enemy.maxStamina }}</p>
       </div>
 
+      <!-- Botão de sair sempre visível -->
       <div class="exit-button-container">
         <button class="btn-exit" (click)="confirmExit()">Sair para Campanhas</button>
       </div>
-
-
     </div>
   </div>
 </body>

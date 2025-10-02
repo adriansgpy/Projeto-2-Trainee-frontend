@@ -31,15 +31,25 @@ export class LoginComponent implements OnInit { // Adicionado 'implements OnInit
   ) {}
   
   ngOnInit() {
-    this.audioService.playMusic('assets/soundtrack/bms.mp3');
+  this.audioService.playMusic('assets/soundtrack/bms.mp3');
 
-    // Listener para habilitar fullscreen após interação do usuário
-    const fullscreenHandler = () => {
-      this.enterFullscreen();
-      document.removeEventListener('click', fullscreenHandler);
-    };
-    document.addEventListener('click', fullscreenHandler);
+  // Login automático se houver token
+  const token = localStorage.getItem('token');
+  if (token) {
+    // Aqui você pode opcionalmente validar o token chamando uma rota /auth/me
+    this.audioService.stopMusic();
+    this.router.navigate(['/homepage']); // Vai direto para a homepage
+    return; // Sai do ngOnInit
   }
+
+  // Listener para habilitar fullscreen após interação do usuário
+  const fullscreenHandler = () => {
+    this.enterFullscreen();
+    document.removeEventListener('click', fullscreenHandler);
+  };
+  document.addEventListener('click', fullscreenHandler);
+  }
+
 
   enterFullscreen() {
     const elem = document.documentElement;

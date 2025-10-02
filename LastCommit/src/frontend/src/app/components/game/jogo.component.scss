@@ -453,3 +453,17 @@ html, body, app-root {
 }
 
 }
+
+.chat-buttons button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #e74c3c; /* vermelho */
+  color: white;
+  font-weight: bold;
+}
+
+.chat-buttons button:hover {
+  background-color: #c0392b;
+}
