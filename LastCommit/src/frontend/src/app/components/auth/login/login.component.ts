@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { AudioService } from '../../../services/soundtrack.service';
   standalone: true,
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit { // Adicionado 'implements OnInit'
   usuario: string = '';
   senha: string = '';
   resposta: string | null = null;
@@ -33,6 +33,7 @@ export class LoginComponent {
   ngOnInit() {
     this.audioService.playMusic('assets/soundtrack/bms.mp3');
 
+    // Listener para habilitar fullscreen após interação do usuário
     const fullscreenHandler = () => {
       this.enterFullscreen();
       document.removeEventListener('click', fullscreenHandler);
@@ -64,12 +65,13 @@ export class LoginComponent {
   }
 
   fazerLogin() {
-    // Verifica campos obrigatórios
+    // 1. Validação de campos obrigatórios
     if (!this.usuario || !this.senha) {
       this.showEmptyFieldsModal = true;
       return;
     }
 
+    // 2. Chamada de API para login
     this.http.post(`${this.apiUrl}/login`, {
       nomeUsuario: this.usuario,
       senha: this.senha,
@@ -78,6 +80,7 @@ export class LoginComponent {
         this.resposta = 'Login realizado com sucesso!';
         this.erro = null;
 
+        // Armazena o token e navega
         if (res.access_token) {
           localStorage.setItem('token', res.access_token);
         }
@@ -86,12 +89,13 @@ export class LoginComponent {
         this.router.navigate(['/homepage']);
       },
       error: (err) => {
-        console.error('Erro:', err);
+        console.error('Erro ao tentar login:', err);
 
-        // Se o backend retornou 401 ou 400, mostra modal de credenciais inválidas
+        // Se o backend retornar 401 ou 400 (credenciais inválidas), mostra modal específico
         if (err.status === 401 || err.status === 400) {
           this.showInvalidCredentialsModal = true;
         } else {
+          // Outros erros
           this.erro = 'Ocorreu um erro ao tentar fazer login.';
         }
 

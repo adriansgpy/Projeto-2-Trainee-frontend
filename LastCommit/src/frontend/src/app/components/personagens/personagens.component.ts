@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+// Interface para um Personagem
 interface Personagem {
   _id: string;
   nome: string;
@@ -21,10 +22,21 @@ interface Personagem {
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule]
 })
-export class PersonagensComponent implements OnInit {
-  characters: Personagem[] = [];
-  showValidationModal = false;
 
+export class PersonagensComponent implements OnInit {
+  // Dados de personagens
+  characters: Personagem[] = [];
+
+  // Propriedades para o formulário de novo personagem
+  newCharacter: Partial<Personagem> = {
+    nome: '',
+    role: '',
+    hpAtual: 100,
+    stamina: 100,
+    ataqueEspecial: ''
+  };
+
+  // Listagem de classes disponíveis
   classesDisponiveis = [
     { nome: 'Mago', descricao: 'Mestre de magias folclóricas, frágil fisicamente.', hp: 80, stamina: 100, ataqueEspecial: 'Lança feitiços que alteram o ambiente ou inimigos' },
     { nome: 'Marombeiro', descricao: 'Forte e resistente, especialista em combate físico.', hp: 120, stamina: 80, ataqueEspecial: 'Golpe poderoso de curta distância' },
@@ -34,18 +46,16 @@ export class PersonagensComponent implements OnInit {
     { nome: 'Espartano', descricao: 'Forte e resistente, foco em defesa e sobrevivência.', hp: 130, stamina: 80, ataqueEspecial: 'Defesa impenetrável por um turno' },
   ];
 
-  newCharacter: Partial<Personagem> = {
-    nome: '',
-    role: '',
-    hpAtual: 100,
-    stamina: 100,
-    ataqueEspecial: ''
-  };
-
-  // Modais
+  // Propriedades de estado para modais específicos
+  showValidationModal = false;
   showCharacterExistsModal = false;
   showSuccessModal = false;
   isSubmitting = false;
+
+  // Propriedades de estado para o novo modal genérico (declaradas para serem usadas nas novas funções)
+  showModal: boolean = false;
+  modalMessage: string = '';
+  modalType: 'error' | 'success' = 'success';
 
   private apiUrl = 'http://127.0.0.1:8000/personagens';
 
@@ -87,23 +97,22 @@ export class PersonagensComponent implements OnInit {
     }
   }
 
+  // >>> INÍCIO DA RESOLUÇÃO DO CONFLITO <<<
   createCharacter() {
-    if (!this.newCharacter.nome || !this.newCharacter.role) {
+    const vazioRegex = /^\s*$/;
+
+    // 1. Validação: Verifica campos vazios ou nulos.
+    if (!this.newCharacter.nome || vazioRegex.test(this.newCharacter.nome) || !this.newCharacter.role) {
       this.showValidationModal = true;
       return;
     }
 
     this.isSubmitting = true;
 
-    const payload: Personagem = {
-      _id: '',
-      nome: this.newCharacter.nome!,
-      role: this.newCharacter.role!,
-      hpAtual: this.newCharacter.hpAtual!,
-      stamina: this.newCharacter.stamina!,
-      ataqueEspecial: this.newCharacter.ataqueEspecial!
-    };
+    // 2. Definição do Payload (CORREÇÃO DE BUG: variável 'payload' estava indefinida)
+    const payload = this.newCharacter;
 
+    // 3. Chamada HTTP
     this.http.post<Personagem>(this.apiUrl, payload, { headers: this.getAuthHeaders() }).subscribe({
       next: (created) => {
         created._id = (created as any)._id?.$oid ? (created as any)._id.$oid : created._id;
@@ -131,6 +140,7 @@ export class PersonagensComponent implements OnInit {
       }
     });
   }
+  // >>> FIM DA RESOLUÇÃO DO CONFLITO <<<
 
   closeCharacterExistsModal() {
     this.showCharacterExistsModal = false;
@@ -138,6 +148,10 @@ export class PersonagensComponent implements OnInit {
 
   closeSuccessModal() {
     this.showSuccessModal = false;
+  }
+  
+  closeValidationModal() {
+    this.showValidationModal = false;
   }
 
   deleteCharacter(character: Personagem) {
@@ -147,5 +161,17 @@ export class PersonagensComponent implements OnInit {
       },
       error: (err) => console.error('Erro ao deletar personagem:', err)
     });
+  }
+
+  // Funções para o novo modal genérico
+  openModal(message: string, type: 'error' | 'success' = 'success') {
+    this.modalMessage = message;
+    this.modalType = type;
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.modalMessage = '';
   }
 }

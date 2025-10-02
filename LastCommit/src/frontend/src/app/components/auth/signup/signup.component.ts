@@ -1,5 +1,4 @@
-// signup.component.ts
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,17 +15,18 @@ import { UsuarioModel } from './UsuarioModel';
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule]
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   nome = '';
   usuario = '';
   senha = '';
   confirmarSenha = '';
   resposta: string | null = null;
-  erro: string | null = null;
+  erro: string | null = null; // Mensagem de erro para o modal genérico
 
-  // Modais
+  // Modais de estado
   showUserExistsModal = false;
   showSuccessModal = false;
+  showGenericErrorModal = false; // Novo modal para erros de validação e erros gerais da API
   isSubmitting = false;
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -54,60 +54,70 @@ export class SignupComponent {
     this.router.navigate(['/login']);
   }
 
+  // Função auxiliar para mostrar o modal de erro genérico
+  private showValidationErrorMessage(message: string) {
+    this.erro = message;
+    this.showGenericErrorModal = true;
+    this.resposta = null;
+  }
+
   registrar(): void {
     const nomeRegex = /^[A-Za-záàâãéèêíóôõúçÁÀÂÃÉÈÍÓÔÕÚÇ\s'-]+$/;
     const loginRegex = /^[a-z0-9_]{4,20}$/;
     const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    // Validações
+    // Limpa status de erro/resposta antes de começar
+    this.erro = null;
+    this.resposta = null;
+    this.showGenericErrorModal = false;
+    this.showUserExistsModal = false;
+
+    // 1. Validações de Campos
     /*if (!this.nome || !this.usuario || !this.senha || !this.confirmarSenha) {
-      this.erro = 'Por favor, preencha todos os campos obrigatórios.';
-      this.resposta = null;
+      this.showValidationErrorMessage('Por favor, preencha todos os campos obrigatórios para continuar.');
       return;
     }
 
     if (this.senha !== this.confirmarSenha) {
-      this.erro = 'As senhas não coincidem.';
-      this.resposta = null;
+      this.showValidationErrorMessage('As senhas não coincidem. Por favor, verifique.');
       return;
     }
 
     if (!nomeRegex.test(this.nome.trim())) {
-      this.erro = 'Nome inválido. Use apenas letras (com acentos), espaços, hífen e apóstrofo.';
-      this.resposta = null;
+      this.showValidationErrorMessage('Nome inválido. Use apenas letras (com acentos), espaços, hífen e apóstrofo.');
       return;
     }
 
     if (!loginRegex.test(this.usuario)) {
-      this.erro = 'Login inválido. Use apenas letras minúsculas, números, underline (_) e entre 4 e 20 caracteres.';
-      this.resposta = null;
+      this.showValidationErrorMessage('Login inválido. Use apenas letras minúsculas, números, underline (_), e tenha entre 4 e 20 caracteres.');
       return;
     }
 
     if (!senhaRegex.test(this.senha)) {
-      this.erro = 'A senha deve ter no mínimo 8 caracteres, contendo 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial (@ $ ! % * ? &).';
-      this.resposta = null;
+      this.showValidationErrorMessage('A senha deve ter no mínimo 8 caracteres, contendo pelo menos 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial (@ $ ! % * ? &).');
       return;
     }*/
 
-    this.erro = null;
-    this.resposta = null;
+    // Fim das validações, inicia submissão
     this.isSubmitting = true;
 
     const usuarioModel = new UsuarioModel(this.nome, this.usuario, this.senha);
 
     this.authService.signup(usuarioModel).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.isSubmitting = false;
-        this.resposta = res.msg;
+        this.resposta = res.msg || "Usuário registrado com sucesso!";
         this.showSuccessModal = true; // Mostra modal de sucesso
       },
       error: (err) => {
         this.isSubmitting = false;
+
         if (err.error?.detail === 'Usuário já existe') {
           this.showUserExistsModal = true; // Mostra modal de usuário existente
         } else {
-          this.erro = err.error?.detail || 'Erro ao cadastrar. Tente novamente.';
+          // Mostra erro genérico
+          const errorMessage = err.error?.detail || 'Erro ao cadastrar. Tente novamente.';
+          this.showValidationErrorMessage(errorMessage);
         }
       }
     });
@@ -116,6 +126,12 @@ export class SignupComponent {
   // Fechar modal de usuário existente
   closeUserExistsModal() {
     this.showUserExistsModal = false;
+  }
+
+  // Fechar modal de erro genérico
+  closeGenericErrorModal() {
+    this.showGenericErrorModal = false;
+    this.erro = null;
   }
 
   // Fechar modal de sucesso e ir para login
