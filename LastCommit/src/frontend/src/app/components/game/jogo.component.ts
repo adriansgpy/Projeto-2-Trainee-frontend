@@ -105,7 +105,9 @@ export class jogoComponent implements OnInit {
           hp: this.enemy.hp,
           max_hp: this.enemy.maxHp,
           stamina: this.enemy.stamina,
-          max_stamina: this.enemy.maxStamina
+          max_stamina: this.enemy.maxStamina,
+          descricao: this.enemy.descricao,       
+          ataqueEspecial: this.enemy.ataqueEspecial
         },
         chapter: this.chapterTitle,
         narrative: "",
@@ -156,7 +158,9 @@ export class jogoComponent implements OnInit {
         hp: this.enemy.hp,
         max_hp: this.enemy.maxHp,
         stamina: this.enemy.stamina,
-        max_stamina: this.enemy.maxStamina
+        max_stamina: this.enemy.maxStamina,
+        descricao: this.enemy.descricao,       
+        ataqueEspecial: this.enemy.ataqueEspecial
       },
       chapter: this.chapterTitle,
       narrative: "",

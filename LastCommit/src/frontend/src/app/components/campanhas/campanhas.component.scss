@@ -346,20 +346,71 @@ $fonte-banner: monospace;
     color: $cor-destaque;
 }
 
+/* ======================================= */
+/* SELEÇÃO DE PERSONAGEM (GLOBAL DROPDOWN) */
+/* ======================================= */
+
+.personagem-global-container {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    /* Adiciona um container visualmente destacado */
+    padding: 15px;
+    background-color: rgba(17, 17, 17, 0.9); /* Fundo escuro sutil */
+    border: 1px solid $cor-alerta; /* Borda de alerta/sangue */
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba($cor-alerta, 0.3);
+}
+
+.personagem-global-container label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: $cor-texto-claro; /* Mudei para texto claro para contraste */
+    font-family: $fonte-subtitulo;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
 .dropdown-personagem {
-    width: 40%;
-    padding: 10px;
-    font-size: 16px;
+    width: 100%; /* Ocupa a largura total do container */
+    max-width: 400px; /* Limite a largura em telas maiores */
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    
+    /* Estilo Sombrio e de Alerta */
     background-color: #111;
-    color: #fff;
-    border: 2px solid $cor-destaque;
-    border-radius: 8px;
+    color: $cor-texto-claro;
+    border: 2px solid $cor-destaque; /* Borda inicial com a cor de destaque */
+    border-radius: 4px;
     outline: none;
     cursor: pointer;
+    appearance: none; /* Remove o estilo padrão do navegador */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C70039' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dropdown-personagem:hover {
-    border-color: $cor-alerta;
+    border-color: $cor-alerta; /* Cor de alerta no hover */
+    box-shadow: 0 0 10px rgba($cor-alerta, 0.5);
+}
+
+/* Estiliza as opções dentro do dropdown */
+.dropdown-personagem option {
+    background-color: #1a1a1a;
+    color: $cor-texto-claro;
+    padding: 10px;
+}
+
+/* Responsividade: ocupa a largura total em mobile */
+@media (max-width: 992px) {
+    .dropdown-personagem {
+        max-width: none;
+    }
 }
 
 
