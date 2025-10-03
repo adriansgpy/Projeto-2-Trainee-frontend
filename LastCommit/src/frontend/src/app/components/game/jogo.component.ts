@@ -10,13 +10,15 @@ interface Player {
   maxHp: number;
   stamina: number;
   maxStamina: number;
+  inventory: string[];
+  classe : string;
 }
 
 interface ChatMessage {
   from: 'player' | 'llm' | 'system';
   text: string;
   formattedText: string;
-   buttons?: { label: string; action: string }[];
+  buttons?: { label: string; action: string }[];
 }
 
 @Component({
@@ -27,16 +29,17 @@ interface ChatMessage {
   imports: [CommonModule, RouterModule, FormsModule]
 })
 export class jogoComponent implements OnInit {
-  player: Player = { nome: '', hp: 0, maxHp: 0, stamina: 0, maxStamina: 0 };
+  player: Player = { nome: '', hp: 0, maxHp: 0, stamina: 0, maxStamina: 0, inventory: [], classe: '' };
   enemy: Lenda & { hp: number; maxHp: number; stamina: number; maxStamina: number } = {} as any;
   chapterTitle: string = '';
   chapterImage: string = '';
   choices: string[] = [];
-  isGameOver : boolean = false;
+  isGameOver: boolean = false;
   playerAction: string = '';
   chat: ChatMessage[] = [];
 
-  showConfirmModal: boolean = false; 
+  // Modal de confirmação de saída
+  showConfirmModal: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -49,10 +52,12 @@ export class jogoComponent implements OnInit {
     if (personagemData && lendaData) {
       this.player = {
         nome: personagemData.nome ?? 'Jogador',
+        classe: personagemData.classe ?? 'Jogador',
         hp: personagemData.hpAtual ?? 100,
         maxHp: personagemData.maxHp ?? personagemData.hpAtual ?? 100,
         stamina: personagemData.staminaAtual ?? 100,
         maxStamina: personagemData.maxStamina ?? personagemData.staminaAtual ?? 100,
+        inventory: personagemData.inventory ?? []
       };
       this.enemy = {
         ...lendaData,
@@ -75,41 +80,43 @@ export class jogoComponent implements OnInit {
     this.chat.push({ from, text, formattedText: text.replace(/\n/g, '<br>') });
   }
 
-
+  // ---------------- MODAL DE SAÍDA ----------------
   confirmExit() {
     this.showConfirmModal = true;
   }
 
   exitGame() {
     this.showConfirmModal = false;
-    this.router.navigate(['/homepage/campanhas']); 
+    this.router.navigate(['/homepage/campanhas']); // Ajuste para sua rota de campanhas
   }
 
   cancelExit() {
     this.showConfirmModal = false;
   }
 
-  // ---------------- COMECAR JOGO ----------------
+  // ---------------- GAME LOGIC ----------------
   async startGame() {
+    
     const payload = {
       state: {
         player: {
-          nome: this.player.nome,
-          hp: this.player.hp,
-          max_hp: this.player.maxHp,
-          stamina: this.player.stamina,
-          max_stamina: this.player.maxStamina,
+          nome: this.player.nome || "Jogador",
+          classe: this.player.classe || "Guerreiro",
+          hp: this.player.hp ?? 100,
+          max_hp: this.player.maxHp ?? 100,
+          stamina: this.player.stamina ?? 100,
+          max_stamina: this.player.maxStamina ?? 100,
+          inventario: this.player.inventory ?? []
         },
         enemy: {
-          nome: this.enemy.nome,
-          hp: this.enemy.hp,
-          max_hp: this.enemy.maxHp,
-          stamina: this.enemy.stamina,
-          max_stamina: this.enemy.maxStamina,
-          descricao: this.enemy.descricao,       
-          ataqueEspecial: this.enemy.ataqueEspecial
+          nome: this.enemy.nome || "Inimigo",
+          descricao: this.enemy.descricao || "",  // <- adicionado
+          hp: this.enemy.hp ?? 100,
+          max_hp: this.enemy.maxHp ?? 100,
+          stamina: this.enemy.stamina ?? 100,
+          max_stamina: this.enemy.maxStamina ?? 100
         },
-        chapter: this.chapterTitle,
+        chapter: this.chapterTitle || "Capítulo 1",
         narrative: "",
         choices: []
       }
@@ -129,6 +136,7 @@ export class jogoComponent implements OnInit {
       if (data.status?.player) {
         this.player.hp = data.status.player.hp;
         this.player.stamina = data.status.player.stamina;
+        this.player.inventory = data.status.player.inventario ?? this.player.inventory;
       }
       if (data.status?.enemy) {
         this.enemy.hp = data.status.enemy.hp;
@@ -140,33 +148,47 @@ export class jogoComponent implements OnInit {
     }
   }
 
- async processTurn(action: string) {
+  // jogo.component.ts
+
+  // jogo.component.ts
+
+async processTurn(action: string) {
+  // 1. Adiciona a ação do jogador ao chat
   this.addChatMessage('player', action);
 
-  const payload = {
-    action,
+  // Prepara o objeto GameState
+  const gameStatePayload = {
     state: {
       player: {
-        nome: this.player.nome,
-        hp: this.player.hp,
-        max_hp: this.player.maxHp,
-        stamina: this.player.stamina,
-        max_stamina: this.player.maxStamina,
+        nome: this.player.nome || "Jogador",
+        classe: this.player.classe || "Guerreiro",
+        hp: this.player.hp ?? 100,
+        max_hp: this.player.maxHp ?? 100,
+        stamina: this.player.stamina ?? 100,
+        max_stamina: this.player.maxStamina ?? 100,
+        inventario: this.player.inventory ?? []
       },
       enemy: {
-        nome: this.enemy.nome,
-        hp: this.enemy.hp,
-        max_hp: this.enemy.maxHp,
-        stamina: this.enemy.stamina,
-        max_stamina: this.enemy.maxStamina,
-        descricao: this.enemy.descricao,       
-        ataqueEspecial: this.enemy.ataqueEspecial
+        nome: this.enemy.nome || "Inimigo",
+        descricao: this.enemy.descricao || "", 
+        hp: this.enemy.hp ?? 100,
+        max_hp: this.enemy.maxHp ?? 100,
+        stamina: this.enemy.stamina ?? 100,
+        max_stamina: this.enemy.maxStamina ?? 100
       },
-      chapter: this.chapterTitle,
+      chapter: this.chapterTitle || "Capítulo 1",
       narrative: "",
-      choices: this.choices
+      choices: []
     }
   };
+
+  // CORREÇÃO: Cria o payload final incluindo o campo 'action'
+  const payload = {
+    action: action, // <--- Adicionado o campo 'action' aqui
+    state: gameStatePayload.state
+  };
+
+  console.log("Payload enviado em processTurn:", JSON.stringify(payload, null, 2));
 
   try {
     const response = await fetch('http://localhost:8000/llm/turn', {
@@ -181,7 +203,7 @@ export class jogoComponent implements OnInit {
     const narrativaArray = Array.isArray(data.narrativa) ? data.narrativa : [data.narrativa || ''];
     this.addChatMessage('llm', narrativaArray.join('\n'));
 
-    // resultado do turno 
+    // resultado numérico (hp/stamina changes)
     if (data.turn_result) {
       let resultText = '..............................\n\nRESULTADO\n\n';
       if (data.turn_result.enemy) {
@@ -202,18 +224,23 @@ export class jogoComponent implements OnInit {
       this.addChatMessage('llm', resultText);
     }
 
+    // escolhas para o próximo turno
     this.choices = data.escolhas ?? [];
 
+    // atualizar status do jogador
     if (data.status?.player) {
       this.player.hp = data.status.player.hp;
       this.player.stamina = data.status.player.stamina;
+      this.player.inventory = data.status.player.inventario ?? this.player.inventory;
     }
 
+    // atualizar status do inimigo
     if (data.status?.enemy) {
       this.enemy.hp = data.status.enemy.hp;
       this.enemy.stamina = data.status.enemy.stamina;
     }
 
+    // verificar derrota
     if (this.enemy.hp <= 0) {
       this.enemy.hp = 0;
       this.gameOver(true);
@@ -232,6 +259,8 @@ export class jogoComponent implements OnInit {
   }
 }
 
+
+
   sendAction() {
     if (!this.playerAction.trim()) return;
     this.processTurn(this.playerAction);
@@ -242,26 +271,25 @@ export class jogoComponent implements OnInit {
     this.processTurn(choice);
   }
 
-
   gameOver(vitoria: boolean) {
-  this.isGameOver = true;
+    this.isGameOver = true;
 
-  if (vitoria) {
-    this.addChatMessage('system', `🏆 Vitória! Você derrotou ${this.enemy.nome} com honra!`);
-  } else {
-    this.addChatMessage('system', `💀 Derrota... ${this.enemy.nome} acabou com você.`);
+    if (vitoria) {
+      this.addChatMessage('system', `🏆 Vitória! Você derrotou ${this.enemy.nome} com honra!`);
+    } else {
+      this.addChatMessage('system', `💀 Derrota... ${this.enemy.nome} acabou com você.`);
+    }
+
+    // Mensagem final com botões
+    this.chat.push({
+      from: 'system',
+      text: '',
+      formattedText: '',
+      buttons: [
+        { label: '🚪 O seu trabalho foi terminado. Volte pra casa.', action: 'exitToCampaigns' }
+      ]
+    });
   }
-
-  // Mensagem final com botões
-  this.chat.push({
-    from: 'system',
-    text: '',
-    formattedText: '',
-    buttons: [
-      { label: '🚪 O seu trabalho foi terminado. Volte pra casa.', action: 'exitToCampaigns' }
-    ]
-  });
-}
 
   handleButtonAction(action: string) {
     if (action === 'exitToCampaigns') {
@@ -269,14 +297,14 @@ export class jogoComponent implements OnInit {
     }
   }
 
-
   restartGame() {
     this.isGameOver = false;
     this.chat = [];
     this.player.hp = this.player.maxHp;
     this.player.stamina = this.player.maxStamina;
     this.enemy.hp = this.enemy.maxHp;
+    
     this.enemy.stamina = this.enemy.maxStamina;
-    this.addChatMessage('system', '⚔️ Uma nova batalha começa!');
+    this.addChatMessage('system', '⚔ Uma nova batalha começa!');
   }
 }

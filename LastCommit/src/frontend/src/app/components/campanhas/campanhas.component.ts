@@ -16,6 +16,7 @@ interface Capitulo {
 interface Personagem {
   _id: string;
   nome: string;
+  classe?: string;
   inventario: string[];
   ultimoCapitulo: string | null;
   hpAtual: number;
@@ -126,33 +127,33 @@ this.campanhas = [
   }
 
   loadPersonagens() {
+  const token = localStorage.getItem('token');
 
-    const token = localStorage.getItem('token');
+  this.http.get<Personagem[]>(this.apiUrl, { headers: { Authorization: `Bearer ${token}` } })
+    .subscribe({
+      next: (data) => {
+        this.personagens = data.map(p => ({
+          ...p,
+          _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id,
+          classe: (p as any).role || 'Guerreiro'  // <-- aqui mapeia 'role' do MongoDB para 'classe'
+        }));
 
-    this.http.get<Personagem[]>(this.apiUrl, { headers: { Authorization: `Bearer ${token}` } })
-      .subscribe({
-        next: (data) => {
-          this.personagens = data.map(p => ({
-            ...p,
-            _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id
-          }));
+        if (this.personagens.length === 0) {
+          this.showNoCharacterModal = true; 
+        } 
 
-          if (this.personagens.length === 0) {
-            this.showNoCharacterModal = true; 
-          } 
+        const saved = localStorage.getItem('personagemSelecionado');
+        if (saved) {
+          this.personagemGlobalSelecionado = this.personagens.find(p => p._id === saved) || null;
+        } else if (this.personagens.length > 0) {
+          this.personagemGlobalSelecionado = this.personagens[0];
+        }
 
-          const saved = localStorage.getItem('personagemSelecionado');
-          if (saved) {
-            this.personagemGlobalSelecionado = this.personagens.find(p => p._id === saved) || null;
-          } else if (this.personagens.length > 0) {
-            this.personagemGlobalSelecionado = this.personagens[0];
-          }
+      },
+      error: (err) => console.error('Erro ao carregar personagens:', err)
+    });
+}
 
-        },
-        error: (err) => console.error('Erro ao carregar personagens:', err)
-      });
-
-  }
 
   onPersonagemChange(personagem: Personagem) {
 

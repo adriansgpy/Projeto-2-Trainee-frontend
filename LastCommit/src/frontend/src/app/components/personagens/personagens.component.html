@@ -10,12 +10,11 @@
               <strong>{{ character.nome }}</strong>
               <span>Classe: {{ character.role }}</span>
               <span>HP: {{ character.hpAtual }}</span>
-              <span>Stamina: {{ character.stamina }}</span>
               <span>Ataque Especial: {{ character.ataqueEspecial }}</span>
             </div>
           </div>
           <div class="card-buttons">
-            <button class="delete-btn" (click)="deleteCharacter(character)">Deletar</button>
+            <button class="delete-btn" (click)="confirmDeleteCharacter(character)">Deletar</button>
           </div>
         </li>
       </ul>
@@ -45,7 +44,6 @@
         <div *ngIf="newCharacter.role">
           <p><strong>Descrição:</strong> {{ getClasseSelecionada()?.descricao }}</p>
           <p><strong>HP Inicial:</strong> {{ newCharacter.hpAtual }}</p>
-          <p><strong>Stamina:</strong> {{ newCharacter.stamina }}</p>
           <p><strong>Ataque Especial:</strong> {{ newCharacter.ataqueEspecial }}</p>
         </div>
 
@@ -57,7 +55,19 @@
 </div>
 
 
-<!-- Modal de personagem existente -->
+<div class="modal-overlay" *ngIf="showDeleteConfirmModal">
+  <div class="modal">
+    <h2>Atenção!</h2>
+    <p>Tem certeza que deseja deletar o personagem <strong>{{ characterToDelete?.nome }}</strong>?</p>
+    <p>Esta ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" (click)="closeDeleteConfirmationModal()">Cancelar</button>
+      <button class="delete-btn" (click)="executeDelete()">Deletar Permanentemente</button>
+    </div>
+  </div>
+</div>
+
+
 <div class="modal-overlay" *ngIf="showCharacterExistsModal">
   <div class="modal">
     <h2>Erro de Exterminador</h2>
@@ -66,7 +76,6 @@
   </div>
 </div>
 
-<!-- Modal de sucesso -->
 <div class="modal-overlay" *ngIf="showSuccessModal">
   <div class="modal">
     <h2>Agora o chinelo vai cantar.</h2>
@@ -75,7 +84,6 @@
   </div>
 </div>
 
-<!-- Modal de validação -->
 <div class="modal-overlay" *ngIf="showValidationModal">
   <div class="modal">
     <h2>Calma lá!</h2>
@@ -84,3 +92,10 @@
   </div>
 </div>
 
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal" [ngClass]="{'modal-error': modalType === 'error', 'modal-success': modalType === 'success'}">
+    <h2>{{ modalType === 'success' ? 'Sucesso!' : 'Erro!' }}</h2>
+    <p>{{ modalMessage }}</p>
+    <button (click)="closeModal()">Fechar</button>
+  </div>
+</div>

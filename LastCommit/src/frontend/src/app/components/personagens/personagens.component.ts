@@ -10,7 +10,6 @@ interface Personagem {
   nome: string;
   role: string;
   hpAtual: number;
-  stamina: number;
   ataqueEspecial: string;
   image?: string;
 }
@@ -32,18 +31,17 @@ export class PersonagensComponent implements OnInit {
     nome: '',
     role: '',
     hpAtual: 100,
-    stamina: 100,
     ataqueEspecial: ''
   };
 
   // Listagem de classes disponíveis
   classesDisponiveis = [
-    { nome: 'Mago', descricao: 'Mestre de magias folclóricas, frágil fisicamente.', hp: 80, stamina: 100, ataqueEspecial: 'Lança feitiços que alteram o ambiente ou inimigos' },
-    { nome: 'Marombeiro', descricao: 'Forte e resistente, especialista em combate físico.', hp: 120, stamina: 80, ataqueEspecial: 'Golpe poderoso de curta distância' },
-    { nome: 'Cientista Doido', descricao: 'Inventivo, pode manipular o ambiente ou objetos.', hp: 90, stamina: 100, ataqueEspecial: 'Cria gadgets que causam efeitos variados' },
-    { nome: 'Ninja', descricao: 'Ágil e sorrateiro, especialista em movimentos rápidos.', hp: 85, stamina: 90, ataqueEspecial: 'Ataque furtivo e esquiva rápida' },
-    { nome: 'Mestre de Artes Marciais', descricao: 'Equilibrado, ótimo corpo a corpo e defesa.', hp: 110, stamina: 90, ataqueEspecial: 'Combo de ataques que causa dano extra' },
-    { nome: 'Espartano', descricao: 'Forte e resistente, foco em defesa e sobrevivência.', hp: 130, stamina: 80, ataqueEspecial: 'Defesa impenetrável por um turno' },
+    { nome: 'Mago', descricao: 'Mestre de magias folclóricas, frágil fisicamente.', hp: 80,  ataqueEspecial: 'Lança feitiços que alteram o ambiente ou inimigos' },
+    { nome: 'Marombeiro', descricao: 'Forte e resistente, especialista em combate físico.', hp: 120,  ataqueEspecial: 'Golpe poderoso de curta distância' },
+    { nome: 'Cientista Doido', descricao: 'Inventivo, pode manipular o ambiente ou objetos.', hp: 90,  ataqueEspecial: 'Cria gadgets que causam efeitos variados' },
+    { nome: 'Ninja', descricao: 'Ágil e sorrateiro, especialista em movimentos rápidos.', hp: 85, ataqueEspecial: 'Ataque furtivo e esquiva rápida' },
+    { nome: 'Mestre de Artes Marciais', descricao: 'Equilibrado, ótimo corpo a corpo e defesa.', hp: 110,  ataqueEspecial: 'Combo de ataques que causa dano extra' },
+    { nome: 'Espartano', descricao: 'Forte e resistente, foco em defesa e sobrevivência.', hp: 130, ataqueEspecial: 'Defesa impenetrável por um turno' },
   ];
 
   // Propriedades de estado para modais específicos
@@ -52,7 +50,12 @@ export class PersonagensComponent implements OnInit {
   showSuccessModal = false;
   isSubmitting = false;
 
-  // Propriedades de estado para o novo modal genérico (declaradas para serem usadas nas novas funções)
+  // ESTADO DO NOVO MODAL DE CONFIRMAÇÃO DE EXCLUSÃO
+  showDeleteConfirmModal = false;
+  characterToDelete: Personagem | null = null;
+  // FIM DO ESTADO DO NOVO MODAL
+
+  // Propriedades de estado para o novo modal genérico (mantidas do seu código original)
   showModal: boolean = false;
   modalMessage: string = '';
   modalType: 'error' | 'success' = 'success';
@@ -91,7 +94,6 @@ export class PersonagensComponent implements OnInit {
     const classe = this.classesDisponiveis.find(c => c.nome === classeNome);
     if (classe) {
       this.newCharacter.hpAtual = classe.hp;
-      this.newCharacter.stamina = classe.stamina;
       this.newCharacter.ataqueEspecial = classe.ataqueEspecial;
       this.newCharacter.role = classe.nome;
     }
@@ -118,7 +120,6 @@ export class PersonagensComponent implements OnInit {
           nome: '',
           role: '',
           hpAtual: 100,
-          stamina: 100,
           ataqueEspecial: ''
         };
 
@@ -148,15 +149,42 @@ export class PersonagensComponent implements OnInit {
     this.showValidationModal = false;
   }
 
-  deleteCharacter(character: Personagem) {
-    this.http.delete(`${this.apiUrl}/${character._id}`, { headers: this.getAuthHeaders() }).subscribe({
-      next: () => {
-        this.characters = this.characters.filter(c => c._id !== character._id);
-      },
-      error: (err) => console.error('Erro ao deletar personagem:', err)
-    });
+  // NOVA FUNÇÃO: Abre o modal de confirmação antes de deletar
+  confirmDeleteCharacter(character: Personagem) {
+    this.characterToDelete = character;
+    this.showDeleteConfirmModal = true;
   }
 
+  // NOVA FUNÇÃO: Fecha o modal de confirmação de delete
+  closeDeleteConfirmationModal() {
+    this.showDeleteConfirmModal = false;
+    this.characterToDelete = null;
+  }
+
+  // FUNÇÃO DE DELETE MODIFICADA: Agora executa a exclusão APENAS após a confirmação.
+  executeDelete() {
+    if (!this.characterToDelete) {
+      this.closeDeleteConfirmationModal();
+      return;
+    }
+    
+    const idToDelete = this.characterToDelete._id;
+
+    this.http.delete(`${this.apiUrl}/${idToDelete}`, { headers: this.getAuthHeaders() }).subscribe({
+      next: () => {
+        this.characters = this.characters.filter(c => c._id !== idToDelete);
+        this.openModal(`Personagem ${this.characterToDelete?.nome} deletado com sucesso.`, 'success'); // Usa o modal genérico para feedback
+        this.closeDeleteConfirmationModal(); // Fecha o modal de confirmação
+      },
+      error: (err) => {
+        this.openModal(`Erro ao deletar ${this.characterToDelete?.nome}.`, 'error');
+        console.error('Erro ao deletar personagem:', err);
+        this.closeDeleteConfirmationModal(); // Fecha o modal de confirmação mesmo com erro
+      }
+    });
+  }
+  
+  // As funções openModal e closeModal são mantidas
   openModal(message: string, type: 'error' | 'success' = 'success') {
     this.modalMessage = message;
     this.modalType = type;

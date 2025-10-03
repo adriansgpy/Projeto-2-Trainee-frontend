@@ -516,3 +516,10 @@ html, body, app-root {
     border-color: #777;
     transform: scale(1.05);
 }
+
+.hp-damage {
+  color: red;
+  font-size: 22px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
