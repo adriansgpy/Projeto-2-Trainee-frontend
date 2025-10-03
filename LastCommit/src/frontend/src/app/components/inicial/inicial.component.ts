@@ -24,11 +24,8 @@ export class InicialComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    // Remove o token do localStorage
     localStorage.removeItem('token');
-
-    // Redireciona para a tela inicial
-    this.router.navigate(['/login']); // ou '/inicial', conforme sua rota
+    this.router.navigate(['/login']); 
   }
 
   ngOnDestroy(): void {

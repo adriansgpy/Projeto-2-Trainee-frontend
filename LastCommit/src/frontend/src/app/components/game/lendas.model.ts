@@ -11,7 +11,7 @@ export const LENDAS: Lenda[] = [
   {
     nome: 'Loira do Banheiro',
     descricao: 'Devido à inflação violenta, os donos das lojas Boticário Make B e L’Oréal estão reclamando que a Loira do Banheiro anda assaltando as lojas do Rio de Janeiro. Vá e coloque um fim nesse absurdo!',
-    hp: 50,
+    hp: 80,
     stamina: 120,
     ataqueEspecial: 'Susto Mortal: assusta o jogador, causando perda de turno',
     imagem: 'assets/loira_do_banheiro.png'

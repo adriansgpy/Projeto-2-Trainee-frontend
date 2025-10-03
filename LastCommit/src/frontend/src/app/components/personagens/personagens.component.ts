@@ -97,11 +97,9 @@ export class PersonagensComponent implements OnInit {
     }
   }
 
-  // >>> INÍCIO DA RESOLUÇÃO DO CONFLITO <<<
   createCharacter() {
     const vazioRegex = /^\s*$/;
 
-    // 1. Validação: Verifica campos vazios ou nulos.
     if (!this.newCharacter.nome || vazioRegex.test(this.newCharacter.nome) || !this.newCharacter.role) {
       this.showValidationModal = true;
       return;
@@ -109,16 +107,13 @@ export class PersonagensComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    // 2. Definição do Payload (CORREÇÃO DE BUG: variável 'payload' estava indefinida)
     const payload = this.newCharacter;
 
-    // 3. Chamada HTTP
     this.http.post<Personagem>(this.apiUrl, payload, { headers: this.getAuthHeaders() }).subscribe({
       next: (created) => {
         created._id = (created as any)._id?.$oid ? (created as any)._id.$oid : created._id;
         this.characters.push(created);
 
-        // Limpa formulário
         this.newCharacter = {
           nome: '',
           role: '',
@@ -140,7 +135,6 @@ export class PersonagensComponent implements OnInit {
       }
     });
   }
-  // >>> FIM DA RESOLUÇÃO DO CONFLITO <<<
 
   closeCharacterExistsModal() {
     this.showCharacterExistsModal = false;
@@ -163,7 +157,6 @@ export class PersonagensComponent implements OnInit {
     });
   }
 
-  // Funções para o novo modal genérico
   openModal(message: string, type: 'error' | 'success' = 'success') {
     this.modalMessage = message;
     this.modalType = type;

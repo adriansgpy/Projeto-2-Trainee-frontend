@@ -66,10 +66,6 @@
             <p><strong>Nome:</strong> {{ player.nome }}</p>
             <p><strong>HP:</strong> {{ player.hp }} / {{ player.maxHp }}</p>
             <p><strong>Stamina:</strong> {{ player.stamina }} / {{ player.maxStamina }}</p>
-            <p><strong>Inventário:</strong></p>
-            <ul>
-                <li *ngFor="let item of player.inventory">{{ item }}</li>
-            </ul>
         </div>
 
         <h2>Lenda</h2>

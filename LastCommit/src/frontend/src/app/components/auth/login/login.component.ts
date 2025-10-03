@@ -3,7 +3,6 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AudioService } from '../../../services/soundtrack.service';
 
 @Component({
   selector: 'app-login',
@@ -27,22 +26,19 @@ export class LoginComponent implements OnInit { // Adicionado 'implements OnInit
   constructor(
     private http: HttpClient,
     private router: Router,
-    private audioService: AudioService
+
   ) {}
   
   ngOnInit() {
-  this.audioService.playMusic('assets/soundtrack/bms.mp3');
+ 
 
   // Login automático se houver token
   const token = localStorage.getItem('token');
   if (token) {
-    // Aqui você pode opcionalmente validar o token chamando uma rota /auth/me
-    this.audioService.stopMusic();
-    this.router.navigate(['/homepage']); // Vai direto para a homepage
-    return; // Sai do ngOnInit
+    this.router.navigate(['/homepage']); 
+    return; 
   }
 
-  // Listener para habilitar fullscreen após interação do usuário
   const fullscreenHandler = () => {
     this.enterFullscreen();
     document.removeEventListener('click', fullscreenHandler);
@@ -55,9 +51,9 @@ export class LoginComponent implements OnInit { // Adicionado 'implements OnInit
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
-    } else if ((elem as any).webkitRequestFullscreen) { /* Safari */
+    } else if ((elem as any).webkitRequestFullscreen) { 
       (elem as any).webkitRequestFullscreen();
-    } else if ((elem as any).msRequestFullscreen) { /* IE11 */
+    } else if ((elem as any).msRequestFullscreen) {
       (elem as any).msRequestFullscreen();
     }
   }
@@ -90,12 +86,10 @@ export class LoginComponent implements OnInit { // Adicionado 'implements OnInit
         this.resposta = 'Login realizado com sucesso!';
         this.erro = null;
 
-        // Armazena o token e navega
         if (res.access_token) {
           localStorage.setItem('token', res.access_token);
         }
 
-        this.audioService.stopMusic();
         this.router.navigate(['/homepage']);
       },
       error: (err) => {
@@ -105,7 +99,6 @@ export class LoginComponent implements OnInit { // Adicionado 'implements OnInit
         if (err.status === 401 || err.status === 400) {
           this.showInvalidCredentialsModal = true;
         } else {
-          // Outros erros
           this.erro = 'Ocorreu um erro ao tentar fazer login.';
         }
 

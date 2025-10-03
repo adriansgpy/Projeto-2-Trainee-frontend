@@ -9,6 +9,16 @@
     </div>
   </div>
 
+  <div class="modal-overlay" *ngIf="showNoCharacterModal">
+    <div class="modal">
+      <h3>Então...</h3>
+      <p>Você ainda não possui nenhum exterminador criado. Crie um personagem para poder exterminar essas lendas meia boca.</p>
+      <div class="modal-actions">
+        <button (click)="showNoCharacterModal = false">Fechar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="personagem-global-container" *ngIf="personagens.length > 0">
     <label for="personagemGlobal">Selecione seu personagem:</label>
     <select 

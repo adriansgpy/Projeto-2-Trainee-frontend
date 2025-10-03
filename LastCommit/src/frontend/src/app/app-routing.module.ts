@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { ProfileComponent } from './components/profile/profile.component';
-
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,20 +22,13 @@ export const routes: Routes = [
     ]
   },
 
-  {
-    path: 'intro/cientista',
-    loadComponent: () => import('./components/intro/cientista-intro/cientista_intro.component').then(m => m.CientistaIntroComponent)
-  },
 
   {
     path: 'game',
     loadComponent: () => import('./components/game/jogo.component').then(m => m.jogoComponent)
-  },
+  }
 
-  {
-    path: 'intro/HEV',
-    loadComponent: () => import('./components/intro/HEV/hev_intro.component').then(m => m.HevIntroComponent)
-  },
+ 
 ];
 
 @NgModule({

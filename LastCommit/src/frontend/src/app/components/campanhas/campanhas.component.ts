@@ -39,11 +39,12 @@ interface Campanha {
 })
 
 export class CampanhasComponent implements OnInit {
-  campanhas: Campanha[] = [];
+  campanhas: Campanha[] = []; 
   personagens: Personagem[] = [];
   personagemGlobalSelecionado: Personagem | null = null;
   campanhaSelecionada: Campanha | null = null;
   private apiUrl = 'http://127.0.0.1:8000/personagens';
+  showNoCharacterModal: boolean = false; 
 
   constructor(
     private http: HttpClient,
@@ -136,6 +137,10 @@ this.campanhas = [
             _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id
           }));
 
+          if (this.personagens.length === 0) {
+            this.showNoCharacterModal = true; 
+          } 
+
           const saved = localStorage.getItem('personagemSelecionado');
           if (saved) {
             this.personagemGlobalSelecionado = this.personagens.find(p => p._id === saved) || null;
@@ -169,11 +174,9 @@ this.campanhas = [
   const lenda = LENDAS.find(l => l.nome === camp.titulo);
   if (!lenda) return;
 
-  // Salva no localStorage
   localStorage.setItem('playerSelected', JSON.stringify(personagem));
   localStorage.setItem('lendaSelected', JSON.stringify(lenda));
 
-  // Navega para o jogo
   this.router.navigateByUrl('/game');
 }
 
@@ -182,7 +185,6 @@ this.campanhas = [
     const rotaIntro = '/game';
     this.audioService.stopMusic();
     console.log("personagem: " + personagem.nome)
-    //this.router.navigateByUrl(rotaIntro, { state: { personagem } });
   }
 
 }

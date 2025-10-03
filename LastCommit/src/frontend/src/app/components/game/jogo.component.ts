@@ -10,7 +10,6 @@ interface Player {
   maxHp: number;
   stamina: number;
   maxStamina: number;
-  inventory: string[];
 }
 
 interface ChatMessage {
@@ -28,7 +27,7 @@ interface ChatMessage {
   imports: [CommonModule, RouterModule, FormsModule]
 })
 export class jogoComponent implements OnInit {
-  player: Player = { nome: '', hp: 0, maxHp: 0, stamina: 0, maxStamina: 0, inventory: [] };
+  player: Player = { nome: '', hp: 0, maxHp: 0, stamina: 0, maxStamina: 0 };
   enemy: Lenda & { hp: number; maxHp: number; stamina: number; maxStamina: number } = {} as any;
   chapterTitle: string = '';
   chapterImage: string = '';
@@ -37,8 +36,7 @@ export class jogoComponent implements OnInit {
   playerAction: string = '';
   chat: ChatMessage[] = [];
 
-  // Modal de confirmação de saída
-  showConfirmModal: boolean = false;
+  showConfirmModal: boolean = false; 
 
   constructor(private router: Router) {}
 
@@ -55,7 +53,6 @@ export class jogoComponent implements OnInit {
         maxHp: personagemData.maxHp ?? personagemData.hpAtual ?? 100,
         stamina: personagemData.staminaAtual ?? 100,
         maxStamina: personagemData.maxStamina ?? personagemData.staminaAtual ?? 100,
-        inventory: personagemData.inventory ?? []
       };
       this.enemy = {
         ...lendaData,
@@ -78,21 +75,21 @@ export class jogoComponent implements OnInit {
     this.chat.push({ from, text, formattedText: text.replace(/\n/g, '<br>') });
   }
 
-  // ---------------- MODAL DE SAÍDA ----------------
+
   confirmExit() {
     this.showConfirmModal = true;
   }
 
   exitGame() {
     this.showConfirmModal = false;
-    this.router.navigate(['/homepage/campanhas']); // Ajuste para sua rota de campanhas
+    this.router.navigate(['/homepage/campanhas']); 
   }
 
   cancelExit() {
     this.showConfirmModal = false;
   }
 
-  // ---------------- GAME LOGIC ----------------
+  // ---------------- COMECAR JOGO ----------------
   async startGame() {
     const payload = {
       state: {
@@ -102,7 +99,6 @@ export class jogoComponent implements OnInit {
           max_hp: this.player.maxHp,
           stamina: this.player.stamina,
           max_stamina: this.player.maxStamina,
-          inventario: this.player.inventory
         },
         enemy: {
           nome: this.enemy.nome,
@@ -131,7 +127,6 @@ export class jogoComponent implements OnInit {
       if (data.status?.player) {
         this.player.hp = data.status.player.hp;
         this.player.stamina = data.status.player.stamina;
-        this.player.inventory = data.status.player.inventario ?? this.player.inventory;
       }
       if (data.status?.enemy) {
         this.enemy.hp = data.status.enemy.hp;
@@ -155,7 +150,6 @@ export class jogoComponent implements OnInit {
         max_hp: this.player.maxHp,
         stamina: this.player.stamina,
         max_stamina: this.player.maxStamina,
-        inventario: this.player.inventory
       },
       enemy: {
         nome: this.enemy.nome,
@@ -183,7 +177,7 @@ export class jogoComponent implements OnInit {
     const narrativaArray = Array.isArray(data.narrativa) ? data.narrativa : [data.narrativa || ''];
     this.addChatMessage('llm', narrativaArray.join('\n'));
 
-    // resultado numérico (hp/stamina changes)
+    // resultado do turno 
     if (data.turn_result) {
       let resultText = '..............................\n\nRESULTADO\n\n';
       if (data.turn_result.enemy) {
@@ -209,7 +203,6 @@ export class jogoComponent implements OnInit {
     if (data.status?.player) {
       this.player.hp = data.status.player.hp;
       this.player.stamina = data.status.player.stamina;
-      this.player.inventory = data.status.player.inventario ?? this.player.inventory;
     }
 
     if (data.status?.enemy) {
