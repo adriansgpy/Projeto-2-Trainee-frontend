@@ -1,0 +1,142 @@
+/* ======= CONTAINER GERAL ======= */
+.perfil-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #e0e0e0;
+  font-family: "Cinzel", serif;
+  text-shadow: 2px 2px 5px #000;
+}
+
+.perfil-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #ff3333;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: flicker 2s infinite alternate;
+}
+
+/* ======= INFO ======= */
+.perfil-info {
+  margin: 10px 0;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border-left: 4px solid #ff3333;
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+.perfil-info label {
+  font-weight: bold;
+  color: #fff;
+}
+
+.perfil-info span {
+  color: #bbb;
+}
+
+/* ======= BOTÕES ======= */
+.perfil-actions button,
+.modal-actions button,
+.field button {
+  background: #990000;
+  border: none;
+  padding: 8px 14px;
+  margin-top: 12px;
+  margin-left: 5px;
+  border-radius: 6px;
+  color: white;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.perfil-actions button:hover,
+.modal-actions button:hover,
+.field button:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+/* ======= MODAL ======= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.modal {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 360px;
+  color: #eee;
+  text-align: center;
+  border: 2px solid #ff3333;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
+}
+
+.modal h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #ff4444;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.field {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.field input {
+  width: calc(100% - 90px);
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  background: #111;
+  color: #eee;
+  margin-right: 5px;
+}
+
+.error-msg {
+  color: #ff3333;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  text-shadow: 0 0 5px #000;
+}
+
+
+
+
+/* ======= ANIMAÇÕES ======= */
+@keyframes flicker {
+  0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff3333, 0 0 20px #ff0000; }
+  50% { text-shadow: 0 0 2px #660000, 0 0 5px #990000; }
+  100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333, 0 0 40px #ff0000; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

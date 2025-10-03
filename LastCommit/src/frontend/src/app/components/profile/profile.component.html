@@ -1,0 +1,62 @@
+<div class="perfil-container">
+  <h2>Meu Perfil</h2>
+
+  <div class="perfil-info">
+    <label>Nome:</label>
+    <span>{{ nome }}</span>
+  </div>
+
+  <div class="perfil-info">
+    <label>Usuário:</label>
+    <span>{{ usuario }}</span>
+  </div>
+
+  <div class="perfil-actions">
+    <button (click)="openChangePassword()">Trocar Senha</button>
+  </div>
+</div>
+
+<!-- Modal de sucesso -->
+<div class="modal-overlay" *ngIf="showSuccessModal">
+  <div class="modal">
+    <h3>Sucesso!</h3>
+    <p>Sua senha foi alterada com sucesso!</p>
+    <div class="modal-actions">
+      <button (click)="closeSuccessModal()">OK</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal trocar senha -->
+<div class="modal-overlay" *ngIf="showChangePasswordModal">
+  <div class="modal">
+    <h3>Trocar Senha</h3>
+
+    <div class="field">
+    <label>Senha atual</label>
+    <input [type]="showCurrentPassword ? 'text' : 'password'" [(ngModel)]="currentPassword" />
+    <button (click)="toggleShowCurrent()">{{ showCurrentPassword ? 'Ocultar' : 'Mostrar' }}</button>
+    <div *ngIf="currentPasswordError" class="error-msg">{{ currentPasswordError }}</div>
+    </div>
+
+    <div class="field">
+    <label>Nova senha</label>
+    <input [type]="showNewPassword ? 'text' : 'password'" [(ngModel)]="newPassword" />
+    <button (click)="toggleShowNew()">{{ showNewPassword ? 'Ocultar' : 'Mostrar' }}</button>
+    <div *ngIf="newPasswordError" class="error-msg">{{ newPasswordError }}</div>
+    </div>
+
+
+    <!-- Mensagem de erro -->
+    <div *ngIf="newPassword && newPassword.length < 6" class="error-msg">
+    A senha deve ter pelo menos 6 caracteres.
+    </div>
+
+
+    <div class="modal-actions">
+      <button (click)="submitChangePassword()">Confirmar</button>
+      <button (click)="closeChangePassword()">Cancelar</button>
+    </div>
+  </div>
+</div>
