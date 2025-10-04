@@ -1,6 +1,4 @@
-/* ======================================= */
-/* Reset Básico e Configurações de Base - O Básico Permanece Sombrio */
-/* ======================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,15 +8,11 @@
 html, body, app-root {
     width: 100%;
     height: 100%;
-    /* Fonte mais agressiva e fria para o terror tech */
     font-family: 'Courier New', monospace;
-    /* Fundo de abismo - quase preto, mas com uma leve sujeira */
     background-color: #0d0d0d;
-    /* Cor de texto pálida e fria */
     color: #a0a0a0;
 }
 
-/* Scrollbar Sanguinolenta e Desgastada */
 ::-webkit-scrollbar {
     width: 8px; /* Mais grossa */
 }
@@ -31,16 +25,13 @@ html, body, app-root {
     background: #000000;
 }
 
-/* Scroll invisível - mantido para as áreas com overflow */
 .main-content::-webkit-scrollbar,
 .sidebar::-webkit-scrollbar {
     width: 8px;
     background: transparent;
 }
 
-/* ======================================= */
-/* Fundo do Capítulo (Mortal) */
-/* ======================================= */
+
 #chapter-bg {
     position: fixed;
     top: 0;
@@ -50,16 +41,11 @@ html, body, app-root {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* Filtro para escurecer drasticamente e adicionar desfoque/distorção */
     filter: brightness(0.08) contrast(1.2) blur(1px); 
     z-index: -1;
-    /* Transição mais lenta, para uma sensação de lentidão e peso */
     transition: background-image 0.8s ease-in-out, filter 0.8s ease-in-out;
 }
 
-/* ======================================= */
-/* Container Principal e Layout */
-/* ======================================= */
 .container {
     display: flex;
     flex-direction: row;
@@ -69,64 +55,50 @@ html, body, app-root {
     gap: 20px;
 }
 
-/* Área Principal (Caixa de Pesadelos) */
 .main-content {
     flex: 3;
     padding: 25px; 
     overflow-y: auto;
-    /* Fundo mais denso e opaco, como um material pesado */
     background: rgba(10, 10, 10, 0.95);
     border-radius: 0px; /* Remoção de bordas arredondadas para um visual duro */
-    /* Sombra interna para profundidade e externa sutilmente vermelha */
     box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.15), 0 4px 15px rgba(0, 0, 0, 0.5);
-    /* Borda de metal enferrujado/sujo */
     border: 1px solid #440000; 
 }
 
-/* Sidebar Lateral (Painel de Status) - Registro de Dor */
 .sidebar {
     flex: 1;
     padding: 25px;
     overflow-y: auto;
-    /* Fundo mais consistente e pesado */
     background: rgba(10, 10, 10, 0.95);
     border-radius: 0px;
     box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.15), 0 4px 15px rgba(0, 0, 0, 0.5);
     border: 1px solid #440000;
 }
 
-/* ======================================= */
-/* Banner e Título - Manchas de Sangue */
-/* ======================================= */
 .chapter-banner {
     position: relative;
     width: 100%;
     height: 150px; 
-    /* Fundo preto, sugerindo um vácuo */
     background: #000000;
     border-radius: 0px;
     display: flex;
     align-items: flex-end;
     padding: 15px;
     margin-bottom: 25px;
-    border-bottom: 3px solid #660000; /* Uma linha de corte vermelha */
+    border-bottom: 3px solid #660000; 
 }
 
 .chapter-title {
     font-size: 3rem; /* Maior e mais imponente */
-    /* Cor de destaque: o Vermelho Sangue */
     color: #ff0000; 
     font-weight: 900;
-    /* Sombra forte para simular um brilho maligno ou neon falho */
     text-shadow: 0 0 5px #ff0000, 0 0 10px rgba(255, 0, 0, 0.5);
     letter-spacing: 2px; /* Mais espaçamento, mais ameaçador */
     text-transform: uppercase;
     font-family: 'Arial Black', sans-serif; /* Fonte pesada */
 }
 
-/* ======================================= */
-/* Texto do Capítulo - Frágil e Sombrio (Não usado no seu HTML, mas mantido) */
-/* ======================================= */
+
 .chapter-text {
     font-size: 1.1rem;
     line-height: 1.8; /* Aumentando a legibilidade no escuro */
@@ -138,20 +110,16 @@ html, body, app-root {
 
 .chapter-text p {
     margin-bottom: 1.5em;
-    /* Adicionando uma sutil falha no texto (glitch) */
     text-shadow: 0 0 1px rgba(100, 255, 255, 0.05);
 }
 
-/* ======================================= */
-/* CHAT BOX E MENSAGENS - A Troca de Sussurros */
-/* ======================================= */
+
 .chat-box {
     flex-grow: 1; 
     height: 60vh; 
     overflow-y: auto;
     padding-right: 15px; 
     margin-bottom: 20px;
-    /* Sem bordas no chatbox para que as mensagens se destaquem no main-content */
 }
 
 .chat-message {
@@ -167,7 +135,6 @@ html, body, app-root {
     border-left: 3px solid transparent; /* Adicionando um risco lateral */
 }
 
-/* Estilo Base do Parágrafo dentro da Mensagem */
 .chat-message p {
     margin: 0;
     color: inherit;
@@ -179,9 +146,7 @@ html, body, app-root {
     margin-top: 0.7em; 
 }
 
-/* ------------------ */
-/* Estilo do LLM/Sistema (Voz da Lenda/Maldição) */
-/* ------------------ */
+
 .llm-msg {
     margin-right: auto;
     background-color: #121212; /* Fundo sombrio */
@@ -190,9 +155,7 @@ html, body, app-root {
     border-left-color: #ff0000; /* Linha de sangue para a Lenda */
 }
 
-/* ------------------ */
-/* Estilo do Jogador (Sua Própria Angústia) */
-/* ------------------ */
+
 .player-msg {
     margin-left: auto;
     background-color: #330000; /* Cor escura, mas com a marca do sangue */
@@ -221,9 +184,7 @@ html, body, app-root {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
 }
 
-/* ======================================= */
-/* Área de Ações - Onde o Medo é Tomado */
-/* ======================================= */
+
 .actions {
     margin-top: 30px;
     padding: 25px;
@@ -233,7 +194,7 @@ html, body, app-root {
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); /* Brilho sutil */
 }
 
-.actions h2 { /* Não está no HTML, mas mantido. O HTML usa <h3>*/
+.actions h2 { 
     color: #ff3333; /* Vermelho/alaranjado de perigo */
     margin-bottom: 20px;
     font-size: 1.5rem;
@@ -244,7 +205,7 @@ html, body, app-root {
     padding-bottom: 10px;
 }
 
-.actions h3 { /* Não está no HTML, mas mantido. O HTML usa <h3>*/
+.actions h3 { 
     color: #ff3333; /* Vermelho/alaranjado de perigo */
     margin-bottom: 20px;
     font-size: 1.5rem;
@@ -279,9 +240,8 @@ html, body, app-root {
     margin-left: 10px;
     border: none;
     border-radius: 0px;
-    /* Botão Vermelho de Ação Perigosa */
     background: #ff3333; 
-    color: #000000; /* Texto preto para contraste extremo */
+    color: #000000; 
     font-weight: 900;
     text-transform: uppercase;
     cursor: pointer;
@@ -290,12 +250,11 @@ html, body, app-root {
 }
 
 .actions button:hover {
-    transform: translateY(-2px); /* Efeito de 'levantar' levemente */
-    background: #cc0000; /* Vermelho mais escuro no hover */
+    transform: translateY(-2px); 
+    background: #cc0000; 
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.6);
 }
 
-/* Lista de escolhas (Links) - Decisões Fatais */
 .actions ul {
     list-style: none;
     padding-left: 0;
@@ -303,18 +262,18 @@ html, body, app-root {
 }
 
 .fundo-container {
-    position: fixed;       /* fixa em relação à viewport */
+    position: fixed;      
     top: 0;
     left: 0;
-    right: 0;             /* garante que vá até o limite direito */
-    bottom: 0;            /* garante que vá até o limite inferior */
-    width: 100%;           /* cobre largura total */
-    height: 100%;          /* cobre altura total */
-    z-index: -3;           /* atrás de tudo */
-    overflow: hidden;      /* impede scroll interno */
-    background-image: url('/assets/horror.png'); /* sua imagem */
-    background-size: cover;    /* cobre toda a área mantendo proporção */
-    background-position: center; /* centraliza a imagem */
+    right: 0;             
+    bottom: 0;            
+    width: 100%;          
+    height: 100%;         
+    z-index: -3;          
+    overflow: hidden;     
+    background-image: url('/assets/horror.png'); 
+    background-size: cover;    
+    background-position: center;
     background-repeat: no-repeat;
 }
 
@@ -324,7 +283,6 @@ html, body, app-root {
     margin-bottom: 6px;
     border-radius: 0px;
     cursor: pointer;
-    /* Separador fino e pálido */
     border-bottom: 1px solid #202020;
     transition: background-color 0.2s, color 0.2s, letter-spacing 0.2s;
     font-size: 1.1rem;
@@ -336,16 +294,14 @@ html, body, app-root {
 }
 
 .actions ul li:hover {
-    background: #080808; /* Fundo que sugere o abismo */
-    color: #ff5555; /* Destaque em vermelho pálido/ferido */
-    letter-spacing: 1px; /* Dando a sensação de que a escolha é enfatizada */
+    background: #080808; 
+    color: #ff5555; 
+    letter-spacing: 1px; 
 }
 
-/* ======================================= */
-/* Sidebar (Painel de Status) - Registro de Dor */
-/* ======================================= */
+
 .sidebar h2 {
-    color: #00ff66; /* Cor de destaque "vivo/hack" */
+    color: #00ff66;
     margin-bottom: 15px;
     font-size: 1.3rem;
     font-weight: 700;
@@ -355,7 +311,6 @@ html, body, app-root {
     padding-bottom: 8px;
 }
 
-/* Status de jogador e inimigo - Fichas de Identificação */
 .sidebar .status {
     margin-bottom: 30px;
     background: #0d0d0d;
@@ -388,12 +343,10 @@ html, body, app-root {
 }
 
 .sidebar .status ul li:hover {
-    color: #ff5555; /* Destaque no hover em vermelho de ferida */
+    color: #ff5555; 
 }
 
-/* ======================================= */
-/* Botão de Sair - A Fuga */
-/* ======================================= */
+
 .exit-button-container {
     margin-top: 30px; 
     text-align: center;
@@ -421,7 +374,6 @@ html, body, app-root {
     transform: scale(0.98);
 }
 
-/* Botão de sair no canto (Se for o caso - não usado no HTML principal) */
 .exit-button {
     float: right;
     background-color: #440000;
@@ -439,9 +391,7 @@ html, body, app-root {
     background-color: #660000;
 }
 
-/* ======================================= */
-/* Modal - O Aviso Fatal */
-/* ======================================= */
+
 .modal-overlay {
     position: fixed;
     top: 0;

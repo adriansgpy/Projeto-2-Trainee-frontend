@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-// Importe Lenda, assumindo que ela ainda existe (mantido como comentário para evitar erro de importação não definida)
-// import { Lenda } from './lendas.model'; 
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-// Definindo Lenda apenas para fins de tipagem, assumindo suas propriedades chave
 interface Lenda {
     nome: string;
     descricao: string;
@@ -48,7 +45,6 @@ export class jogoComponent implements OnInit {
   playerAction: string = '';
   chat: ChatMessage[] = [];
 
-  // Modal de confirmação de saída
   showConfirmModal: boolean = false;
 
   constructor(private router: Router) {}
@@ -104,7 +100,7 @@ export class jogoComponent implements OnInit {
     this.showConfirmModal = false;
   }
 
-  // ---------------- GAME LOGIC ----------------
+  // ---------------- COMECAR O JOGO ----------------
   async startGame() {
     
     const payload = {
@@ -184,7 +180,7 @@ async processTurn(action: string) {
         choices: []
       };
     
-    // CORREÇÃO: Cria o payload final incluindo o campo 'action' e o objeto 'state' aninhado
+    //PAYLOAD PARA ENVIAR AO LLM
     const payload = {
       action: action,
       state: gameStatePayload
@@ -203,46 +199,40 @@ async processTurn(action: string) {
 
       const data = await response.json();
 
-      // narrativa do turno
+      // recebendo narrativa do turno
       const narrativaArray = Array.isArray(data.narrativa) ? data.narrativa : [data.narrativa || ''];
       this.addChatMessage('llm', narrativaArray.join('\n'));
 
-      // resultado numérico (hp/stamina changes)
+      // resultado numérico (hp)
       if (data.turn_result) {
         let resultText = '..............................\n\nRESULTADO\n\n';
         if (data.turn_result.enemy) {
           resultText += `${this.enemy.nome}:\n`;
           if (data.turn_result.enemy.hp_change)
             resultText += `${data.turn_result.enemy.hp_change > 0 ? '+' : ''}${data.turn_result.enemy.hp_change} HP\n`;
-          // Stamina removida da exibição
           resultText += '\n';
         }
         if (data.turn_result.player) {
           resultText += `${this.player.nome}:\n`;
           if (data.turn_result.player.hp_change)
             resultText += `${data.turn_result.player.hp_change > 0 ? '+' : ''}${data.turn_result.player.hp_change} HP\n`;
-          // Stamina removida da exibição
         }
-        this.addChatMessage('llm', resultText);
+        //this.addChatMessage('llm', resultText);
       }
 
-      // escolhas para o próximo turno
       this.choices = data.escolhas ?? [];
 
-      // atualizar status do jogador (mantendo stamina para o próximo payload)
       if (data.status?.player) {
         this.player.hp = data.status.player.hp;
         this.player.stamina = data.status.player.stamina;
         this.player.inventory = data.status.player.inventario ?? this.player.inventory;
       }
 
-      // atualizar status do inimigo (mantendo stamina para o próximo payload)
       if (data.status?.enemy) {
         this.enemy.hp = data.status.enemy.hp;
         this.enemy.stamina = data.status.enemy.stamina;
       }
 
-      // verificar derrota
       if (this.enemy.hp <= 0) {
         this.enemy.hp = 0;
         this.gameOver(true);
@@ -281,7 +271,6 @@ async processTurn(action: string) {
       this.addChatMessage('system', `💀 Derrota... ${this.enemy.nome} acabou com você.`);
     }
 
-    // Mensagem final com botões
     this.chat.push({
       from: 'system',
       text: '',

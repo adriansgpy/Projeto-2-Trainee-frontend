@@ -1,4 +1,3 @@
-// imports já existentes...
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [CommonModule, FormsModule], // <-- IMPORTA O FormsModule AQUI
+  imports: [CommonModule, FormsModule], 
 
 })
 export class ProfileComponent implements OnInit {
@@ -56,7 +55,7 @@ export class ProfileComponent implements OnInit {
   closeSuccessModal() {
     this.showSuccessModal = false;
   }
-  // abrir modal de trocar senha
+  
   openChangePassword() {
     this.currentPassword = '';
     this.newPassword = '';
@@ -78,7 +77,7 @@ export class ProfileComponent implements OnInit {
   submitChangePassword() {
   const senhaRegex = /^.{6,}$/;
 
-  // Limpa erros
+
   this.currentPasswordError = '';
   this.newPasswordError = '';
   let hasError = false;
@@ -88,7 +87,7 @@ export class ProfileComponent implements OnInit {
   else if (!senhaRegex.test(this.newPassword)) { this.newPasswordError = 'A nova senha deve ter pelo menos 6 caracteres.'; hasError = true; }
   if (hasError) return;
 
-  const token = localStorage.getItem('token'); // pega o token armazenado no login
+  const token = localStorage.getItem('token'); 
 
   this.http.post(
     'http://127.0.0.1:8000/auth/change-password',

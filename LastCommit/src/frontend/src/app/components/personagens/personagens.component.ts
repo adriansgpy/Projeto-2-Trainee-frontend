@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-// Interface para um Personagem
 interface Personagem {
   _id: string;
   nome: string;
@@ -23,10 +22,8 @@ interface Personagem {
 })
 
 export class PersonagensComponent implements OnInit {
-  // Dados de personagens
   characters: Personagem[] = [];
 
-  // Propriedades para o formulário de novo personagem
   newCharacter: Partial<Personagem> = {
     nome: '',
     role: '',
@@ -34,7 +31,6 @@ export class PersonagensComponent implements OnInit {
     ataqueEspecial: ''
   };
 
-  // Listagem de classes disponíveis
   classesDisponiveis = [
     { nome: 'Mago', descricao: 'Mestre de magias folclóricas, frágil fisicamente.', hp: 80,  ataqueEspecial: 'Lança feitiços que alteram o ambiente ou inimigos' },
     { nome: 'Marombeiro', descricao: 'Forte e resistente, especialista em combate físico.', hp: 120,  ataqueEspecial: 'Golpe poderoso de curta distância' },
@@ -44,18 +40,13 @@ export class PersonagensComponent implements OnInit {
     { nome: 'Espartano', descricao: 'Forte e resistente, foco em defesa e sobrevivência.', hp: 130, ataqueEspecial: 'Defesa impenetrável por um turno' },
   ];
 
-  // Propriedades de estado para modais específicos
   showValidationModal = false;
   showCharacterExistsModal = false;
   showSuccessModal = false;
   isSubmitting = false;
 
-  // ESTADO DO NOVO MODAL DE CONFIRMAÇÃO DE EXCLUSÃO
   showDeleteConfirmModal = false;
   characterToDelete: Personagem | null = null;
-  // FIM DO ESTADO DO NOVO MODAL
-
-  // Propriedades de estado para o novo modal genérico (mantidas do seu código original)
   showModal: boolean = false;
   modalMessage: string = '';
   modalType: 'error' | 'success' = 'success';
@@ -149,19 +140,16 @@ export class PersonagensComponent implements OnInit {
     this.showValidationModal = false;
   }
 
-  // NOVA FUNÇÃO: Abre o modal de confirmação antes de deletar
   confirmDeleteCharacter(character: Personagem) {
     this.characterToDelete = character;
     this.showDeleteConfirmModal = true;
   }
 
-  // NOVA FUNÇÃO: Fecha o modal de confirmação de delete
   closeDeleteConfirmationModal() {
     this.showDeleteConfirmModal = false;
     this.characterToDelete = null;
   }
 
-  // FUNÇÃO DE DELETE MODIFICADA: Agora executa a exclusão APENAS após a confirmação.
   executeDelete() {
     if (!this.characterToDelete) {
       this.closeDeleteConfirmationModal();
@@ -173,18 +161,17 @@ export class PersonagensComponent implements OnInit {
     this.http.delete(`${this.apiUrl}/${idToDelete}`, { headers: this.getAuthHeaders() }).subscribe({
       next: () => {
         this.characters = this.characters.filter(c => c._id !== idToDelete);
-        this.openModal(`Personagem ${this.characterToDelete?.nome} deletado com sucesso.`, 'success'); // Usa o modal genérico para feedback
-        this.closeDeleteConfirmationModal(); // Fecha o modal de confirmação
+        this.openModal(`Personagem ${this.characterToDelete?.nome} deletado com sucesso.`, 'success'); 
+        this.closeDeleteConfirmationModal(); 
       },
       error: (err) => {
         this.openModal(`Erro ao deletar ${this.characterToDelete?.nome}.`, 'error');
         console.error('Erro ao deletar personagem:', err);
-        this.closeDeleteConfirmationModal(); // Fecha o modal de confirmação mesmo com erro
+        this.closeDeleteConfirmationModal(); 
       }
     });
   }
   
-  // As funções openModal e closeModal são mantidas
   openModal(message: string, type: 'error' | 'success' = 'success') {
     this.modalMessage = message;
     this.modalType = type;

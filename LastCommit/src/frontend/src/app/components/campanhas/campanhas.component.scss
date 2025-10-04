@@ -1,16 +1,16 @@
 // ===========================================
 // VARIÁVEIS DE TEMA (Terror/Alerta)
 // ===========================================
-$cor-alerta: #900C3F;       // Vermelho Escuro/Sangue (Títulos e Destaque Principal)
-$cor-destaque: #C70039;     // Laranja Queimado/Ferrugem (Botões, Hover, Subtítulos)
-$cor-texto-claro: #f0f0f0;  // Texto padrão claro
-$cor-texto-secundario: #ddd; // Descrições
-$cor-fundo-card: rgba(39, 39, 39, 0.7); // Fundo dos cards (escuro e semi-transparente)
-$cor-fundo-modal: #1a1a1a;  // Fundo do modal (opaco e escuro)
-$cor-fundo-modal-acao: #555; // Fundo de ações secundárias no modal
+$cor-alerta: #900C3F;       
+$cor-destaque: #C70039;     
+$cor-texto-claro: #f0f0f0;  
+$cor-texto-secundario: #ddd; 
+$cor-fundo-card: rgba(39, 39, 39, 0.7);
+$cor-fundo-modal: #1a1a1a;  
+$cor-fundo-modal-acao: #555; 
 
-$sombra-alerta: rgba($cor-destaque, 0.4); // Sombra para o hover do card
-$sombra-banner: rgba(0, 0, 0, 0.7); // Sombra do texto no banner
+$sombra-alerta: rgba($cor-destaque, 0.4); 
+$sombra-banner: rgba(0, 0, 0, 0.7); 
 
 $fonte-titulo-principal: monospace;
 $fonte-subtitulo:monospace;
@@ -22,7 +22,7 @@ $fonte-banner: monospace;
 /* ======================================= */
 
 .campanhas-container {
-    width: 100%; /* Largura 100% da viewport, não 100vw para evitar barra de rolagem horizontal */
+    width: 100%; 
     margin: 0 auto; 
     padding: 0 20px;
     display: flex;
@@ -41,10 +41,6 @@ $fonte-banner: monospace;
     flex-direction: column;
     gap: 25px;
 }
-
-/* ======================================= */
-/* TÍTULOS E TEXTOS */
-/* ======================================= */
 
 .titulo-tela {
     font-family: $fonte-titulo-principal;
@@ -78,9 +74,6 @@ $fonte-banner: monospace;
 }
 
 
-/* ======================================= */
-/* BANNER (Destaque Principal) */
-/* ======================================= */
 
 .banner {
     position: relative;
@@ -107,7 +100,7 @@ $fonte-banner: monospace;
     background-image: url("/assets/terminator.jpg");
     background-size: cover;
     background-position: center;
-    filter: blur(8px) brightness(0.4); // aqui aplicamos o blur só na imagem
+    filter: blur(8px) brightness(0.4); 
     z-index: 0; // atrás do conteúdo
 }
 
@@ -143,9 +136,7 @@ $fonte-banner: monospace;
 }
 
 
-/* ======================================= */
-/* CARDS E LISTAGEM */
-/* ======================================= */
+
 
 .cards-container {
     display: flex;
@@ -218,10 +209,6 @@ $fonte-banner: monospace;
 }
 
 
-/* ======================================= */
-/* BOTÃO DE AÇÃO (ENTRAR) */
-/* ======================================= */
-
 .btn-entrar {
     background: $cor-destaque;
     color: #fff;
@@ -247,10 +234,6 @@ $fonte-banner: monospace;
     cursor: not-allowed;
 }
 
-
-/* ======================================= */
-/* MODAL E OVERLAY */
-/* ======================================= */
 
 .modal-overlay {
     position: fixed;
@@ -374,19 +357,17 @@ $fonte-banner: monospace;
 }
 
 .dropdown-personagem {
-    width: 100%; /* Ocupa a largura total do container */
-    max-width: 400px; /* Limite a largura em telas maiores */
+    width: 100%; 
+    max-width: 400px;
     padding: 12px 15px;
     font-size: 1.1rem;
-    
-    /* Estilo Sombrio e de Alerta */
     background-color: #111;
     color: $cor-texto-claro;
-    border: 2px solid $cor-destaque; /* Borda inicial com a cor de destaque */
+    border: 2px solid $cor-destaque; 
     border-radius: 4px;
     outline: none;
     cursor: pointer;
-    appearance: none; /* Remove o estilo padrão do navegador */
+    appearance: none; 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C70039' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
@@ -414,13 +395,9 @@ $fonte-banner: monospace;
 }
 
 
-/* ======================================= */
-/* RESPONSIVIDADE */
-/* ======================================= */
 
 @media (max-width: 992px) {
     .card {
-        /* Desativa a rolagem horizontal e força a coluna */
         flex: 1 1 100%;
         min-width: auto;
         max-width: 100%;
@@ -507,7 +484,7 @@ $fonte-banner: monospace;
   line-height: 1.5;
   margin-bottom: 10px;
   text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  min-height: 50px; // garante altura mínima para cards uniformes
+  min-height: 50px; 
 }
 
 /* Botão de entrar */

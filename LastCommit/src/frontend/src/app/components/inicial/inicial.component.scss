@@ -12,10 +12,6 @@ $cor-fundo-transparente: rgba(0, 0, 0, 0.3); // Fundo para painéis principais
 $cor-fundo-transparente-leve: rgba(0, 0, 0, 0); // Fundo mais leve para detalhes
 $cor-borda-sutil: rgba(150, 150, 150, 0.1);
 
-
-/* ======================================= */
-/* Reset Básico e Configurações de Base */
-/* ======================================= */
 * {
     margin: 0;
     padding: 0;
@@ -30,7 +26,6 @@ html, body, app-root {
     color: $cor-texto-claro;
 }
 
-/* Scrollbar Clean */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -73,7 +68,6 @@ html, body, app-root {
     box-sizing: border-box; 
 }
 
-/* CONTAINER PRINCIPAL (Fundo Semi-Transparente) */
 .inicial-container {
     display: flex;
     flex-direction: column;
@@ -81,7 +75,6 @@ html, body, app-root {
     gap: 2rem;
     width: 100%; 
     
-    /* Fundo Semi-Transparente */
     background-color: $cor-fundo-transparente; 
     padding: 30px; 
     border-radius: 8px;
@@ -90,7 +83,6 @@ html, body, app-root {
     box-sizing: border-box; 
 }
 
-/* TÍTULO */
 .titulo-principal {
     font-family: $fonte-titulo; 
     font-size: 4.5rem;
@@ -132,7 +124,6 @@ html, body, app-root {
     }
 }
 
-/* ALERTA URGENTE (Piscar) */
 .alerta-urgente {
     font-size: 1.5rem;
     font-weight: 700;
@@ -150,17 +141,6 @@ html, body, app-root {
     animation: blink 1.2s infinite steps(1, end);
 }
 
-
-/* BOTÃO START */
-
-/* BOTÃO START ESTILO TERROR */
-
-
-
-
-/* ======================================= */
-/* SEÇÃO 'SOBRE O JOGO' (Fundo Levemente Transparente) */
-/* ======================================= */
 .sobre-jogo-vertical {
     display: flex;
     margin-top: 40px;

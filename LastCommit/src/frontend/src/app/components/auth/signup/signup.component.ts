@@ -21,12 +21,11 @@ export class SignupComponent implements OnInit {
   senha = '';
   confirmarSenha = '';
   resposta: string | null = null;
-  erro: string | null = null; // Mensagem de erro para o modal genérico
+  erro: string | null = null; 
 
-  // Modais de estado
   showUserExistsModal = false;
   showSuccessModal = false;
-  showGenericErrorModal = false; // Novo modal para erros de validação e erros gerais da API
+  showGenericErrorModal = false; 
   isSubmitting = false;
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -54,7 +53,6 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // Função auxiliar para mostrar o modal de erro genérico
   private showValidationErrorMessage(message: string) {
     this.erro = message;
     this.showGenericErrorModal = true;
@@ -67,13 +65,11 @@ export class SignupComponent implements OnInit {
     const senhaRegex = /^.{6,}$/;
 
 
-    // Limpa status de erro/resposta antes de começar
     this.erro = null;
     this.resposta = null;
     this.showGenericErrorModal = false;
     this.showUserExistsModal = false;
 
-    // 1. Validações de Campos
     if (!this.nome || !this.usuario || !this.senha || !this.confirmarSenha) {
       this.showValidationErrorMessage('Por favor, preencha todos os campos obrigatórios para continuar.');
       return;
@@ -108,15 +104,14 @@ export class SignupComponent implements OnInit {
       next: (res: any) => {
         this.isSubmitting = false;
         this.resposta = res.msg || "Usuário registrado com sucesso!";
-        this.showSuccessModal = true; // Mostra modal de sucesso
+        this.showSuccessModal = true; 
       },
       error: (err) => {
         this.isSubmitting = false;
 
         if (err.error?.detail === 'Usuário já existe') {
-          this.showUserExistsModal = true; // Mostra modal de usuário existente
+          this.showUserExistsModal = true; 
         } else {
-          // Mostra erro genérico
           const errorMessage = err.error?.detail || 'Erro ao cadastrar. Tente novamente.';
           this.showValidationErrorMessage(errorMessage);
         }
@@ -124,18 +119,15 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  // Fechar modal de usuário existente
   closeUserExistsModal() {
     this.showUserExistsModal = false;
   }
 
-  // Fechar modal de erro genérico
   closeGenericErrorModal() {
     this.showGenericErrorModal = false;
     this.erro = null;
   }
 
-  // Fechar modal de sucesso e ir para login
   goToLogin() {
     this.showSuccessModal = false;
     this.router.navigate(['/login']);
