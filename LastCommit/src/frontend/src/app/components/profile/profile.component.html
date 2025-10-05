@@ -16,7 +16,6 @@
   </div>
 </div>
 
-<!-- Modal de sucesso -->
 <div class="modal-overlay" *ngIf="showSuccessModal">
   <div class="modal">
     <h3>Sucesso!</h3>
@@ -27,8 +26,6 @@
   </div>
 </div>
 
-
-<!-- Modal trocar senha -->
 <div class="modal-overlay" *ngIf="showChangePasswordModal">
   <div class="modal">
     <h3>Trocar Senha</h3>
@@ -47,8 +44,6 @@
     <div *ngIf="newPasswordError" class="error-msg">{{ newPasswordError }}</div>
     </div>
 
-
-    <!-- Mensagem de erro -->
     <div *ngIf="newPassword && newPassword.length < 6" class="error-msg">
     A senha deve ter pelo menos 6 caracteres.
     </div>

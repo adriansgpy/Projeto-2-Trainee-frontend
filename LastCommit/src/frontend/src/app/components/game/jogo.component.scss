@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -14,11 +13,11 @@ html, body, app-root {
 }
 
 ::-webkit-scrollbar {
-    width: 8px; /* Mais grossa */
+    width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #500000; /* Vermelho escuro/sangue */
-    border-radius: 0px; /* Bordas quadradas/duras */
+    background: #500000;
+    border-radius: 0px;
     border: 1px solid #220000;
 }
 ::-webkit-scrollbar-track {
@@ -31,7 +30,6 @@ html, body, app-root {
     background: transparent;
 }
 
-
 #chapter-bg {
     position: fixed;
     top: 0;
@@ -41,7 +39,7 @@ html, body, app-root {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: brightness(0.08) contrast(1.2) blur(1px); 
+    filter: brightness(0.08) contrast(1.2) blur(1px);
     z-index: -1;
     transition: background-image 0.8s ease-in-out, filter 0.8s ease-in-out;
 }
@@ -51,18 +49,18 @@ html, body, app-root {
     flex-direction: row;
     width: 100%;
     height: 100%;
-    padding: 20px; /* Reduzindo um pouco o padding para sensação de aperto */
+    padding: 20px;
     gap: 20px;
 }
 
 .main-content {
     flex: 3;
-    padding: 25px; 
+    padding: 25px;
     overflow-y: auto;
     background: rgba(10, 10, 10, 0.95);
-    border-radius: 0px; /* Remoção de bordas arredondadas para um visual duro */
+    border-radius: 0px;
     box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.15), 0 4px 15px rgba(0, 0, 0, 0.5);
-    border: 1px solid #440000; 
+    border: 1px solid #440000;
 }
 
 .sidebar {
@@ -78,34 +76,33 @@ html, body, app-root {
 .chapter-banner {
     position: relative;
     width: 100%;
-    height: 150px; 
+    height: 150px;
     background: #000000;
     border-radius: 0px;
     display: flex;
     align-items: flex-end;
     padding: 15px;
     margin-bottom: 25px;
-    border-bottom: 3px solid #660000; 
+    border-bottom: 3px solid #660000;
 }
 
 .chapter-title {
-    font-size: 3rem; /* Maior e mais imponente */
-    color: #ff0000; 
+    font-size: 3rem;
+    color: #ff0000;
     font-weight: 900;
     text-shadow: 0 0 5px #ff0000, 0 0 10px rgba(255, 0, 0, 0.5);
-    letter-spacing: 2px; /* Mais espaçamento, mais ameaçador */
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-family: 'Arial Black', sans-serif; /* Fonte pesada */
+    font-family: 'Arial Black', sans-serif;
 }
-
 
 .chapter-text {
     font-size: 1.1rem;
-    line-height: 1.8; /* Aumentando a legibilidade no escuro */
+    line-height: 1.8;
     margin-top: 20px;
     padding: 0;
     background: transparent;
-    color: #ccc; /* Texto levemente mais claro para contraste */
+    color: #ccc;
 }
 
 .chapter-text p {
@@ -113,26 +110,24 @@ html, body, app-root {
     text-shadow: 0 0 1px rgba(100, 255, 255, 0.05);
 }
 
-
 .chat-box {
-    flex-grow: 1; 
-    height: 60vh; 
+    flex-grow: 1;
+    height: 60vh;
     overflow-y: auto;
-    padding-right: 15px; 
+    padding-right: 15px;
     margin-bottom: 20px;
 }
 
 .chat-message {
-    max-width: 80%; 
+    max-width: 80%;
     padding: 15px 20px;
     margin-bottom: 18px;
-    border-radius: 0px; /* Bordas quadradas, duras */
+    border-radius: 0px;
     line-height: 1.6;
     font-size: 1.05rem;
     position: relative;
-    /* Sombra mais marcada e com um leve tom de névoa */
-    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.1); 
-    border-left: 3px solid transparent; /* Adicionando um risco lateral */
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.1);
+    border-left: 3px solid transparent;
 }
 
 .chat-message p {
@@ -143,35 +138,32 @@ html, body, app-root {
 .chat-message p > br {
     display: block;
     content: "";
-    margin-top: 0.7em; 
+    margin-top: 0.7em;
 }
-
 
 .llm-msg {
     margin-right: auto;
-    background-color: #121212; /* Fundo sombrio */
+    background-color: #121212;
     border: 1px solid #333333;
     color: #f0f0f0;
-    border-left-color: #ff0000; /* Linha de sangue para a Lenda */
+    border-left-color: #ff0000;
 }
-
 
 .player-msg {
     margin-left: auto;
-    background-color: #330000; /* Cor escura, mas com a marca do sangue */
-    color: #e0e0e0; /* Texto mais claro, mas ainda pálido */
+    background-color: #330000;
+    color: #e0e0e0;
     font-weight: 500;
     border: 1px solid #660000;
-    border-right-color: #00ff66; /* Linha verde neon de 'hack/vida' */
+    border-right-color: #00ff66;
 }
 
-/* Botões do Chat (Aparecem no final do jogo) */
 .chat-buttons button {
     padding: 10px 20px;
     border-radius: 4px;
     border: 1px solid #880000;
     cursor: pointer;
-    background-color: #440000; /* Vermelho escuro */
+    background-color: #440000;
     color: #ff5555;
     font-weight: bold;
     text-transform: uppercase;
@@ -184,55 +176,53 @@ html, body, app-root {
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
 }
 
-
 .actions {
     margin-top: 30px;
     padding: 25px;
-    background: #101010; /* Fundo mais escuro para o painel */
+    background: #101010;
     border-radius: 0px;
-    border: 1px solid #660000; /* Borda de sangue */
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2); /* Brilho sutil */
+    border: 1px solid #660000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
 }
 
-.actions h2 { 
-    color: #ff3333; /* Vermelho/alaranjado de perigo */
+.actions h2 {
+    color: #ff3333;
     margin-bottom: 20px;
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
     text-shadow: 0 0 3px #ff3333;
-    border-bottom: 2px dashed #440000; /* Linha de corte/rasgo */
+    border-bottom: 2px dashed #440000;
     padding-bottom: 10px;
 }
 
-.actions h3 { 
-    color: #ff3333; /* Vermelho/alaranjado de perigo */
+.actions h3 {
+    color: #ff3333;
     margin-bottom: 20px;
     font-size: 1.5rem;
     font-weight: 700;
     text-transform: uppercase;
     text-shadow: 0 0 3px #ff3333;
-    border-bottom: 2px dashed #440000; /* Linha de corte/rasgo */
+    border-bottom: 2px dashed #440000;
     padding-bottom: 10px;
 }
 
 .actions input[type="text"] {
-    width: 80%; /* Mais largo */
+    width: 80%;
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 0px;
-    /* Estilo de terminal/glitch */
     border: 1px solid #880000;
     background-color: #0a0a0a;
-    color: #00ff66; /* Cor de terminal 'hackeando' */
+    color: #00ff66;
     font-size: 1.1rem;
     font-family: 'Courier New', monospace;
 }
 
 .actions input[type="text"]:focus {
     outline: none;
-    box-shadow: 0 0 8px rgba(0, 255, 102, 0.5); /* Brilho neon de terminal */
-    border-color: #00ff66; 
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+    border-color: #00ff66;
 }
 
 .actions button {
@@ -240,8 +230,8 @@ html, body, app-root {
     margin-left: 10px;
     border: none;
     border-radius: 0px;
-    background: #ff3333; 
-    color: #000000; 
+    background: #ff3333;
+    color: #000000;
     font-weight: 900;
     text-transform: uppercase;
     cursor: pointer;
@@ -250,8 +240,8 @@ html, body, app-root {
 }
 
 .actions button:hover {
-    transform: translateY(-2px); 
-    background: #cc0000; 
+    transform: translateY(-2px);
+    background: #cc0000;
     box-shadow: 0 4px 8px rgba(255, 0, 0, 0.6);
 }
 
@@ -262,17 +252,17 @@ html, body, app-root {
 }
 
 .fundo-container {
-    position: fixed;      
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;             
-    bottom: 0;            
-    width: 100%;          
-    height: 100%;         
-    z-index: -3;          
-    overflow: hidden;     
-    background-image: url('/assets/horror.png'); 
-    background-size: cover;    
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    overflow: hidden;
+    background-image: url('/assets/horror.png');
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -294,11 +284,10 @@ html, body, app-root {
 }
 
 .actions ul li:hover {
-    background: #080808; 
-    color: #ff5555; 
-    letter-spacing: 1px; 
+    background: #080808;
+    color: #ff5555;
+    letter-spacing: 1px;
 }
-
 
 .sidebar h2 {
     color: #00ff66;
@@ -316,13 +305,13 @@ html, body, app-root {
     background: #0d0d0d;
     padding: 15px;
     border-radius: 0px;
-    border: 1px dashed #660000; /* Borda quebrada */
+    border: 1px dashed #660000;
 }
 
 .sidebar .status p {
     margin-bottom: 10px;
     font-size: 1rem;
-    color: #e0e0e0; /* Texto claro */
+    color: #e0e0e0;
     font-weight: bold;
     text-shadow: 0 0 1px #00ff66;
 }
@@ -343,20 +332,19 @@ html, body, app-root {
 }
 
 .sidebar .status ul li:hover {
-    color: #ff5555; 
+    color: #ff5555;
 }
 
-
 .exit-button-container {
-    margin-top: 30px; 
+    margin-top: 30px;
     text-align: center;
 }
 
 .btn-exit {
     padding: 12px 25px;
-    background-color: #990000; /* Vermelho mais profundo e ameaçador */
+    background-color: #990000;
     color: #fff;
-    border: 2px solid #ff0000; /* Borda de perigo */
+    border: 2px solid #ff0000;
     border-radius: 0px;
     font-weight: bold;
     cursor: pointer;
@@ -367,7 +355,7 @@ html, body, app-root {
 .btn-exit:hover {
     background-color: #cc0000;
     border-color: #ff3333;
-    box-shadow: 0 0 10px #ff3333; /* Brilho de alarme */
+    box-shadow: 0 0 10px #ff3333;
 }
 
 .btn-exit:active {
@@ -391,14 +379,12 @@ html, body, app-root {
     background-color: #660000;
 }
 
-
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Fundo de névoa densa */
     background: rgba(0,0,0,0.85);
     backdrop-filter: blur(5px);
     display: flex;
@@ -408,14 +394,14 @@ html, body, app-root {
 }
 
 .modal {
-    background-color: #000000; /* Fundo Absoluto */
+    background-color: #000000;
     padding: 40px;
     border-radius: 0px;
-    color: #ff5555; /* Aviso em vermelho/ferida */
+    color: #ff5555;
     max-width: 450px;
     text-align: center;
     border: 3px solid #ff0000;
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); /* Brilho intenso de perigo */
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.7);
 }
 
 .modal h2 {
@@ -445,7 +431,7 @@ html, body, app-root {
 }
 
 .modal-buttons button:first-child {
-    background-color: #ff0000; /* Confirmar - A Ação Fatal */
+    background-color: #ff0000;
     color: #000;
 }
 
@@ -456,7 +442,7 @@ html, body, app-root {
 }
 
 .modal-buttons button:last-child {
-    background-color: #333; /* Cancelar - Um Alívio Falso */
+    background-color: #333;
     color: #fff;
     border-color: #555;
 }

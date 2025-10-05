@@ -22,7 +22,6 @@
 
       <h1>CRIAR CONTA</h1>
 
-      <!-- Mensagens de erro e sucesso -->
       <div *ngIf="erro" class="error-msg">{{ erro }}</div>
       <div *ngIf="resposta" class="success-msg">{{ resposta }}</div>
 
@@ -51,7 +50,6 @@
   </div>
 </div>
 
-<!-- Modal de usuário existente -->
 <div class="modal-overlay" *ngIf="showUserExistsModal">
   <div class="modal">
     <h2>Ops!</h2>
@@ -60,7 +58,6 @@
   </div>
 </div>
 
-<!-- Modal de conta criada com sucesso -->
 <div class="modal-overlay" *ngIf="showSuccessModal">
   <div class="modal">
     <h2>Pronto para exterminar?</h2>

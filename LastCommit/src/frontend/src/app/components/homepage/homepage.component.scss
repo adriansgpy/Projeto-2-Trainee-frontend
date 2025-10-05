@@ -6,7 +6,6 @@ $fonte-principal: 'Inter', sans-serif;
 $fonte-black-mesa-logo: 'Orbitron', monospace;
 $fonte-menu: 'Inter', sans-serif;
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -21,7 +20,7 @@ $fonte-menu: 'Inter', sans-serif;
   100% { transform: translate(0); opacity: 0; }
 }
 
-/* Global styles */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -30,7 +29,7 @@ html, body {
   font-family: $fonte-principal;
   color: $cor-texto-claro;
   overflow-x: hidden;
-  overflow-y: auto; /* Permite rolagem */
+  overflow-y: auto; 
 }
 
 .app-wrapper {
@@ -40,7 +39,6 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Background layers */
 .fundo-container {
   position: fixed;
   top: 0;
@@ -152,13 +150,12 @@ html, body {
   }
 }
 
-/* Main content */
 .main-content-form {
   position: relative; 
   display: block;
   width: 100%;
-  min-height: 100vh; /* garante altura mínima */
-  padding-top: 120px; /* ajusta para a altura do header */
-  overflow: visible; /* permite crescimento do conteúdo */
+  min-height: 100vh; 
+  padding-top: 120px; 
+  overflow: visible; 
   box-sizing: border-box;
 }

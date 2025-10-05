@@ -13,6 +13,8 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 
 -Angular CLI: npm install -g @angular/cli
 
+- Git / Git LFS (Para o video da tela de login)
+
 (Obs.: Para o back-end, será necessário também Python 3.8+ MongoDB)
 
 ##Para rodar
@@ -22,4 +24,4 @@ npm install
 ng serve
 http://localhost:4200 abrir com navegador
 
-
+certifique-se de ter o servidor da API rodando! Um abraço Quisen, Matheus, Erica e toda a equipe!

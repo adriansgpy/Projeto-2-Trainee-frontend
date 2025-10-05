@@ -135,7 +135,7 @@ this.campanhas = [
         this.personagens = data.map(p => ({
           ...p,
           _id: (p as any)._id?.$oid ? (p as any)._id.$oid : (p as any)._id,
-          classe: (p as any).role || 'Guerreiro'  // <-- aqui mapeia 'role' do MongoDB para 'classe'
+          classe: (p as any).role || 'Guerreiro'  
         }));
 
         if (this.personagens.length === 0) {

@@ -1,6 +1,3 @@
-// ===========================================
-// VARIÁVEIS DE TEMA (Terror/Alerta)
-// ===========================================
 $cor-alerta: #900C3F;       
 $cor-destaque: #C70039;     
 $cor-texto-claro: #f0f0f0;  
@@ -8,18 +5,11 @@ $cor-texto-secundario: #ddd;
 $cor-fundo-card: rgba(39, 39, 39, 0.7);
 $cor-fundo-modal: #1a1a1a;  
 $cor-fundo-modal-acao: #555; 
-
 $sombra-alerta: rgba($cor-destaque, 0.4); 
 $sombra-banner: rgba(0, 0, 0, 0.7); 
-
 $fonte-titulo-principal: monospace;
-$fonte-subtitulo:monospace;
+$fonte-subtitulo: monospace;
 $fonte-banner: monospace;
-
-
-/* ======================================= */
-/* LAYOUT E CONTAINERS BASE */
-/* ======================================= */
 
 .campanhas-container {
     width: 100%; 
@@ -32,10 +22,9 @@ $fonte-banner: monospace;
 }
 
 .campanha-secao {
-    /* Corrigido: flex: 1 1 100% está correto para seções verticais */
     flex: 1 1 100%; 
     min-width: 200px;
-    max-width: 100%; /* Permite que ocupe toda a largura */
+    max-width: 100%; 
     width: 100%; 
     display: flex;
     flex-direction: column;
@@ -73,8 +62,6 @@ $fonte-banner: monospace;
     line-height: 1.6;
 }
 
-
-
 .banner {
     position: relative;
     width: 100%;
@@ -84,10 +71,8 @@ $fonte-banner: monospace;
     padding: 20px 40px;
     border-radius: 10px;
     overflow: hidden;
-    
-    /* Conteúdo ficará acima do pseudo-elemento */
     z-index: 1;
-    color: #fff; // exemplo para textos
+    color: #fff; 
 }
 
 .banner::before {
@@ -101,9 +86,8 @@ $fonte-banner: monospace;
     background-size: cover;
     background-position: center;
     filter: blur(8px) brightness(0.4); 
-    z-index: 0; // atrás do conteúdo
+    z-index: 0; 
 }
-
 
 .banner::after {
     content: '';
@@ -112,14 +96,14 @@ $fonte-banner: monospace;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Escurecimento */
+    background: rgba(0, 0, 0, 0.5); 
     z-index: 1;
 }
 
 .banner-info {
     position: relative;
     z-index: 2;
-    color: $cor-destaque; /* Tom de alerta no banner */
+    color: $cor-destaque;
     max-width: 800px;
     font-family: $fonte-banner;
     text-shadow: 0 0 10px $sombra-banner;
@@ -135,43 +119,41 @@ $fonte-banner: monospace;
     line-height: 1.5;
 }
 
-
-
-
 .cards-container {
     display: flex;
     flex-direction: row;
-    margin: 12px 0; /* Ajustado para 0 lateralmente */
+    margin: 12px 0;
     flex-wrap: nowrap; 
-    overflow-x: auto; /* Permite rolar horizontalmente */
+    overflow-x: auto;
     gap: 20px;
     padding: 10px 0;
-    width: calc(100% + 40px); /* Ajusta para compensar o padding do .campanhas-container */
-    margin-left: -20px; /* Puxa para a esquerda */
+    width: calc(100% + 40px);
+    margin-left: -20px;
     box-sizing: border-box;
-    
-    /* SCROLLBAR para o container de cards */
-    &::-webkit-scrollbar {
-        height: 8px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #444;
-        border-radius: 4px;
-    }
-    &::-webkit-scrollbar-track {
-        background: #1a1a1a;
-    }
+}
+
+.cards-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.cards-container::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.cards-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
 }
 
 .card {
-    flex: 0 0 500px; /* Base 500px, não cresce nem encolhe (mantém o overflow-x) */
+    flex: 0 0 500px;
     min-width: 500px;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     height: 650px; 
     background: $cor-fundo-card;
-    margin: 20px; /* Mantém a margem para espaçamento visual */
+    margin: 20px;
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -208,7 +190,6 @@ $fonte-banner: monospace;
     padding: 15px;
 }
 
-
 .btn-entrar {
     background: $cor-destaque;
     color: #fff;
@@ -225,7 +206,7 @@ $fonte-banner: monospace;
 }
 
 .btn-entrar:hover:not(:disabled) {
-    background: $cor-alerta; /* Fica mais escuro/saturado no hover */
+    background: $cor-alerta;
     box-shadow: 0 4px 15px $sombra-alerta;
 }
 
@@ -233,7 +214,6 @@ $fonte-banner: monospace;
     background: #555;
     cursor: not-allowed;
 }
-
 
 .modal-overlay {
     position: fixed;
@@ -260,7 +240,7 @@ $fonte-banner: monospace;
     flex-direction: column;
     gap: 20px;
     animation: scaleIn 0.3s ease;
-    border: 1px solid $cor-destaque; /* Borda de destaque */
+    border: 1px solid $cor-destaque;
 }
 
 @keyframes scaleIn {
@@ -321,28 +301,9 @@ $fonte-banner: monospace;
     display: flex;
     flex-direction: column;
     gap: 8px;
-}
-
-.personagem-global-container label {
-    font-size: 16px;
-    font-weight: bold;
-    color: $cor-destaque;
-}
-
-/* ======================================= */
-/* SELEÇÃO DE PERSONAGEM (GLOBAL DROPDOWN) */
-/* ======================================= */
-
-.personagem-global-container {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    
-    /* Adiciona um container visualmente destacado */
     padding: 15px;
-    background-color: rgba(17, 17, 17, 0.9); /* Fundo escuro sutil */
-    border: 1px solid $cor-alerta; /* Borda de alerta/sangue */
+    background-color: rgba(17, 17, 17, 0.9);
+    border: 1px solid $cor-alerta;
     border-radius: 6px;
     box-shadow: 0 0 15px rgba($cor-alerta, 0.3);
 }
@@ -350,7 +311,7 @@ $fonte-banner: monospace;
 .personagem-global-container label {
     font-size: 1.1rem;
     font-weight: bold;
-    color: $cor-texto-claro; /* Mudei para texto claro para contraste */
+    color: $cor-texto-claro;
     font-family: $fonte-subtitulo;
     letter-spacing: 1.5px;
     margin-bottom: 5px;
@@ -371,96 +332,41 @@ $fonte-banner: monospace;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C70039' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dropdown-personagem:hover {
-    border-color: $cor-alerta; /* Cor de alerta no hover */
+    border-color: $cor-alerta;
     box-shadow: 0 0 10px rgba($cor-alerta, 0.5);
 }
 
-/* Estiliza as opções dentro do dropdown */
 .dropdown-personagem option {
     background-color: #1a1a1a;
     color: $cor-texto-claro;
     padding: 10px;
 }
 
-/* Responsividade: ocupa a largura total em mobile */
 @media (max-width: 992px) {
-    .dropdown-personagem {
-        max-width: none;
-    }
-}
-
-
-
-@media (max-width: 992px) {
-    .card {
-        flex: 1 1 100%;
-        min-width: auto;
-        max-width: 100%;
-        height: auto; /* Permite que a altura se ajuste ao conteúdo */
-        margin: 10px 0;
-    }
-
-    .cards-container {
-        flex-direction: column;
-        gap: 20px;
-        width: 100%; /* Ajusta para a largura normal */
-        margin-left: 0;
-        overflow-x: hidden;
-    }
+    .dropdown-personagem { max-width: none; }
+    .card { flex: 1 1 100%; min-width: auto; max-width: 100%; height: auto; margin: 10px 0; }
+    .cards-container { flex-direction: column; gap: 20px; width: 100%; margin-left: 0; overflow-x: hidden; }
 }
 
 @media (max-width: 768px) {
-    .titulo-tela {
-        font-size: 2.2rem;
-    }
-    
-    .banner-info h1 {
-        font-size: 3rem;
-    }
-    
-    .banner-info p {
-        font-size: 1.4rem;
-    }
-
-    .card-info h3 {
-        font-size: 1.6rem;
-    }
-    
-    .descricao-longa {
-        font-size: 1.3rem;
-    }
+    .titulo-tela { font-size: 2.2rem; }
+    .banner-info h1 { font-size: 3rem; }
+    .banner-info p { font-size: 1.4rem; }
+    .card-info h3 { font-size: 1.6rem; }
+    .descricao-longa { font-size: 1.3rem; }
 }
 
 @media (max-width: 576px) {
-    .campanhas-container {
-        padding: 40px 10px 20px 10px;
-    }
-
-    .titulo-tela {
-        font-size: 1.8rem;
-    }
-    
-    .banner {
-        height: 250px;
-        padding: 15px 20px;
-    }
-    
-    .banner-info h1 {
-        font-size: 2.5rem;
-    }
-    
-    .btn-entrar {
-        padding: 12px 20px;
-        font-size: medium;
-    }
+    .campanhas-container { padding: 40px 10px 20px 10px; }
+    .titulo-tela { font-size: 1.8rem; }
+    .banner { height: 250px; padding: 15px 20px; }
+    .banner-info h1 { font-size: 2.5rem; }
+    .btn-entrar { padding: 12px 20px; font-size: medium; }
 }
-
-
 
 .card-info {
   padding: 15px;
@@ -470,9 +376,9 @@ $fonte-banner: monospace;
 }
 
 .card-info h3 {
-  font-family: 'Creepster', cursive; // fonte de terror/zoeira
+  font-family: 'Creepster', cursive;
   font-size: 1.8rem;
-  color: #900C3F; // vermelho sangue
+  color: #900C3F;
   margin-bottom: 8px;
   text-shadow: 0 0 8px rgba(144, 12, 63, 0.7);
 }
@@ -480,17 +386,16 @@ $fonte-banner: monospace;
 .card-descricao {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  color: #d0d0d0; // texto suave
+  color: #d0d0d0;
   line-height: 1.5;
   margin-bottom: 10px;
   text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  min-height: 50px; 
+  min-height: 50px;
 }
 
-/* Botão de entrar */
 .btn-entrar {
   padding: 10px 20px;
-  background-color: #C70039; // laranja sangue
+  background-color: #C70039;
   border: 1px solid #900C3F;
   color: #fff;
   font-weight: bold;
@@ -553,4 +458,3 @@ $fonte-banner: monospace;
 .modal-actions button:hover {
   background: #c0392b;
 }
-

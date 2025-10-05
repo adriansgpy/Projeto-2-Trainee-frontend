@@ -1,78 +1,69 @@
-// ===========================================
-// NOVAS VARIÁVEIS DE TEMA DE TERROR
-// ===========================================
-$cor-alerta: #900C3F;          // Vermelho Escuro/Sangue (Alerta Principal)
-$cor-destaque: #C70039;        // Laranja Queimado/Ferrugem (Hover e Botões de Ação)
-$cor-laranja: $cor-destaque;   // Redefinindo Laranja
-$cor-laranja-clara: #E44C65;   // Um tom mais claro do alerta
-$cor-preto: #050505;           // Preto absoluto
-$cor-cinza: #141414;           // Fundo escuro do card
-$cor-cinza-claro: #222222;     // Fundo dos inputs
-$cor-texto: #e0e0e0;           // Texto padrão claro
-$cor-erro: #e74c3c;            // Erro padrão (mantido por ser eficaz)
-$cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
+$cor-alerta: #900C3F;
+$cor-destaque: #C70039;
+$cor-laranja: $cor-destaque;
+$cor-laranja-clara: #E44C65;
+$cor-preto: #050505;
+$cor-cinza: #141414;
+$cor-cinza-claro: #222222;
+$cor-texto: #e0e0e0;
+$cor-erro: #e74c3c;
+$cor-sucesso: #2ecc71;
 
 .characters-page {
     color: $cor-texto;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 3rem 2rem; /* Mais espaçamento superior/inferior */
+    padding: 3rem 2rem;
     font-family: sans-serif;
-    letter-spacing: 1px; /* Mais espaçado */
-    /* Garante o fundo preto */
+    letter-spacing: 1px;
 }
 
 .characters-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 3rem; /* Mais espaço entre as seções */
+    gap: 3rem;
     width: 100%;
-    max-width: 1300px; /* Um pouco mais largo */
-    
+    max-width: 1300px;
+
     @media (max-width: 992px) {
-        grid-template-columns: 1fr; /* Coluna única em telas menores */
+        grid-template-columns: 1fr;
     }
 }
 
 .section-title {
-    font-size: 1.8rem; /* Um pouco maior */
-    color: $cor-alerta; /* Vermelho Sangue */
+    font-size: 1.8rem;
+    color: $cor-alerta;
     text-transform: uppercase;
-    border-bottom: 3px solid $cor-alerta; /* Borda mais grossa */
+    border-bottom: 3px solid $cor-alerta;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     letter-spacing: 3px;
     text-shadow: 0 0 5px rgba($cor-alerta, 0.5);
 }
 
-
-/* ======================================= */
-/* LISTA DE PERSONAGENS (Cards) */
-/* ======================================= */
 .characters-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 1.5rem; /* Mais espaço entre os cards */
+    gap: 1.5rem;
 }
 
 .character-card {
     background: $cor-cinza;
-    border-left: 6px solid $cor-destaque; /* Borda mais grossa, cor Ferrugem */
+    border-left: 6px solid $cor-destaque;
     padding: 1.2rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    border-radius: 4px; /* Mais angular */
+    border-radius: 4px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-right: 1px solid rgba($cor-cinza-claro, 0.2);
 
     &:hover {
         transform: scale(1.02);
-        /* Sombra forte na cor de alerta */
-        box-shadow: 0 0 15px rgba($cor-alerta, 0.6); 
+        box-shadow: 0 0 15px rgba($cor-alerta, 0.6);
     }
 }
 
@@ -84,8 +75,8 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
         width: 90px;
         height: 90px;
         object-fit: cover;
-        border: 3px solid $cor-destaque; /* Borda de Ferrugem */
-        border-radius: 4px; /* Mais angular */
+        border: 3px solid $cor-destaque;
+        border-radius: 4px;
         background: $cor-cinza-claro;
     }
 
@@ -95,9 +86,9 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
         justify-content: center;
 
         strong {
-            font-size: 1.4rem; /* Maior */
+            font-size: 1.4rem;
             margin-bottom: 0.3rem;
-            color: $cor-laranja-clara; /* Tom mais claro do alerta */
+            color: $cor-laranja-clara;
             text-transform: uppercase;
         }
 
@@ -118,8 +109,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
             color: $cor-destaque;
 
             &.none {
-                /* Mantido vermelho forte para indicar perigo/ausência */
-                background: rgba($cor-erro, 0.2); 
+                background: rgba($cor-erro, 0.2);
                 border-color: $cor-erro;
                 color: $cor-erro;
             }
@@ -127,8 +117,6 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     }
 }
 
-
-/* Botões de Ação do Card */
 .card-buttons {
     display: flex;
     flex-direction: column;
@@ -147,19 +135,19 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
         letter-spacing: 1px;
 
         &.view-btn {
-            background: $cor-destaque; /* Ferrugem */
+            background: $cor-destaque;
             color: $cor-preto;
             font-weight: bold;
 
             &:hover {
-                background: $cor-alerta; /* Sangue no hover */
+                background: $cor-alerta;
                 box-shadow: 0 0 8px rgba($cor-destaque, 0.5);
             }
         }
 
         &.delete-btn {
             background: transparent;
-            border: 1px solid $cor-erro; /* Vermelho Erro */
+            border: 1px solid $cor-erro;
             color: $cor-erro;
 
             &:hover {
@@ -178,14 +166,10 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     font-size: 1rem;
 }
 
-
-/* ======================================= */
-/* SEÇÃO DE CRIAÇÃO (Side Panel) */
-/* ======================================= */
 .create-character-section {
     padding: 2rem;
     border-radius: 8px;
-    border: 1px solid $cor-alerta; /* Borda de Sangue */
+    border: 1px solid $cor-alerta;
     box-shadow: 0 0 10px rgba($cor-alerta, 0.3);
 
     form {
@@ -202,7 +186,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
         label {
             font-weight: bold;
             font-size: 0.95rem;
-            color: $cor-destaque; /* Ferrugem */
+            color: $cor-destaque;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -218,7 +202,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
             font-size: 1rem;
 
             &:focus {
-                border: 1px solid $cor-alerta; /* Foco em Sangue */
+                border: 1px solid $cor-alerta;
                 background: darken($cor-cinza-claro, 5%);
                 box-shadow: 0 0 5px rgba($cor-alerta, 0.5);
             }
@@ -226,7 +210,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     }
 
     .btn-create {
-        background: $cor-alerta; /* Sangue */
+        background: $cor-alerta;
         color: $cor-preto;
         font-weight: bold;
         padding: 0.8rem;
@@ -239,12 +223,11 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
         margin-top: 1rem;
 
         &:hover {
-            background: $cor-destaque; /* Ferrugem no hover */
+            background: $cor-destaque;
             box-shadow: 0 0 10px rgba($cor-alerta, 0.7);
         }
     }
 }
-
 
 .modal-overlay {
   position: fixed;
@@ -295,15 +278,10 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
   background-color: #0095cc;
 }
 
-
-
-/* ======================================= */
-/* MODAL */
-/* ======================================= */
 .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8); /* Mais opaco */
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -311,11 +289,11 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
 }
 
 .modal-box {
-    background: $cor-cinza; /* Fundo escuro */
+    background: $cor-cinza;
     color: $cor-texto;
     padding: 25px 30px;
-    border-radius: 6px; /* Mais angular */
-    max-width: 400px; /* Um pouco maior */
+    border-radius: 6px;
+    max-width: 400px;
     width: 90%;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
@@ -337,7 +315,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
 }
 
 .modal-btn {
-    background: $cor-destaque; /* Ferrugem */
+    background: $cor-destaque;
     color: $cor-preto;
     border: none;
     padding: 10px 20px;
@@ -358,45 +336,38 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     to { transform: scale(1); opacity: 1; }
 }
 
-// ===========================================
-// ESTILOS DE MODAL (Tema de Terror)
-// ===========================================
-
-/* O backdrop é a tela escura por trás do modal */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba($cor-preto, 0.9); // Preto quase absoluto e opaco
+    background: rgba($cor-preto, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; // Z-index alto para garantir que fique por cima de tudo
-    backdrop-filter: blur(2px); // Adiciona um leve desfoque
+    z-index: 2000;
+    backdrop-filter: blur(2px);
     animation: fadeInModal 0.2s ease-out;
 }
 
-/* O container principal do conteúdo do modal */
 .modal {
-    background: $cor-cinza; // Fundo escuro do card
+    background: $cor-cinza;
     color: $cor-texto;
     padding: 2.5rem 2rem;
     border-radius: 4px;
-    max-width: 450px; // Um pouco mais largo
+    max-width: 450px;
     width: 90%;
     text-align: center;
-    // Sombra forte com a cor de alerta
     box-shadow: 0 0 25px rgba($cor-alerta, 0.8);
-    border: 1px solid $cor-destaque; // Borda sutil de ferrugem
+    border: 1px solid $cor-destaque;
 }
 
 .modal h2 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
-    color: $cor-alerta; // Título em vermelho sangue
+    color: $cor-alerta;
     letter-spacing: 2px;
 }
 
@@ -407,9 +378,8 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     line-height: 1.4;
 }
 
-/* Estilo para o botão principal do modal */
-.modal button, 
-.modal .btn { // Inclui a classe .btn para consistência
+.modal button,
+.modal .btn {
     padding: 0.7rem 1.5rem;
     font-weight: bold;
     border: none;
@@ -418,12 +388,11 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     text-transform: uppercase;
     transition: all 0.2s;
     letter-spacing: 1px;
-    font-family: sans-serif; // Para se destacar um pouco mais
+    font-family: sans-serif;
 }
 
-/* Botão de "OK" ou "Fechar" padrão */
 .modal button:not(.delete-btn) {
-    background-color: $cor-destaque; // Ferrugem
+    background-color: $cor-destaque;
     color: $cor-preto;
 
     &:hover {
@@ -432,7 +401,6 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     }
 }
 
-/* Estilo específico para o botão de deletar DENTRO do modal de confirmação */
 .modal-actions {
     display: flex;
     justify-content: center;
@@ -440,7 +408,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     margin-top: 1rem;
 
     .delete-btn {
-        background: $cor-erro; // Vermelho de erro
+        background: $cor-erro;
         color: $cor-preto;
         font-weight: bold;
 
@@ -451,7 +419,7 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     }
 
     .btn-secondary {
-        background: $cor-cinza-claro; // Fundo escuro sutil
+        background: $cor-cinza-claro;
         color: $cor-texto;
         border: 1px solid $cor-destaque;
 
@@ -462,7 +430,6 @@ $cor-sucesso: #2ecc71;         // Sucesso padrão (mantido por ser eficaz)
     }
 }
 
-/* Estilos de contexto para modais de erro/validação/sucesso */
 .modal {
     &.modal-error {
         border-bottom: 4px solid $cor-erro;
